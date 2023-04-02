@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="team-details">
+    <h1>{{ team_name}} </h1>
+    <h4>Overal number of scored goals scored in history of world cups: {{ranking.GoalsScored}}</h4>
+    <h5>({{ranking.Position}} position in goals ranking)</h5>
+    
+    {% if win %}
+      <h3>Biggest win in a history</h3>
+      <table>
+          <tr>
+            <th>Tournament</th>
+            <th>Match</th>
+            <th>Date</th>
+            <th>Score</th>
+          </tr>
+          {%for row in win%}
+          <tr>
+            <td>{{row.tournament_name}}</td>
+            <td>{{row.match_name}}</td>
+            <td>{{row.match_date}}</td>
+            <td>{{row.Score}}</td>
+          </tr>
+          {%endfor%}
+        </table>
+      {% endif %}
+
+    <h3>Biggest defeat in a history</h3>
+    <table>
+        <tr>
+          <th>Tournament</th>
+          <th>Match</th>
+          <th>Date</th>
+          <th>Score</th>
+        </tr>
+        {%for row in defeat%}
+        <tr>
+          <td>{{row.tournament_name}}</td>
+          <td>{{row.match_name}}</td>
+          <td>{{row.match_date}}</td>
+          <td>{{row.Score}}</td>
+        </tr>
+        {%endfor%}
+      </table>
+    
+    <h3>Best scorers</h3>
+    <table>
+        <tr>
+          <th>Name</th>
+          <th>Number of goals scored</th>
+        </tr>
+        {%for scorer in scorers%}
+        <tr>
+          <td>{{scorer.GivenName + " " + scorer.FamilyName}}</td>
+          <td>{{scorer.GoalsNumber}}</td>
+        </tr>
+        {%endfor%}
+      </table>
+    <div id='chart' class='chart'>
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+        <script type='text/javascript'>
+            var graphs = {{ results_chart | safe}};
+            Plotly.plot('chart', graphs,{});
+        </script>
+    </div>
+</div>
+{% endblock content %}

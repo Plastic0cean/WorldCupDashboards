@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+
+{% block content %}
+<p>Input the player's name</p>
+
+<form method="post">
+  <label for="text_field"></label>
+    <input type="text" name="player" id="player">
+<label for="button"></label>
+  <input type="submit" value="Search">
+</form>
+
+<table class="table table-hover">
+  <thead class="table-dark">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody class="table-group-divider">
+  {%for player in players%}
+  <tr>
+    <td>{{player.PlayerId}}</td>
+    <td>{{player.Name}}</td>
+  </tr>
+  {%endfor%}
+</tbody>
+</table>
+
+
+{% endblock content %}

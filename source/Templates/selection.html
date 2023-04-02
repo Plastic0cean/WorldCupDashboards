@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block content %}
+<p>Select the Team</p>
+
+<form method="post">
+  <label for="dropdown"></label>
+    <select name="teams" id="teams">
+      {% for name in names %}
+      <option value={{name}}>{{name}}</option>
+      {% endfor %}
+    </select>
+<label for="button"></label>
+  <input type="submit" value="Submit">
+</form>
+{% endblock content %}
