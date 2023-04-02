@@ -1,14 +1,29 @@
+from configparser import ConfigParser
 from dataclasses import dataclass
 
 
 @dataclass
 class DbConfig:
-    server: str = r"(localdb)\ProjectsV13"
-    driver: str = "ODBC Driver 17 for SQL Server"
-    database: str = ""
+    server: str  
+    driver: str 
+    database: str 
 
-    def read_file(path: str):
-        pass
+    @classmethod
+    def from_ini_file(cls, file: str):
+        config = ConfigParser()
+        config.read(file)
+        return cls(
+            config["DATABASE"]["server"],
+            config["DATABASE"]["driver"],
+            config["DATABASE"]["database"])
 
 
-db_config = DbConfig()
+@dataclass
+class Config:
+    db: DbConfig
+
+
+
+
+db_config = DbConfig.from_ini_file("config.ini")
+config = Config(db_config)

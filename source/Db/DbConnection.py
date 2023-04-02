@@ -1,13 +1,12 @@
 from typing import Any, List
 from collections import defaultdict
 import pyodbc 
+from Config import config
+
 
 def create_connection_string(driver: str, server: str, database: str):
     return "Driver={" + driver + "};" + f"Server={server};" + f"Database={database};"+ "Trusted_Connection=yes;"
 
-DRIVER = "ODBC Driver 17 for SQL Server"
-SERVER = r"(localdb)\ProjectsV13"
-DATABASE = "Test"    
 
 class Singleton:
     _instance = None 
@@ -56,4 +55,5 @@ class DBConnection(Singleton):
         except IndexError:
             return dict()
         
-conn = DBConnection(create_connection_string(DRIVER, SERVER, DATABASE))
+
+conn = DBConnection(create_connection_string(config.db.driver, config.db.server, config.db.database))
