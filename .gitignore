@@ -129,6 +129,6 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# Pyre type checker
 .pyre/
 /conspect and queries.sql
+*.ipynb
