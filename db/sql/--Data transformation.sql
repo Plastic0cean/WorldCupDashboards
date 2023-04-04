@@ -1,3 +1,6 @@
+BEGIN TRY 
+
+BEGIN TRANSACTION 
 --Data transformation 
 --1. Create [Teams] table 
 SELECT
@@ -42,4 +45,14 @@ FROM goals
 
 --3. Create Players table 
 SELECT * INTO Reports.Players FROM players
+
+COMMIT TRANSACTION
+END TRY 
+
+BEGIN CATCH 
+PRINT ERROR_MESSAGE()
+ROLLBACK TRANSACTION 
+END CATCH 
+
+
 
