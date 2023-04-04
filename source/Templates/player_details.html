@@ -10,6 +10,13 @@
     <li class="list-group-item"><b>Date of birth</b>: {{player.birth_date}}</li>
   </ul>
 </div>
+<div id='chart' class='chart'>
+  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+  <script type='text/javascript'>
+      var graphs = {{ goals_by_team | safe}};
+      Plotly.plot('chart', graphs,{});
+  </script>
+</div>
 
 
 {% endblock content %}

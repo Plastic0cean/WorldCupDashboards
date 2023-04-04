@@ -25,10 +25,19 @@ class PieChartPX:
         return json.dumps(fig, cls=PlotlyJSONEncoder)
 
 
-class VisualisationsRendere:
-
-    def __init__(self, figure) -> None:
-        self.figure = figure
-
-    def render(self):
-        return json.dumps(self.figure, cls=PlotlyJSONEncoder)
+def render_players_goals_by_team(data_as_dict):
+    data = pd.DataFrame(data_as_dict)
+    title=None
+    labels = {
+        "number_of_goals": "Number of goals",
+        "team": ""
+    }    
+    fig = px.bar(
+        data, 
+        y='number_of_goals', 
+        x='team', 
+        title=title,
+        labels=labels
+        )
+    fig.update_yaxes(visible=False, showticklabels=True)
+    return json.dumps(fig, cls=PlotlyJSONEncoder)

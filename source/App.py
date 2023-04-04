@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Visualizations.plots import PieChartPX
+from Visualizations.plots import PieChartPX, render_players_goals_by_team
 import Reports.teams 
 import Reports.players
 from SearchingEngine.Searching import fuzzy_filter_players
@@ -56,7 +56,9 @@ def player_details(player_id: str):
     player = Reports.players.get_player_by_id(player_id)
     return render_template(
         "player_details.html", 
-        player=player)
+        player=player,
+        goals_by_team=render_players_goals_by_team(Reports.players.get_player_goals_by_team(player_id))
+    )
 
 
 
