@@ -15,4 +15,7 @@ def get_player_by_id(player_id: str):
 
 def get_player_goals_by_team(player_id: str):
     with conn:
-        return conn.execute(f"SELECT * FROM PlayerGoalsByTeam ({player_id}) ORDER BY number_of_goals DESC", True)
+        return conn.select_as_dict(
+            f"SELECT * FROM PlayerGoalsByTeam ('{player_id}') ORDER BY number_of_goals DESC")
+    
+
