@@ -2,7 +2,7 @@ from Db.DbConnection import conn
 
 def get_all_players_names():
     with conn:
-        names = conn.execute("SELECT * FROM PlayersList()", True)
+        names = conn.execute("SELECT * FROM PlayersList() ORDER BY name ASC", True)
     return names
 
 
