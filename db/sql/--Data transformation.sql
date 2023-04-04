@@ -44,6 +44,7 @@ INTO [Reports].[Goals]
 FROM goals
 
 --3. Create Players table 
+UPDATE players SET given_name = NULL WHERE given_name = 'not applicable'
 SELECT * INTO Reports.Players FROM players
 
 COMMIT TRANSACTION
