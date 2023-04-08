@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Visualizations.plots import PieChartPX, render_players_goals_by_team
+from Visualizations.plots import PieChartPX, render_players_goals_by_team, render_player_appearances_by_tournament
 import Reports.teams 
 import Reports.players
 from SearchingEngine.Searching import fuzzy_filter_players
@@ -54,10 +54,15 @@ def players_selection():
 @app.route("/players/<player_id>")
 def player_details(player_id: str):
     player = Reports.players.get_player_by_id(player_id)
+    awards = Reports.players.get_player_awards(player_id)
+    stats = Reports.players.get_player_basic_stats(player_id)
     return render_template(
         "player_details.html", 
         player=player,
-        goals_by_team=render_players_goals_by_team(Reports.players.get_player_goals_by_team(player_id))
+        goals_by_team=render_players_goals_by_team(Reports.players.get_player_goals_by_team(player_id)),
+        awards=awards,
+        stats=stats,
+        appearances_by_tournament=render_player_appearances_by_tournament(Reports.players.get_matches_by_tournament(player_id))
     )
 
 

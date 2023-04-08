@@ -41,3 +41,16 @@ def render_players_goals_by_team(data_as_dict):
         )
     fig.update_yaxes(visible=False, showticklabels=True)
     return json.dumps(fig, cls=PlotlyJSONEncoder)
+
+
+def render_player_appearances_by_tournament(data_as_dict):
+    data = pd.DataFrame(data_as_dict)
+
+    label = {
+    "tournament": "Tournament",
+    "number_of_matches": "Number of matches"}
+
+    fig = px.bar(data, labels=label, x="tournament", y="number_of_matches", color="stage", title=None)
+    fig.update_yaxes(visible=True, showticklabels=False)
+    return json.dumps(fig, cls=PlotlyJSONEncoder)
+
