@@ -5,18 +5,66 @@
 <div class="card" style="width: 18rem;">
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><b>Name</b>: {{player.name}}</li>
-    <li class="list-group-item"><b>Nationality: </b>{{player.team}}</li>
+    <li class="list-group-item"><b>Nationality</b>: {{player.team}}</li>
     <li class="list-group-item"><b>Position</b>: {{player.position}}</li>
     <li class="list-group-item"><b>Date of birth</b>: {{player.birth_date}}</li>
   </ul>
 </div>
-<div id='chart' class='chart'>
+
+<div class="card" style="width: 18rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><b>Appearances</b>: {{stats.matches}} </li>
+    <li class="list-group-item"><b>Goals</b>: {{stats.goals}}</li>
+    <li class="list-group-item"><b>Yellow cards</b>: {{stats.yellow_cards}}</li>
+    <li class="list-group-item"><b>Red cards</b>: {{stats.red_cards}}</li>
+  </ul>
+</div>
+
+
+<h1>Matches</h1>
+<h4>Total number of matches in different tournaments</h4>
+<div id='chart2' class='chart2'>
   <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
   <script type='text/javascript'>
-      var graphs = {{ goals_by_team | safe}};
-      Plotly.plot('chart', graphs,{});
+      var graphs = {{ appearances_by_tournament | safe}};
+      Plotly.plot('chart2', graphs,{});
   </script>
 </div>
 
 
+{% if stats.goals>0 %}
+  <h1>Goals</h1>
+  <h4>Number of goals scored against different teams</h4>
+  <div id='chart' class='chart'>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script type='text/javascript'>
+        var graphs = {{ goals_by_team | safe}};
+        Plotly.plot('chart', graphs,{});
+    </script>
+  </div>
+{% endif %}
+
+
+{% if awards %}
+  <h1>Individual awards</h1>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Award</th>
+        <th scope="col">Description</th>
+        <th scope="col">Tournament</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for award in awards %}
+      <tr>
+        <td>{{award.name}}</td>
+        <td>{{award.description}}</td>
+        <td>{{award.year + " " + award.country}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
 {% endblock content %}
