@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+{% block content %}
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Select a tournament
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {%for tournament in tournaments%}
+      <a class="dropdown-item" href="#">{{tournament.year + " - " +tournament.host_country}}</a>
+      {%endfor%}
+    </div>
+  </div>
+
+<h1>Number of goals and games in different years</h1>
+<div id='chart' class='chart'>
+  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+  <script type='text/javascript'>
+      var graphs = {{ goals_by_tournament | safe}};
+      Plotly.plot('chart', graphs,{},);
+  </script>
+</div>
+
+
+<h1> Top scorers </h1>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Player</th>
+        <th scope="col">Nationality</th>
+        <th scope="col">Goals Scored</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for scorer in top_scorers %}
+      <tr>
+        <td><a href="{{url_for('player_details', player_id=scorer.player_id)}}">{{scorer.player_name}}</a></td>
+        <td><a href="{{url_for('team_details', team_name=scorer.team_id)}}">{{scorer.team}}</a></td>
+        <td>{{scorer.goals}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

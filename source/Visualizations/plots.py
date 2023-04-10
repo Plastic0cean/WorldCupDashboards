@@ -2,6 +2,7 @@ import json
 import pandas as pd
 from plotly.utils import PlotlyJSONEncoder
 import plotly.express as px
+import plotly.graph_objects as go
 
 
 class PieChartPX:
@@ -53,4 +54,21 @@ def render_player_appearances_by_tournament(data_as_dict):
     fig = px.bar(data, labels=label, x="tournament", y="number_of_matches", color="stage", title=None)
     fig.update_yaxes(visible=True, showticklabels=False)
     return json.dumps(fig, cls=PlotlyJSONEncoder)
+
+
+
+def render_goals_by_tournament(data):
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=data['year'], y=data["goals"],
+                        mode='markers',
+                        name='Scored goals'))
+
+    fig.add_trace(go.Scatter(x=data['year'], y=data["matches"],
+                        mode='markers',
+                        name='Matches played'))
+    return json.dumps(fig, cls=PlotlyJSONEncoder)
+
+
+
+
 

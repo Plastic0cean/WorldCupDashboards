@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Visualizations.plots import PieChartPX, render_players_goals_by_team, render_player_appearances_by_tournament
+from Visualizations.plots import PieChartPX, render_players_goals_by_team, render_player_appearances_by_tournament, render_goals_by_tournament
 import Reports.teams 
 import Reports.players
+import Reports.tournaments
 from SearchingEngine.Searching import fuzzy_filter_players
 
 app = Flask(__name__)
@@ -64,6 +65,18 @@ def player_details(player_id: str):
         stats=stats,
         appearances_by_tournament=render_player_appearances_by_tournament(Reports.players.get_matches_by_tournament(player_id))
     )
+
+
+@app.route("/tournaments")
+def tournaments():
+    tournaments_list = Reports.tournaments.get_tournaments_list()
+    
+    return render_template(
+        "tournaments.html",
+        tournaments=tournaments_list,
+        goals_by_tournament=render_goals_by_tournament(Reports.tournaments.get_goals_and_games_by_tournament()),
+        top_scorers=Reports.tournaments.get_top_scorers(how_many=20)
+        )
 
 
 

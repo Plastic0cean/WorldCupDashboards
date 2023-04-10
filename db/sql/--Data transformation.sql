@@ -14,6 +14,8 @@ INTO Reports.Teams
 FROM teams 
 
 --2. Create [Goals] table
+UPDATE goals SET given_name = NULL WHERE given_name = 'not applicable'
+
 SELECT 
 	goal_id AS GoalId, 
 	tournament_id AS TournamentId, 
