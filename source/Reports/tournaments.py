@@ -18,6 +18,26 @@ def get_top_scorers(tournament_id: str=None, how_many: int=None):
     query = f"SELECT {top} * FROM TopScorersOfTournament({tournament_id}) ORDER BY goals DESC"
     with conn:
         return conn.execute(query, True)
+    
+
+def get_most_goals_in_single_game(tournament_id: str=None):
+    if tournament_id:
+        tournament_id = "'" + tournament_id + "'"
+    else:
+        tournament_id="NULL"
+    query = f"SELECT * FROM MostGoalsInSingleGame({tournament_id})"
+    with conn:
+        return conn.execute(query, True)
+
+
+def get_most_cards_in_single_game(tournament_id: str=None):
+    if tournament_id:
+        tournament_id = "'" + tournament_id + "'"
+    else:
+        tournament_id="NULL"
+    query = f"SELECT * FROM MostBookingsByGames({tournament_id})"
+    with conn:
+        return conn.execute(query, True)
 
 
 def get_wins_ranking():

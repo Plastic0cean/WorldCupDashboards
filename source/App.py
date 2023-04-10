@@ -70,12 +70,16 @@ def player_details(player_id: str):
 @app.route("/tournaments")
 def tournaments():
     tournaments_list = Reports.tournaments.get_tournaments_list()
+    most_goals_in_single_game=Reports.tournaments.get_most_goals_in_single_game()
+    most_cards_in_single_game=Reports.tournaments.get_most_cards_in_single_game()
     
     return render_template(
         "tournaments.html",
         tournaments=tournaments_list,
         goals_by_tournament=render_goals_by_tournament(Reports.tournaments.get_goals_and_games_by_tournament()),
-        top_scorers=Reports.tournaments.get_top_scorers(how_many=20)
+        top_scorers=Reports.tournaments.get_top_scorers(how_many=20),   
+        most_goals_in_single_game=most_goals_in_single_game,
+        most_cards_in_single_game=most_cards_in_single_game
         )
 
 
