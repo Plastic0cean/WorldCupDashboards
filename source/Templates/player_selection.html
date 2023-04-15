@@ -16,6 +16,8 @@
   <thead class="table-dark">
     <tr>
       <th>Name</th>
+      <th>Nationality</th>
+      <th>Position</th>
     </tr>
   </thead>
   <tbody class="table-group-divider">
@@ -24,6 +26,8 @@
     <td>
       <a href=" {{ url_for('player_details', player_id=player.PlayerId)}}"> {{player.Name}}</a> 
       </td>
+      <td>{{player.nationality}}</td>
+      <td>{{player.position}}</td>
   </tr>
   {%endfor%}
 </tbody>
