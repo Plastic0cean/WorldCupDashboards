@@ -47,6 +47,13 @@ FROM goals
 UPDATE players SET given_name = NULL WHERE given_name = 'not applicable'
 SELECT * INTO Reports.Players FROM players
 
+--4. Update Stadiums table 
+ALTER TABLE stadiums ADD coordinates_lat float 
+ALTER TABLE stadiums ADD coordinates_long float 
+UPDATE stadiums SET stadium_wikipedia_link = 'https://en.wikipedia.org/wiki/Arena_Independ%C3%AAncia' WHERE stadium_id = 'S-007'
+
+
+
 COMMIT TRANSACTION
 END TRY 
 
