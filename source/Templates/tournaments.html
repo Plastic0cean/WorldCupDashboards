@@ -1,25 +1,32 @@
 {% extends "main.html" %}
 {% block content %}
 
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Select a tournament
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        {%for tournament in tournaments%}
-      <a class="dropdown-item" href="#">{{tournament.year + " - " +tournament.host_country}}</a>
-      {%endfor%}
-    </div>
-  </div>
 
-<h1>Number of goals and games in different years</h1>
-<div id='chart' class='chart'>
-  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-  <script type='text/javascript'>
-      var graphs = {{ goals_by_tournament | safe}};
-      Plotly.plot('chart', graphs,{},);
-  </script>
+<div class="dropdown">
+  <button class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+      {% if tournament_id %} {{tournament_id}}
+      {% else %} 
+      Filter a tournament 
+      {% endif %}
+  </button>
+  <ul class="dropdown-menu">
+    {%for tournament in tournaments%}
+    <li><a href="{{'?id='+tournament.tournament_id}}">{{tournament.year + " - " +tournament.host_country}}</a></li>
+    {%endfor%}
+  </ul>
 </div>
+
+{% if not tournament_id %}
+  <h1>Number of goals and games in different years</h1>
+  <div id='chart' class='chart'>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script type='text/javascript'>
+        var graphs = {{ goals_by_tournament | safe}};
+        Plotly.plot('chart', graphs,{},);
+    </script>
+  </div>
+{% endif %}
+
 
 <h1> Most goals in a single match</h1>
 {{most_goals_in_single_game}}
@@ -46,4 +53,38 @@
     </tbody>
   </table>
 
+  <script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+  var dropdown = document.querySelector(".dropdown");
+  var button = dropdown.querySelector(".dropdown-toggle");
+  var menu = dropdown.querySelector(".dropdown-menu");
+
+  function toggleMenu() {
+    if (menu.getAttribute("aria-hidden") === "true") {
+      menu.setAttribute("aria-hidden", "false");
+      button.setAttribute("aria-expanded", "true");
+      menu.style.display = "block";
+    } else {
+      menu.setAttribute("aria-hidden", "true");
+      button.setAttribute("aria-expanded", "false");
+      menu.style.display = "none";
+    }
+  }
+
+  button.addEventListener("click", toggleMenu);
+  dropdown.addEventListener("keydown", function(event) {
+    if (event.code === "Space" || event.code === "Enter") {
+      event.preventDefault();
+      toggleMenu();
+    }
+  });
+  document.addEventListener("click", function(event) {
+    if (!dropdown.contains(event.target)) {
+      menu.setAttribute("aria-hidden", "true");
+      button.setAttribute("aria-expanded", "false");
+      menu.style.display = "none";
+    }
+  });
+});
+  </script>
 {% endblock content %}

@@ -48,7 +48,6 @@ def players_selection():
     players = Reports.players.get_all_players_names()
     if request.method == "POST":
         players = fuzzy_filter_players(players, request.form["player"])
-        print(request.form["player"])
     return render_template("player_selection.html", players=players)
 
 
@@ -69,17 +68,24 @@ def player_details(player_id: str):
 
 @app.route("/tournaments")
 def tournaments():
+    tournament_id = request.args.get('id', default=None)
+    print(tournament_id)
+    print(tournament_id is None, tournament_id == "")
+
     tournaments_list = Reports.tournaments.get_tournaments_list()
-    most_goals_in_single_game=Reports.tournaments.get_most_goals_in_single_game()
-    most_cards_in_single_game=Reports.tournaments.get_most_cards_in_single_game()
+    most_goals_in_single_game=Reports.tournaments.get_most_goals_in_single_game(tournament_id)
+    most_cards_in_single_game=Reports.tournaments.get_most_cards_in_single_game(tournament_id)
+    top_scorers = Reports.tournaments.get_top_scorers(tournament_id=tournament_id, how_many=20)
+    goals_by_tournament=render_goals_by_tournament(Reports.tournaments.get_goals_and_games_by_tournament())
     
     return render_template(
         "tournaments.html",
         tournaments=tournaments_list,
-        goals_by_tournament=render_goals_by_tournament(Reports.tournaments.get_goals_and_games_by_tournament()),
-        top_scorers=Reports.tournaments.get_top_scorers(how_many=20),   
+        goals_by_tournament=goals_by_tournament,
+        top_scorers=top_scorers,   
         most_goals_in_single_game=most_goals_in_single_game,
-        most_cards_in_single_game=most_cards_in_single_game
+        most_cards_in_single_game=most_cards_in_single_game,
+        tournament_id=tournament_id
         )
 
 
