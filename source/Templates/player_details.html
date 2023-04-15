@@ -20,16 +20,17 @@
   </ul>
 </div>
 
-
-<h1>Matches</h1>
-<h4>Total number of matches in different tournaments</h4>
-<div id='chart2' class='chart2'>
-  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-  <script type='text/javascript'>
-      var graphs = {{ appearances_by_tournament | safe}};
-      Plotly.plot('chart2', graphs,{});
-  </script>
-</div>
+{% if appearances_by_tournament%}
+  <h1>Matches</h1>
+  <h4>Total number of matches in different tournaments</h4>
+  <div id='chart2' class='chart2'>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script type='text/javascript'>
+        var graphs = {{ appearances_by_tournament | safe}};
+        Plotly.plot('chart2', graphs,{});
+    </script>
+  </div>
+{% endif %}
 
 
 {% if stats.goals>0 %}
