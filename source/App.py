@@ -13,19 +13,19 @@ def home():
     return render_template("main.html")
 
 
-@app.route("/teams/<team_name>", methods=("GET", "POST"))
-def team_details(team_name: str):
-    ranking = Reports.teams.get_goal_ranking_by_team(team_name)
-    win = Reports.teams.get_biggest_win_by_team(team_name)
-    defeat = Reports.teams.get_biggest_defeat_by_team(team_name)
-    scorers = Reports.teams.get_top_scorers(team_name, 10)
+@app.route("/teams/<team_id>", methods=("GET", "POST"))
+def team_details(team_id: str):
+    ranking = Reports.teams.get_goal_ranking_by_team(team_id)
+    win = Reports.teams.get_biggest_win_by_team(team_id)
+    defeat = Reports.teams.get_biggest_defeat_by_team(team_id)
+    scorers = Reports.teams.get_top_scorers(team_id, 10)
     
     results_pie_chart = PieChartPX(
-        Reports.teams.get_team_matches_summary(team_name),
+        Reports.teams.get_team_matches_summary(team_id),
         ["DarkBlue", "Red", "Green"], "Overall results of games played")
     return render_template(
         "team_detals.html",
-        team_name=team_name,
+        team_id=team_id,
         ranking=ranking,
         win=win,
         defeat=defeat,
@@ -37,9 +37,9 @@ def team_details(team_name: str):
 def teams_selection():
     teams = Reports.teams.get_all_team_names()
     if request.method == "POST":
-        team_name = request.form["teams"]
-        return redirect(url_for("team_details", team_name=team_name))
-    return render_template("selection.html", names=teams)
+        team_id = request.form["teams"]
+        return redirect(url_for("team_details", team_id=team_id))
+    return render_template("selection.html", teams=teams)
 
 
 @app.route("/players", methods=("GET", "POST"))
