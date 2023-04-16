@@ -28,6 +28,14 @@
 {% endif %}
 
 
+<div id='chart_map' class='chart_map'>
+  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+  <script type='text/javascript'>
+      var graphs = {{ stadiums_map | safe}};
+      Plotly.plot('chart_map', graphs,{},);
+  </script>
+</div>
+
 <h1> Most goals in a single match</h1>
 {{most_goals_in_single_game}}
 

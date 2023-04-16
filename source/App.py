@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Visualizations.plots import PieChartPX, render_players_goals_by_team, render_player_appearances_by_tournament, render_goals_by_tournament
+from Visualizations.plots import PieChartPX, render_players_goals_by_team, render_player_appearances_by_tournament, render_goals_by_tournament, show_stadiums_on_map
 import Reports.teams 
 import Reports.players
 import Reports.tournaments
@@ -78,6 +78,7 @@ def tournaments():
     top_scorers = Reports.tournaments.get_top_scorers(tournament_id=tournament_id, how_many=20)
     goals_by_tournament=render_goals_by_tournament(Reports.tournaments.get_goals_and_games_by_tournament())
     
+    
     return render_template(
         "tournaments.html",
         tournaments=tournaments_list,
@@ -85,7 +86,9 @@ def tournaments():
         top_scorers=top_scorers,   
         most_goals_in_single_game=most_goals_in_single_game,
         most_cards_in_single_game=most_cards_in_single_game,
-        tournament_id=tournament_id
+        tournament_id=tournament_id,
+        stadiums_map = show_stadiums_on_map(
+        Reports.tournaments.get_number_of_matches_on_stadiums(tournament_id))
         )
 
 

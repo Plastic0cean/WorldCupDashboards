@@ -56,7 +56,6 @@ def render_player_appearances_by_tournament(data_as_dict):
     return json.dumps(fig, cls=PlotlyJSONEncoder)
 
 
-
 def render_goals_by_tournament(data):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data['year'], y=data["goals"],
@@ -70,5 +69,18 @@ def render_goals_by_tournament(data):
 
 
 
+def show_stadiums_on_map(data):
+    data = pd.DataFrame(data)
 
+    fig = px.scatter_mapbox(
+        data, 
+        lat="coordinates_lat", lon="coordinates_long", 
+        color="number_of_games",
+        size="number_of_games",
+        hover_name="stadium_name", 
+        hover_data=["city_name", "country_name"],
+        zoom=3)
 
+    fig.update_layout(mapbox_style="open-street-map")
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    return json.dumps(fig, cls=PlotlyJSONEncoder)
