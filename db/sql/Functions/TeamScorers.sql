@@ -1,4 +1,4 @@
-CREATE FUNCTION TeamScorers (@Team VARCHAR(2000))
+CREATE FUNCTION TeamScorers (@TeamId VARCHAR(2000))
 RETURNS TABLE 
 AS RETURN 
 	SELECT 
@@ -7,7 +7,7 @@ AS RETURN
 		[GivenName], 
 		COUNT(*) AS GoalsNumber
 	FROM [Reports].[Goals]
-	WHERE [TeamName] = @Team
+	WHERE [TeamId] = @TeamId
 	GROUP BY [PlayerId], [FamilyName], [GivenName]
 GO
 

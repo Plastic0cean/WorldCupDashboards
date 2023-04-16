@@ -1,4 +1,4 @@
-CREATE FUNCTION BiggestDefeatOfTeam (@TeamName AS VARCHAR(2000))
+CREATE FUNCTION BiggestDefeatOfTeam (@TeamId AS VARCHAR(2000))
 RETURNS TABLE 
 AS 
 RETURN 
@@ -12,6 +12,6 @@ RETURN
 		match_date, 
 		CONCAT(goals_for, '-', goals_against) as Score
 	FROM [team_appearances] 
-	WHERE team_name = @TeamName AND Lose=1 AND ABS(goal_differential) = (SELECT MAX(ABS(CAST(goal_differential as Int))) FROM [team_appearances] WHERE team_name = @TeamName AND Lose=1)
+	WHERE team_id = @TeamId AND Lose=1 AND ABS(goal_differential) = (SELECT MAX(ABS(CAST(goal_differential as Int))) FROM [team_appearances] WHERE team_id = @TeamId AND Lose=1)
 GO
 
