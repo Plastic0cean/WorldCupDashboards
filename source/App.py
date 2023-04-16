@@ -21,7 +21,6 @@ def team_details(team_id: str):
     win = Reports.teams.get_biggest_win_by_team(team_id)
     defeat = Reports.teams.get_biggest_defeat_by_team(team_id)
     scorers = Reports.teams.get_top_scorers(team_id, 10)
-    
     results_pie_chart = PieChartPX(
         Reports.teams.get_team_matches_summary(team_id),
         ["DarkBlue", "Red", "Green"], "Overall results of games played")
