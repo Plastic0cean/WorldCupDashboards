@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from Visualizations.plots import PieChartPX, players_goals_by_team, player_appearances_by_tournament
-from Visualizations.plots import PieChartPX, render_players_goals_by_team, render_player_appearances_by_tournament, render_goals_by_tournament, show_stadiums_on_map
+from Visualizations.plots import PieChartPX, players_goals_by_team, player_appearances_by_tournament, render_goals_by_tournament, show_stadiums_on_map
 import Reports.teams 
 import Reports.players
 import Reports.tournaments
