@@ -54,7 +54,7 @@
       {% for scorer in top_scorers %}
       <tr>
         <td><a href="{{url_for('player_details', player_id=scorer.player_id)}}">{{scorer.player_name}}</a></td>
-        <td><a href="{{url_for('team_details', team_name=scorer.team_id)}}">{{scorer.team}}</a></td>
+        <td><a href="{{url_for('team_details', team_id=scorer.team_id)}}">{{scorer.team}}</a></td>
         <td>{{scorer.goals}}</td>
       </tr>
       {% endfor %}
