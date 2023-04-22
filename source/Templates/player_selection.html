@@ -2,36 +2,37 @@
 
 {% block content %}
 
-<br>
+<div id="player-selection-content">
+  <form id="player-searching-form" method="post">
+    <div class="input-group mb-3">
+      <input type="text" name="player" id="player" class="searching-bar" placeholder="Player's name"
+        aria-label="Player's username" aria-describedby="button-addon2">
+      <input type="submit" class="submit-button" id="button-addon2" value="Search">
+    </div>
+  </form>
 
-<form method="post">
-  <div class="input-group mb-3">
-    <input type="text" name="player" id="player" class="form-control" placeholder="Player's name" aria-label="Player's username" aria-describedby="button-addon2">
-    <input type="submit" class="btn btn-outline-secondary" id="button-addon2" value="Search">
+  <div id="player-table-container">
+    <table id="player-table" class="data-table">
+      <!--<table class="table table-hover">-->
+      <thead class="table-header">
+        <tr>
+          <th>Name</th>
+          <th>Nationality</th>
+          <th>Position</th>
+        </tr>
+      </thead>
+      <tbody class="table-body">
+        {%for player in players%}
+        <tr class="row-on-hover-grey">
+          <td>
+            <a href=" {{ url_for('player_details', player_id=player.PlayerId)}}"> {{player.Name}}</a>
+          </td>
+          <td>{{player.nationality}}</td>
+          <td>{{player.position}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
   </div>
-</form>
-
-
-<table class="table table-hover">
-  <thead class="table-dark">
-    <tr>
-      <th>Name</th>
-      <th>Nationality</th>
-      <th>Position</th>
-    </tr>
-  </thead>
-  <tbody class="table-group-divider">
-  {%for player in players%}
-  <tr>
-    <td>
-      <a href=" {{ url_for('player_details', player_id=player.PlayerId)}}"> {{player.Name}}</a> 
-      </td>
-      <td>{{player.nationality}}</td>
-      <td>{{player.position}}</td>
-  </tr>
-  {%endfor%}
-</tbody>
-</table>
-
-
+</div>
 {% endblock content %}

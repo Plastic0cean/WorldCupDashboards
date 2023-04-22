@@ -1,3 +1,7 @@
+body {
+	background-color: rgb(246, 246, 247);
+}
+
 #team-searching h1 {
 	text-align: center;
 	margin-top: 10%;
@@ -38,7 +42,9 @@ a {
 }
 
 
-
+#player-searching-form{
+	margin-top: 3%;
+}
 .dropdown-list {
 	margin-left: 5%;
 	margin-right: 2%;
@@ -47,9 +53,58 @@ a {
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-
 .dropdown-list option {
 	font-size: 17px;
 }
 
-    
+.searching-bar {
+	margin-left: 5%;
+	margin-right: 2%;
+	width: 80%;
+	height: 40px;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+#player-table
+{
+	margin-top: 5%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	border-style: ridge;
+	border-width: 1px;
+	border-color: rgb(167, 169, 170);
+	background-color: white;
+}
+
+
+.table-header {
+	font-weight: bold;
+	/* text-transform: uppercase; */
+	border-style: ridge;
+	border-width: 1px;
+	border-color: rgb(167, 169, 170);
+	height: 40px;
+}
+
+
+tr {
+	height: 50px;
+	border-style: ridge;
+	border-width: 1px;
+	border-color: rgb(210, 213, 214);
+	/* text-indent: 15%; */
+}
+
+td, th {
+	padding-left: 70px;
+}
+
+.row-on-hover-grey{
+	color:rgb(73, 77, 80);
+}
+
+.row-on-hover-grey:hover{
+	background-color:rgba(192, 190, 190, 0.25);
+}
