@@ -29,12 +29,12 @@ body {
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 	transition: all 0.2s ease-in-out;
 }
-  
+
 .submit-button:hover {
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 	transform: translateY(-3px);
 }
-  
+
 
 a {
 	color: inherit;
@@ -42,9 +42,10 @@ a {
 }
 
 
-#player-searching-form{
+#player-searching-form {
 	margin-top: 3%;
 }
+
 .dropdown-list {
 	margin-left: 5%;
 	margin-right: 2%;
@@ -66,8 +67,7 @@ a {
 }
 
 
-#player-table
-{
+#player-table {
 	margin-top: 5%;
 	margin-left: auto;
 	margin-right: auto;
@@ -101,10 +101,10 @@ td, th {
 	padding-left: 70px;
 }
 
-.row-on-hover-grey{
-	color:rgb(73, 77, 80);
+.row-on-hover-grey {
+	color: rgb(73, 77, 80);
 }
 
-.row-on-hover-grey:hover{
-	background-color:rgba(192, 190, 190, 0.25);
+.row-on-hover-grey:hover {
+	background-color: rgba(192, 190, 190, 0.25);
 }
