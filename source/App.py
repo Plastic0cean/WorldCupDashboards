@@ -38,7 +38,7 @@ def team_details(team_id: str):
 def teams_selection():
     teams = Reports.teams.get_all_team_names()
     if request.method == "POST":
-        team_id = request.form["teams"]
+        team_id = request.form["teams-dropdown"]
         return redirect(url_for("team_details", team_id=team_id))
     return render_template("selection.html", teams=teams)
 
