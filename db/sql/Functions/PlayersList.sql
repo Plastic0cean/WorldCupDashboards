@@ -10,6 +10,7 @@ RETURN
 		s.team_id AS team_id,
 		s.team_name AS nationality
 	FROM players p 
-	LEFT JOIN squads s ON p.player_id = s.player_id;
+	LEFT JOIN squads s ON p.player_id = s.player_id
+	WHERE p.player_id IN (SELECT player_id FROM player_appearances);
 
 GO

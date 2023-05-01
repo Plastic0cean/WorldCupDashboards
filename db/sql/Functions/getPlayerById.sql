@@ -5,6 +5,7 @@ RETURN
 		CONCAT(p.given_name, ' ', p.family_name) as [name],
 		birth_date,
 		team_name as team, 
+		team_id,
 		position_name as position 
 	FROM Players p 
 	LEFT JOIN [squads] s ON s.player_id = p.player_id
