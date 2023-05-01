@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
-from Visualizations.plots import PieChartPX, players_goals_by_team, player_appearances_by_tournament
-from Visualizations.plots import PieChartPX, players_goals_by_team, player_appearances_by_tournament, render_goals_by_tournament, show_stadiums_on_map
-import Reports.teams 
+from Visualizations.plots import * 
 import Reports.players
+import Reports.teams 
 import Reports.tournaments
 from SearchingEngine.Searching import fuzzy_filter_players
 
@@ -62,7 +61,10 @@ def player_details(player_id: str):
         goals_by_team=players_goals_by_team(Reports.players.get_player_goals_by_team(player_id)),
         awards=awards,
         stats=stats,
-        appearances_by_tournament=player_appearances_by_tournament(Reports.players.get_matches_by_tournament(player_id))
+        appearances_by_tournament=player_appearances_by_tournament(Reports.players.get_matches_by_tournament(player_id)),
+        appearances_summary = Reports.players.get_apperances_summary(player_id),
+        minutes_played = overall_minutes_played(Reports.players.get_minutes_played(player_id)),
+        starer_or_sub = starter_or_substitute(Reports.players.get_number_of_games_as_starter(player_id))
     )
 
 

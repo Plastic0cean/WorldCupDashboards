@@ -100,3 +100,25 @@ def show_stadiums_on_map(data):
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return json.dumps(fig, cls=PlotlyJSONEncoder)
+
+
+@render_figure
+def starter_or_substitute(data):
+    if not data:
+        return None
+    data = pd.DataFrame(data)
+    trace = go.Pie(labels=data["starer_or_sub"], values=data["number_of_matches"], textinfo='value', hole=0.4)
+    fig = go.Figure(data=[trace])
+    return fig
+
+
+@render_figure
+def overall_minutes_played(data):
+    trace = go.Pie(
+    labels=["Playing", "Bench"], 
+    values=[data["minutes_played"][0], data["minutes_on_bench"][0]],
+    textinfo='value', hole=0.4)
+
+    fig = go.Figure(data=[trace])
+    return fig
+
