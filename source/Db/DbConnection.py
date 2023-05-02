@@ -51,7 +51,7 @@ class DBConnection(Singleton):
             for values in query_result:
                 for field, value in zip(fields, values):
                     result[field].append(value)
-            return result
+            return dict(result)
         except IndexError:
             return dict()
         
