@@ -28,7 +28,7 @@ def get_top_scorers(team_id: str, how_many: int=None):
         top = f"TOP {how_many}"
     with conn:
         return conn.execute(
-            f"SELECT {top} * FROM TeamScorers ('{team_id}') ORDER BY GoalsNumber DESC", 
+            f"SELECT {top} * FROM TeamScorers ('{team_id}') ORDER BY goals_number DESC", 
             get_results=True)
     
 def get_team_matches_summary(team_id: str):
