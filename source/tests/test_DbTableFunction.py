@@ -21,6 +21,10 @@ def test_db_with_default_params():
     func = DbTableFunction("Test", use_default_parameters=True)
     assert func.select_statement() == "SELECT * FROM Test(default)"
 
+def test_db_function_with_desc_sort():
+    func = DbTableFunction("Test")
+    assert func.select_statement(sort_by="1", descending=True) == "SELECT * FROM Test() ORDER BY 1 DESC"
+
 def test_db_function_with_order_by_and_limit():
     func = DbTableFunction("PlayersList")
     assert func.select_statement(limit=10, sort_by="1") == "SELECT TOP 10 * FROM PlayersList() ORDER BY 1"
