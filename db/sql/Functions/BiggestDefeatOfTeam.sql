@@ -10,7 +10,7 @@ RETURN
 		opponent_name, 
 		match_name, 
 		match_date, 
-		CONCAT(goals_for, '-', goals_against) as Score
+		CONCAT(goals_for, '-', goals_against) as score
 	FROM [team_appearances] 
 	WHERE team_id = @TeamId AND Lose=1 AND ABS(goal_differential) = (SELECT MAX(ABS(CAST(goal_differential as Int))) FROM [team_appearances] WHERE team_id = @TeamId AND Lose=1)
 GO

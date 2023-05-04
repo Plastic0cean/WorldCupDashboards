@@ -1,49 +1,37 @@
 from Db.DbConnection import conn
+from Db.DbTableFunction import DbTableFunction
 
 
 def get_all_players_names():
-    with conn:
-        names = conn.execute("SELECT * FROM PlayersList() ORDER BY name ASC", True)
-    return names
-
+    return DbTableFunction("PlayersList").select(conn, sort_by="name")
+    
 
 def get_player_by_id(player_id: str):
-    query = f"SELECT * FROM GetPlayerById('{player_id}')"
-    with conn:
-        player = conn.execute(query, True)
-    return player[0]
+    return DbTableFunction("GetPlayerById", player_id).select(conn)[0]
 
 
 def get_player_goals_by_team(player_id: str):
-    with conn:
-        return conn.select_as_dict(
-            f"SELECT * FROM PlayerGoalsByTeam ('{player_id}') ORDER BY number_of_goals DESC")
+    return DbTableFunction("PlayerGoalsByTeam", player_id).select_as_dict(conn, sort_by="number_of_goals")
     
 
 def get_player_awards(player_id: str):
-    with conn:
-        return conn.execute(f"SELECT * FROM PlayerAwards('{player_id}')", True)
+    return DbTableFunction("PlayerAwards", player_id).select(conn)
     
 
 def get_player_basic_stats(player_id: str):
-    with conn:
-        return conn.execute(f"SELECT * FROM PlayerBasicStatistics('{player_id}')", True)[0]
-    
+    return DbTableFunction("PlayerBasicStatistics", player_id).select(conn)[0]
+
 
 def get_matches_by_tournament(player_id: str):
-    with conn:
-        return conn.select_as_dict(
-            f"SELECT * FROM PlayerApperancesByTournament('{player_id}')"
-            )
+    return DbTableFunction("PlayerApperancesByTournament", player_id).select_as_dict(conn)
+
 
 def get_apperances_summary(player_id: str):
-        with conn:
-            return conn.execute(f"SELECT * FROM PlayerTournamentSummary('{player_id}')", True)
+    return DbTableFunction("PlayerTournamentSummary", player_id).select(conn)
 
 
 def get_number_of_matches(player_id: str):
-        with conn:
-            return conn.execute(f"SELECT * FROM PlayerNumberOfMatches('{player_id}')", True)[0]
+    return DbTableFunction("PlayerNumberOfMatches", player_id).select(conn)[0]
 
 
 def get_minutes_played(player_id: str):

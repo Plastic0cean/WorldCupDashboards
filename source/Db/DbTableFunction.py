@@ -22,27 +22,29 @@ class DbTableFunction:
                 params = ", ".join([f"@{name}='{value}'" for name, value in self._parameters.items()])
             else:
                 params = f"'{self._parameters}'"
+            return params
         if self.use_default_parameters:
             params = "default"
         return params
         
-    def select_statement(self, sort_by: str=None, limit: int=None):
+    def select_statement(self, sort_by: str=None, descending: bool=False, limit: int=None):
         params = self.parameters_str
         top = f"TOP {limit} " if limit else ""
         query = f"SELECT {top}* FROM {self.name}({params})" 
         if sort_by:
             query+= f" ORDER BY {sort_by}"
-        
+            if descending:
+                query+=" DESC"
         return query
 
-    def select(self, conn, sort_by: str=None, limit: int=None):
-        query = self.select_statement(sort_by=sort_by, limit=limit)
+    def select(self, conn, sort_by: str=None, descending: bool=False, limit: int=None):
+        query = self.select_statement(sort_by=sort_by, descending=descending, limit=limit)
         with conn:
             result = conn.execute(query, get_results=True)
         return result
     
-    def select_as_dict(self, conn, sort_by: str=None, limit: int=None):
-        query = self.select_statement(sort_by=sort_by, limit=limit)
+    def select_as_dict(self, conn, sort_by: str=None, descending: bool=False, limit: int=None):
+        query = self.select_statement(sort_by=sort_by, descending=descending, limit=limit)
         with conn:
             result = conn.select_as_dict(query)
         return result

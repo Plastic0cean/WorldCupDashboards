@@ -3,8 +3,8 @@ RETURNS TABLE
 AS 
 RETURN 
 SELECT 
-	Result, 
-	COUNT(*) AS [Number] 
+	Result as result, 
+	COUNT(*) AS [number] 
 FROM team_appearances 
 WHERE team_id = @TeamId GROUP BY Result 
 GO

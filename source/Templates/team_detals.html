@@ -2,8 +2,8 @@
 {% block content %}
 <div class="team-details">
     <h1>{{ team_name}} </h1>
-    <h4>Overal number of scored goals scored in history of world cups: {{ranking.GoalsScored}}</h4>
-    <h5>({{ranking.Position}} position in goals ranking)</h5>
+    <h4>Overal number of scored goals scored in history of world cups: {{ranking.goals_scored}}</h4>
+    <h5>({{ranking.position}} position in goals ranking)</h5>
     
     {% if win %}
       <h3>Biggest win in a history</h3>
@@ -38,7 +38,7 @@
           <td>{{row.tournament_name}}</td>
           <td>{{row.match_name}}</td>
           <td>{{row.match_date}}</td>
-          <td>{{row.Score}}</td>
+          <td>{{row.score}}</td>
         </tr>
         {%endfor%}
       </table>
@@ -51,8 +51,8 @@
         </tr>
         {%for scorer in scorers%}
         <tr>
-          <td>{{scorer.GivenName + " " + scorer.FamilyName}}</td>
-          <td>{{scorer.GoalsNumber}}</td>
+          <td>{{scorer.given_name + " " + scorer.family_name}}</td>
+          <td>{{scorer.goals_number}}</td>
         </tr>
         {%endfor%}
       </table>
