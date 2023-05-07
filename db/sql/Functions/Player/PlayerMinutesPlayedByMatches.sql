@@ -11,7 +11,6 @@ WITH player_matches AS (
 		going_off, 
 		coming_on,
 		starter, 
-		substitute,
 		CASE 
 			WHEN extra_time = 0 THEN 90
 			ELSE 120
