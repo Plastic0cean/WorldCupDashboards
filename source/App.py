@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from Visualizations.plots import * 
 import Reports.players
-import Reports.teams 
+import Reports.teams as teams
 import Reports.tournaments
 from SearchingEngine.Searching import fuzzy_filter_players
 
@@ -16,21 +16,28 @@ def home():
 
 @app.route("/teams/<team_id>", methods=("GET", "POST"))
 def team_details(team_id: str):
-    ranking = Reports.teams.get_goal_ranking_by_team(team_id)
-    win = Reports.teams.get_biggest_win_by_team(team_id)
-    defeat = Reports.teams.get_biggest_defeat_by_team(team_id)
-    scorers = Reports.teams.get_top_scorers(team_id, 10)
+    team = teams.get_team_by_id(team_id)
+    goals_and_matches = teams.get_goals_and_matches_summary(team_id)
+    win = teams.get_biggest_win(team_id)
+    defeat = teams.get_biggest_defeat(team_id)
+    scorers = teams.get_top_scorers(team_id, 10)
     results_pie_chart = PieChartPX(
-        Reports.teams.get_team_matches_summary(team_id),
-        ["DarkBlue", "Red", "Green"], "Overall results of games played")
+        teams.get_matches_results(team_id),
+        ["DarkBlue", "Red", "Green"], None)
+    position_by_tournament = Reports.teams.get_position_by_tournaments(team_id)
     return render_template(
         "team_detals.html",
-        team_id=team_id,
-        ranking=ranking,
+        team=team,
+        goals_and_matches=goals_and_matches,
         win=win,
         defeat=defeat,
         scorers=scorers,
-        results_chart=results_pie_chart.render())
+        results_chart=results_pie_chart.render(),
+        position_by_tournament=position_by_tournament,
+        goals_by_opponent=team_goals_by_opponent(teams.get_goals_by_opponent(team_id)),
+        goals_by_tournament=team_goals_by_tournament(teams.get_goals_by_tournament(team_id)),
+        most_minutes_by_player=players_with_most_minutes(teams.get_minutes_played_by_players(team_id)),
+        matches_chart=all_matches_by_team(teams.get_list_of_matches(team_id)))
 
 
 @app.route("/teams", methods=("GET", "POST"))
