@@ -132,3 +132,4 @@ dmypy.json
 .pyre/
 /conspect and queries.sql
 *.ipynb
+/db/sql/--Data transformation.sql
