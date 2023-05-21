@@ -1,67 +1,193 @@
 {% extends "main.html" %}
 {% block content %}
-<div class="team-details">
-    <h1>{{ team_name}} </h1>
-    <h4>Overal number of scored goals scored in history of world cups: {{ranking.goals_scored}}</h4>
-    <h5>({{ranking.position}} position in goals ranking)</h5>
-    
-    {% if win %}
-      <h3>Biggest win in a history</h3>
-      <table>
+
+<div class="container">
+  <div class="profile-pic">
+    <img src="https://via.placeholder.com/150" alt="Profile Picture">
+  </div>
+  <div class="user-info">
+    <h1>{{team.team_name}}</h1>
+    <h2>{{team.region_name}}</h2>
+  </div>
+</div>
+
+
+<div class="team-cards-container">
+  <div class="dashboard-card">
+    <div class="dashboard-card-content">
+      <h3>{{goals_and_matches.number_of_matches}}</h3>
+      <p>Games played</p>
+    </div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="dashboard-card-content">
+      <h3>{{goals_and_matches.number_of_tournaments}}</h3>
+      <p>Different tournaments</p>
+    </div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="dashboard-card-content">
+      <h3>{{goals_and_matches.goals_scored}}</h3>
+      <p>Goals scored</p>
+    </div>
+  </div>
+
+  <div class="dashboard-card">
+    <div class="dashboard-card-content">
+      <h3>{{goals_and_matches.goals_conceeded}}</h3>
+      <p>Goals conceeded</p>
+    </div>
+  </div>
+</div>
+
+<div id="team-by-tournaments">
+  <table id="team-tournaments-stages-table" class="table-data center">
+    <tr>
+      <th>Tournament</th>
+      <th>Number of matches</th>
+      <th>Position</th>
+    </tr>
+    {%for row in position_by_tournament%}
+    <tr class="row-on-hover-grey">
+      <td><a href="{{url_for('tournaments')}}">{{row.tournament_name}}</a></td>
+      <td>{{row.count_matches}}</td>
+      <td>{{row.position}}</td>
+    </tr>
+    {%endfor%}
+  </table>
+</div>
+
+<div id="team-matches-section">
+  <!-- <h2>Matches statistics</h2> -->
+  <div class="grid-container">
+
+    <div id="team-matches-results" class="dashboard-container">
+      <h3>Matches results</h3>
+      <div id="team-matches-results-pie" class="chart">
+        <script>
+          var graphs = {{ results_chart | safe}};
+          graphs.config = { 'displayModeBar': false };
+          Plotly.plot('team-matches-results-pie', graphs, {});
+        </script>
+      </div>
+    </div>
+
+    <div id="all-matches-of-team" class="dashboard-container">
+      <h3>Result of games</h3>
+      The height of the column represents the goals difference of final score.
+      <div id="all-matches-bar" class="chart">
+        <script>
+          var graphs = {{ matches_chart | safe}};
+          graphs.config = { 'displayModeBar': false };
+          Plotly.plot('all-matches-bar', graphs, {});
+          
+        </script>
+      </div>
+    </div>
+
+
+    <div id="minutes-by-players" class="dashboard-container">
+      <h3>Players with the most minutes played</h3>
+      Top 20 players who spend the largest amount of minutes on the pitch
+      <div id="minutes-by-player-treemap" class="chart">
+        <script>
+          var graphs = {{ most_minutes_by_player | safe}};
+          graphs.config = { 'displayModeBar': false };
+          Plotly.plot('minutes-by-player-treemap', graphs, {});
+        </script>
+      </div>
+    </div>
+
+
+    <div id="team-top-scorers-container">
+      <h3>Best scorers</h3>
+      <table id="team-top-scorers-table" class="table-data">
+        <tr>
+          <th>Name</th>
+          <th>Number of goals</th>
+        </tr>
+        {%for scorer in scorers%}
+        <tr class="row-on-hover-grey">
+          <td><a href="{{url_for('player_details', player_id=scorer.player_id)}}">
+              {{scorer.player_name}}</a></td>
+          <td>{{scorer.goals_number}}</td>
+        </tr>
+        {%endfor%}
+      </table>
+    </div>
+
+    <div id="goals-by-opponent" class="dashboard-container">
+      <h3>Goals scored againts different teams</h3>
+      <div id="goals-by-opponent-bar" class="chart">
+        <script>
+          var graphs = {{ goals_by_opponent | safe}};
+          graphs.config = { 'displayModeBar': false };
+          Plotly.plot('goals-by-opponent-bar', graphs, {});
+        </script>
+      </div>
+    </div>
+
+    <div id="team-goals-by-tournament" class="dashboard-container">
+      <h3>Goals scored by a tournament</h3>
+      <div id="goals-by-tournament-pie" class="chart">
+        <script>
+          var graphs = {{ goals_by_tournament | safe}};
+          graphs.config = { 'displayModeBar': false };
+          Plotly.plot('goals-by-tournament-pie', graphs, {});
+        </script>
+      </div>
+    </div>
+
+    <div id="team-records">
+      <div id="team-biggest-defeat-container">
+        <h3>Biggest defeat</h3>
+        <table id="team-biggest-defeat-table" class="table-data">
           <tr>
             <th>Tournament</th>
             <th>Match</th>
             <th>Date</th>
             <th>Score</th>
           </tr>
-          {%for row in win%}
+          {%for row in defeat%}
           <tr>
             <td>{{row.tournament_name}}</td>
             <td>{{row.match_name}}</td>
             <td>{{row.match_date}}</td>
-            <td>{{row.Score}}</td>
+            <td>{{row.score}}</td>
           </tr>
           {%endfor%}
         </table>
-      {% endif %}
+      </div>
 
-    <h3>Biggest defeat in a history</h3>
-    <table>
-        <tr>
-          <th>Tournament</th>
-          <th>Match</th>
-          <th>Date</th>
-          <th>Score</th>
-        </tr>
-        {%for row in defeat%}
-        <tr>
-          <td>{{row.tournament_name}}</td>
-          <td>{{row.match_name}}</td>
-          <td>{{row.match_date}}</td>
-          <td>{{row.score}}</td>
-        </tr>
-        {%endfor%}
-      </table>
-    
-    <h3>Best scorers</h3>
-    <table>
-        <tr>
-          <th>Name</th>
-          <th>Number of goals scored</th>
-        </tr>
-        {%for scorer in scorers%}
-        <tr>
-          <td>{{scorer.given_name + " " + scorer.family_name}}</td>
-          <td>{{scorer.goals_number}}</td>
-        </tr>
-        {%endfor%}
-      </table>
-    <div id='chart' class='chart'>
-        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-        <script type='text/javascript'>
-            var graphs = {{ results_chart | safe}};
-            Plotly.plot('chart', graphs,{});
-        </script>
+      {% if win %}
+      <div id="team-biggest-win-container">
+        <h3>Biggest win</h3>
+        <table id="team-biggest-win-table" class="table-data">
+          <thead>
+            <tr>
+              <th>Tournament</th>
+              <th>Match</th>
+              <th>Date</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for row in win%}
+            <tr>
+              <td>{{row.tournament_name}}</td>
+              <td>{{row.match_name}}</td>
+              <td>{{row.match_date}}</td>
+              <td>{{row.score}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
     </div>
+
+  </div>
 </div>
 {% endblock content %}
