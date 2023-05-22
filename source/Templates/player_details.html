@@ -14,14 +14,6 @@
     </div>
 </div>
 
-
-      <!-- <li><b>Nationality</b>: {{player.team}}</li>
-      <li><b>Appearances</b>: {{stats.matches}} </li>
-      <li><b>Goals</b>: {{stats.goals}}</li>
-      <li><b>Yellow cards</b>: {{stats.yellow_cards}}</li>
-      <li><b>Red cards</b>: {{stats.red_cards}}</li> -->
-
-      
 {%if appearances_summary%}
 <div id="player-appearances-summary">
   <table class="table table-hover">
@@ -48,7 +40,6 @@
   </table>
 </div>
 {%endif%}
-      
       
 <div class="navigation-panel-justified" id="player-section">
   <button id="goals-navigation-item" class="navigation-item">Goals</button>
@@ -98,7 +89,7 @@
       <p>Goals scored overall</p>
     </div>
   </div>
-  
+
   <div class="dashboard-card">
     <div class="dashboard-card-content">
       <h2>0.28</h2>
@@ -116,9 +107,9 @@
 
   {% if stats.goals>0 %}
   <h4>Number of goals scored against different teams</h4>
-  <div id='chart' class='chart'>
-    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <script type='text/javascript'>
+  <div id="chart" class="chart">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
       var graphs = {{ goals_by_team | safe}};
       graphs.config = {'displayModeBar': false}
       Plotly.plot('chart', graphs, {displayModeBar: false});
