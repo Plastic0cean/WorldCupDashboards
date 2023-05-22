@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="profile-pic">
-    <img src="https://via.placeholder.com/150" alt="Profile Picture" />
+    <img src="https://via.placeholder.com/150" alt="Profile Picture">
   </div>
   <div class="user-info">
     <h1>{{player.name}}</h1>
@@ -52,8 +52,7 @@
   <div class="pie-chart">
   <h1>Number of minutes on the pitch and bench</h1>
   <div id='minutes-played-pie' class='plotly-chart'>
-    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <script type='text/javascript'>
+    <script>
       var graphs = {{ minutes_played | safe}};
       graphs.config = {'displayModeBar': false}
       Plotly.plot('minutes-played-pie', graphs, {displayModeBar: false});
@@ -64,8 +63,7 @@
   <div class="pie-chart">
     <h1>Number of games in starting 11 and as a substitution</h1>
     <div id='starter-or-substitute-pie' class='plotly-chart'>
-      <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-      <script type='text/javascript'>
+      <script>
         var graphs = {{ starer_or_sub | safe}};
         graphs.config = {'displayModeBar': false}
         Plotly.plot('starter-or-substitute-pie', graphs, {displayModeBar: false});
@@ -108,8 +106,7 @@
   {% if stats.goals>0 %}
   <h4>Number of goals scored against different teams</h4>
   <div id="chart" class="chart">
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script type="text/javascript">
+    <script>
       var graphs = {{ goals_by_team | safe}};
       graphs.config = {'displayModeBar': false}
       Plotly.plot('chart', graphs, {displayModeBar: false});
