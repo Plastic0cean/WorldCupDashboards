@@ -18,6 +18,7 @@ body {
 }
 
 #team-searching input {
+	display: inline-block;
 	align-items: center;
 	height: 40px;
 	justify-content: center;
@@ -35,6 +36,7 @@ body {
 	font-size: 16px;
 	transition: all 0.2s ease-in-out;
 	padding: 10px 20px;
+	width: 80px;
 }
 
 .submit-button:hover {
@@ -95,6 +97,10 @@ a:hover {
 
 #team-tournaments-stages-table {
 	width: 70%;
+}
+
+#player-appearances-summary table {
+	width: 80%;
 }
 
 .table-header {
@@ -235,12 +241,6 @@ td, th {
 	transform: translateY(-3px);
 }
 
-.navigation-panel-justified {
-	align-items: center;
-	display: flex;
-	justify-content: center;
-}
-
 .pie-chart {
 	width: 500px;
 	height: 500px;
@@ -254,7 +254,6 @@ td, th {
 
 #player-matches-section {
 	align-items: center;
-	display: None;
 	justify-content: center;
 	margin-top: 15px;
 }
@@ -273,18 +272,31 @@ td, th {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.dashboard-card-content {
-	text-align: center;
+#player-goals-cards-section {
+	display: flex;
+	justify-items: center;
+	justify-content: center;
 }
 
-.dashboard-card-content h3 {
+#player-goals-cards-section .dashboard-card {
+	margin: 20px 40px;
+}
+
+.dashboard-card {
+	height: 125px;
+	text-align: center;
+	padding: 20px;
+	width: 270px;
+}
+
+.dashboard-card h3 {
 	color: var(--blue-accent-color);
 	font-size: 40px;
 	margin-bottom: 10px;
 	margin-top: 10%;
 }
 
-.dashboard-card-content p {
+.dashboard-card p {
 	color: #666;
 	font-size: 16px;
 	margin-bottom: 20px;
