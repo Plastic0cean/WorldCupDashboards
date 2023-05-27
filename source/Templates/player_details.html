@@ -28,7 +28,7 @@
     </thead>
     <tbody>
       {% for row in appearances_summary %}
-      <tr>
+      <tr class="row-on-hover-grey">
         <td>{{row.tournament}}</td>
         <td>{{row.number_of_matches}}</td>
         <td>{{row.number_of_goals}}</td>
@@ -48,7 +48,7 @@
     <div id="minutes-played-pie" class="plotly-chart">
       <script>
         var graphs = {{ minutes_played | safe}};
-        graphs.config = {'displayModeBar': false}
+        graphs.config = {'displayModeBar': false, 'responsive': true};
         Plotly.plot('minutes-played-pie', graphs, {displayModeBar: false});
       </script>
     </div>
@@ -59,7 +59,7 @@
     <div id="starter-or-substitute-pie" class="plotly-chart">
       <script>
         var graphs = {{ starer_or_sub | safe}};
-        graphs.config = {'displayModeBar': false}
+        graphs.config = {'displayModeBar': false, 'responsive': true};
         Plotly.plot('starter-or-substitute-pie', graphs, {displayModeBar: false});
       </script>
     </div>
@@ -70,15 +70,15 @@
 
   <div id="player-goals-cards-section">
     <div class="dashboard-card">
-      <h2>3</h2>
+      <h3>3</h3>
       <p>Goals scored overall</p>
     </div>
     <div class="dashboard-card">
-      <h2>0.28</h2>
+      <h3>0.28</h3>
       <p>Goals per game ratio</p>
     </div>
     <div class="dashboard-card">
-      <h2>60</h2>
+      <h3>60</h3>
       <p>Average minutes to score a goal</p>
     </div>
   </div>
@@ -88,7 +88,7 @@
   <div id="chart" class="chart">
     <script>
       var graphs = {{ goals_by_team | safe}};
-      graphs.config = {'displayModeBar': false}
+      graphs.config = {'displayModeBar': false, 'responsive': true};
       Plotly.plot('chart', graphs, {displayModeBar: false});
     </script>
   </div>
