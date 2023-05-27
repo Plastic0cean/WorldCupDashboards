@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="profile-pic">
-    <img src="https://via.placeholder.com/150" alt="Profile Picture" />
+    <img src="https://via.placeholder.com/150" alt="Profile Picture">
   </div>
   <div class="user-info">
     <h1>{{player.name}}</h1>
@@ -14,17 +14,9 @@
     </div>
 </div>
 
-
-      <!-- <li><b>Nationality</b>: {{player.team}}</li>
-      <li><b>Appearances</b>: {{stats.matches}} </li>
-      <li><b>Goals</b>: {{stats.goals}}</li>
-      <li><b>Yellow cards</b>: {{stats.yellow_cards}}</li>
-      <li><b>Red cards</b>: {{stats.red_cards}}</li> -->
-
-      
 {%if appearances_summary%}
 <div id="player-appearances-summary">
-  <table class="table table-hover">
+  <table class="table-data center">
     <thead>
       <tr>
         <th scope="col">Tournament</th>
@@ -36,7 +28,7 @@
     </thead>
     <tbody>
       {% for row in appearances_summary %}
-      <tr>
+      <tr class="row-on-hover-grey">
         <td>{{row.tournament}}</td>
         <td>{{row.number_of_matches}}</td>
         <td>{{row.number_of_goals}}</td>
@@ -48,79 +40,55 @@
   </table>
 </div>
 {%endif%}
-      
-      
-<div class="navigation-panel-justified" id="player-section">
-  <button id="goals-navigation-item" class="navigation-item">Goals</button>
-  <button id="matches-navigation-item" class="navigation-item">Matches</button>
-  <button id="awards-navigation-item" class="navigation-item">Awards</button>
-</div>
-      
+
 <div id="player-matches-section">
-  
+
   <div class="pie-chart">
-  <h1>Number of minutes on the pitch and bench</h1>
-  <div id='minutes-played-pie' class='plotly-chart'>
-    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <script type='text/javascript'>
-      var graphs = {{ minutes_played | safe}};
-      graphs.config = {'displayModeBar': false}
-      Plotly.plot('minutes-played-pie', graphs, {displayModeBar: false});
-    </script>
+    <h1>Number of minutes on the pitch and bench</h1>
+    <div id="minutes-played-pie" class="plotly-chart">
+      <script>
+        var graphs = {{ minutes_played | safe}};
+        graphs.config = {'displayModeBar': false, 'responsive': true};
+        Plotly.plot('minutes-played-pie', graphs, {displayModeBar: false});
+      </script>
+    </div>
   </div>
-</div>
 
   <div class="pie-chart">
     <h1>Number of games in starting 11 and as a substitution</h1>
-    <div id='starter-or-substitute-pie' class='plotly-chart'>
-      <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-      <script type='text/javascript'>
+    <div id="starter-or-substitute-pie" class="plotly-chart">
+      <script>
         var graphs = {{ starer_or_sub | safe}};
-        graphs.config = {'displayModeBar': false}
+        graphs.config = {'displayModeBar': false, 'responsive': true};
         Plotly.plot('starter-or-substitute-pie', graphs, {displayModeBar: false});
       </script>
     </div>
   </div>
-  
-
-  
 </div>
 
 <div id="player-goals-section">
-  <!-- {% if appearances_by_tournament%}
-  <h4>Total number of matches in different tournaments</h4>
-  {% endif %} -->
 
-<div id="player-goals-cards-section">
-  <div class="dashboard-card">
-    <div class="dashboard-card-content">
-      <h2>3</h2>
+  <div id="player-goals-cards-section">
+    <div class="dashboard-card">
+      <h3>3</h3>
       <p>Goals scored overall</p>
     </div>
-  </div>
-  
-  <div class="dashboard-card">
-    <div class="dashboard-card-content">
-      <h2>0.28</h2>
+    <div class="dashboard-card">
+      <h3>0.28</h3>
       <p>Goals per game ratio</p>
     </div>
-  </div>
-
-  <div class="dashboard-card">
-    <div class="dashboard-card-content">
-      <h2>60</h2>
+    <div class="dashboard-card">
+      <h3>60</h3>
       <p>Average minutes to score a goal</p>
     </div>
   </div>
-</div>
 
   {% if stats.goals>0 %}
   <h4>Number of goals scored against different teams</h4>
-  <div id='chart' class='chart'>
-    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <script type='text/javascript'>
+  <div id="chart" class="chart">
+    <script>
       var graphs = {{ goals_by_team | safe}};
-      graphs.config = {'displayModeBar': false}
+      graphs.config = {'displayModeBar': false, 'responsive': true};
       Plotly.plot('chart', graphs, {displayModeBar: false});
     </script>
   </div>
@@ -151,34 +119,4 @@
   </table>
   {% endif %}
 </div>
-
-
-<script>
-const button1 = document.getElementById('goals-navigation-item');
-const button2 = document.getElementById('awards-navigation-item');
-const button3 = document.getElementById('matches-navigation-item');
-
-const component1 = document.getElementById('player-goals-section');
-const component2 = document.getElementById('player-awards-section');
-const component3 = document.getElementById('player-matches-section');
-
-button1.addEventListener('click', () => {
-  component1.style.display = 'block';
-  component2.style.display = 'none';
-  component3.style.display = 'none';
-});
-
-button2.addEventListener('click', () => {
-  component1.style.display = 'none';
-  component2.style.display = 'block';
-  component3.style.display = 'none';
-});
-
-button3.addEventListener('click', () => {
-  component1.style.display = 'none';
-  component2.style.display = 'none';
-  component3.style.display = 'flex';
-});
-
-</script>
 {% endblock content %}

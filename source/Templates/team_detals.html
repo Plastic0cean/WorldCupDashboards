@@ -14,31 +14,23 @@
 
 <div class="team-cards-container">
   <div class="dashboard-card">
-    <div class="dashboard-card-content">
-      <h3>{{goals_and_matches.number_of_matches}}</h3>
-      <p>Games played</p>
-    </div>
+    <h3>{{goals_and_matches.number_of_matches}}</h3>
+    <p>Games played</p>
   </div>
 
   <div class="dashboard-card">
-    <div class="dashboard-card-content">
-      <h3>{{goals_and_matches.number_of_tournaments}}</h3>
-      <p>Different tournaments</p>
-    </div>
+    <h3>{{goals_and_matches.number_of_tournaments}}</h3>
+    <p>Different tournaments</p>
   </div>
 
   <div class="dashboard-card">
-    <div class="dashboard-card-content">
-      <h3>{{goals_and_matches.goals_scored}}</h3>
-      <p>Goals scored</p>
-    </div>
+    <h3>{{goals_and_matches.goals_scored}}</h3>
+    <p>Goals scored</p>
   </div>
 
   <div class="dashboard-card">
-    <div class="dashboard-card-content">
-      <h3>{{goals_and_matches.goals_conceeded}}</h3>
-      <p>Goals conceeded</p>
-    </div>
+    <h3>{{goals_and_matches.goals_conceeded}}</h3>
+    <p>Goals conceeded</p>
   </div>
 </div>
 
@@ -60,7 +52,6 @@
 </div>
 
 <div id="team-matches-section">
-  <!-- <h2>Matches statistics</h2> -->
   <div class="grid-container">
 
     <div id="team-matches-results" class="dashboard-container">
@@ -68,8 +59,9 @@
       <div id="team-matches-results-pie" class="chart">
         <script>
           var graphs = {{ results_chart | safe}};
-          graphs.config = { 'displayModeBar': false };
-          Plotly.plot('team-matches-results-pie', graphs, {});
+          var layout = {autosize: true}
+          graphs.config = {'displayModeBar': false, 'responsive': true};
+          Plotly.plot('team-matches-results-pie', graphs, layout);
         </script>
       </div>
     </div>
@@ -80,7 +72,7 @@
       <div id="all-matches-bar" class="chart">
         <script>
           var graphs = {{ matches_chart | safe}};
-          graphs.config = { 'displayModeBar': false };
+          graphs.config = {'displayModeBar': false, 'responsive': true};
           Plotly.plot('all-matches-bar', graphs, {});
           
         </script>
@@ -94,7 +86,7 @@
       <div id="minutes-by-player-treemap" class="chart">
         <script>
           var graphs = {{ most_minutes_by_player | safe}};
-          graphs.config = { 'displayModeBar': false };
+          graphs.config = {'displayModeBar': false, 'responsive': true};
           Plotly.plot('minutes-by-player-treemap', graphs, {});
         </script>
       </div>
@@ -123,7 +115,7 @@
       <div id="goals-by-opponent-bar" class="chart">
         <script>
           var graphs = {{ goals_by_opponent | safe}};
-          graphs.config = { 'displayModeBar': false };
+          graphs.config = {'displayModeBar': false, 'responsive': true};
           Plotly.plot('goals-by-opponent-bar', graphs, {});
         </script>
       </div>
@@ -134,7 +126,7 @@
       <div id="goals-by-tournament-pie" class="chart">
         <script>
           var graphs = {{ goals_by_tournament | safe}};
-          graphs.config = { 'displayModeBar': false };
+          graphs.config = {'displayModeBar': false, 'responsive': true};
           Plotly.plot('goals-by-tournament-pie', graphs, {});
         </script>
       </div>
@@ -151,7 +143,7 @@
             <th>Score</th>
           </tr>
           {%for row in defeat%}
-          <tr>
+          <tr class="row-on-hover-grey">
             <td>{{row.tournament_name}}</td>
             <td>{{row.match_name}}</td>
             <td>{{row.match_date}}</td>
@@ -175,7 +167,7 @@
           </thead>
           <tbody>
             {%for row in win%}
-            <tr>
+            <tr class="row-on-hover-grey">
               <td>{{row.tournament_name}}</td>
               <td>{{row.match_name}}</td>
               <td>{{row.match_date}}</td>
