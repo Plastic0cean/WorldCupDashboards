@@ -4,7 +4,6 @@ import pandas as pd
 from plotly.utils import PlotlyJSONEncoder
 import plotly.express as px
 import plotly.graph_objects as go
-
 import plotly.io as pio
 pio.templates.default = "ggplot2"
 
@@ -185,3 +184,20 @@ def all_matches_by_team(data):
         margin=dict(l=15, r=15, t=15, b=15), 
         plot_bgcolor='rgb(246, 246, 247)')
     return fig
+
+@render_figure
+def goals_by_minute_hist(data: pd.DataFrame):
+    fig = px.histogram(data, x="minute", color_discrete_sequence=px.colors.diverging.balance)
+    fig.update_layout(bargap=0.2)
+    fig.layout["xaxis"].title = dict()
+    fig.layout["yaxis"].title = dict()
+    return fig
+
+@render_figure
+def goals_difference_by_team_bubble(data: pd.DataFrame):
+    data["goals_difference"] = data["goals_difference"] + abs(data.goals_difference.min())
+    fig = px.scatter(data, y="goals_for", x="goals_against", size="goals_difference", color="team_name")
+    fig.update_yaxes(visible=False, showticklabels=False)
+    fig.update_xaxes(visible=False, showticklabels=False)
+    return fig
+
