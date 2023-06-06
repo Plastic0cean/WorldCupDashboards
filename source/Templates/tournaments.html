@@ -5,34 +5,35 @@
   <h2>{% if tournament_id %} {{tournament}}</h2>{% endif %}
 </div>
 
-<div class="dropdown">
-  <button type="submit" class="dropdown-toggle dropdown-button" aria-haspopup="true" aria-expanded="false">
+<div class="dropdown-container">
+  <div id="tournament-list-dropdown" class="dropdown">
+    <button type="submit" class="dropbtn">
       {% if tournament_id %} {{tournament_id}}
       {% else %}
       Filter a tournament
       {% endif %}
-  </button>
-  <ul class="dropdown-menu">
-    {%for tournament in tournaments%}
-    <li><a href="{{'?id='+tournament.tournament_id}}">{{tournament.year + " - " +tournament.host_country}}</a></li>
-    {%endfor%}
-  </ul>
+    </button>
+    <div class="dropdown-content">
+      {%for tournament in tournaments%}
+      <a href="{{'?id='+tournament.tournament_id}}">{{tournament.year + " - " +tournament.host_country}}</a>
+      {%endfor%}
+    </div>
+  </div>
 </div>
 
-
+{% if not tournament_id %}
 <div class="dashboard-container">
-  {% if not tournament_id %}
   <h3>Number of goals and games in different years</h3>
   <div id="chart" class="chart">
     <script>
       var graphs = {{ goals_by_tournament | safe}};
-      var layout = {autosize: true}
-      graphs.config = {'displayModeBar': false, 'responsive': true};
+      var layout = { autosize: true }
+      graphs.config = { 'displayModeBar': false, 'responsive': true };
       Plotly.plot('chart', graphs, layout);
-      </script>
-      </div>
-      {% endif %}
-    </div>
+    </script>
+  </div>
+</div>
+{% endif %}
 
 <div id="tournament-reports-container">
   <div class="left-col">
@@ -41,10 +42,10 @@
       <h3>Goals difference by a team</h3>
       <div id="goals-difference-by-team" class="chart">
         <script>
-            var graphs = {{ goals_difference | safe}};
-            var layout = {autosize: true}
-            graphs.config = {'displayModeBar': false, 'responsive': true};
-            Plotly.plot('goals-difference-by-team', graphs, layout);
+          var graphs = {{ goals_difference | safe}};
+          var layout = { autosize: true }
+          graphs.config = { 'displayModeBar': false, 'responsive': true };
+          Plotly.plot('goals-difference-by-team', graphs, layout);
         </script>
       </div>
     </div>
@@ -53,10 +54,10 @@
       <h3>Goals scored by minutes</h3>
       <div id="goals-by-minutes-hist" class="chart">
         <script>
-            var graphs = {{ goals_by_minutes | safe}};
-            var layout = {autosize: true}
-            graphs.config = {'displayModeBar': false, 'responsive': true};
-            Plotly.plot('goals-by-minutes-hist', graphs, layout);
+          var graphs = {{ goals_by_minutes | safe}};
+          var layout = { autosize: true }
+          graphs.config = { 'displayModeBar': false, 'responsive': true };
+          Plotly.plot('goals-by-minutes-hist', graphs, layout);
         </script>
       </div>
     </div>
@@ -65,46 +66,71 @@
 
   <div class="right-col">
 
-    <div id="most-goals-in-match" class="match-score-container">
-      <h3> Most goals in a single match</h3>
-      <div class="match-card">
-        <h4 class="match-date">{{most_goals_in_single_game.match_date}}</h4>
-        <span class="home-team-name">{{most_goals_in_single_game.home_team_name}}</span>
-        <span class="score">{{most_goals_in_single_game.score}}</span>
-        <span class="away-team-name">{{most_goals_in_single_game.away_team_name}}</span>
+
+    <div id="most-goals-in-single-game-container" class="scoreboard-container dashboard-container">
+      <h3>Most goals in a single match</h3>
+      <div class="match-info">
+        <span class="match-date">{{most_goals_in_single_game.match_date}}</span>
+      </div>
+      <div class="scoreboard">
+        <div class="team">
+          <span class="team-name">
+            <a href="{{url_for('team_details', team_id=most_goals_in_single_game.home_team_id)}}">{{most_goals_in_single_game.home_team_name}}</a>
+          </span>
+
+          <span class="team-score">{{most_goals_in_single_game.home_team_score}}</span>
+        </div>
+        <div class="team">
+          <span class="team-name">
+            <a href="{{url_for('team_details', team_id=most_goals_in_single_game.away_team_id)}}">{{most_goals_in_single_game.away_team_name}}</a>
+          </span>
+          <span class="team-score">{{most_goals_in_single_game.away_team_score}}</span>
+        </div>
       </div>
     </div>
 
     {% if most_cards_in_single_game %}
-      <div class="most-bookings-container">
-        <h3> Most bookings in a single match</h3>
-        <div class="match-card">
-          <span class="match_name">{{most_cards_in_single_game.match_name}}</span><br>
-          <span class="yellow-cards">Yellow cards: {{most_cards_in_single_game.yellow_cards}}</span><br>
-          <span class="red-cards">Red cards: {{most_cards_in_single_game.red_cards}}</span>
-        </div>
+    <div class="scoreboard-container dashboard-container">
+      <h3> Most cards in a single match</h3>
+    <div class="match-info">
+      <span class="match-date">{{most_cards_in_single_game.match_date}}</span>
+      <span class="cards">
+        <span class="yellow-card">Yellow cards: {{most_cards_in_single_game.yellow_cards}}</span>
+        <span class="red-card">Red cards: {{most_cards_in_single_game.red_cards}}</span>
+      </span>
+    </div>
+    <div class="scoreboard">
+      <div class="team">
+        <span class="team-name">{{most_cards_in_single_game.home_team_name}}</span>
+        <span class="team-score">{{most_cards_in_single_game.home_team_score}}</span>
       </div>
-    {% endif %}
+      <div class="team">
+        <span class="team-name">{{most_cards_in_single_game.away_team_name}}</span>
+        <span class="team-score">{{most_cards_in_single_game.away_team_score}}</span>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 
     <div id="tournament-top-scorers">
       <h3> Top scorers </h3>
       <table class="table-data center">
-          <thead>
-            <tr>
-              <th scope="col">Player</th>
-              <th scope="col">Nationality</th>
-              <th scope="col">Goals Scored</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for scorer in top_scorers %}
-            <tr>
-              <td><a href="{{url_for('player_details', player_id=scorer.player_id)}}">{{scorer.player_name}}</a></td>
-              <td><a href="{{url_for('team_details', team_id=scorer.team_id)}}">{{scorer.team}}</a></td>
-              <td>{{scorer.goals}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
+        <thead>
+          <tr>
+            <th scope="col">Player</th>
+            <th scope="col">Nationality</th>
+            <th scope="col">Goals Scored</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for scorer in top_scorers %}
+          <tr>
+            <td><a href="{{url_for('player_details', player_id=scorer.player_id)}}">{{scorer.player_name}}</a></td>
+            <td><a href="{{url_for('team_details', team_id=scorer.team_id)}}">{{scorer.team}}</a></td>
+            <td>{{scorer.goals}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
     </div>
 
@@ -112,41 +138,41 @@
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function(event) {
-  var dropdown = document.querySelector(".dropdown");
-  var button = dropdown.querySelector(".dropdown-toggle");
-  var menu = dropdown.querySelector(".dropdown-menu");
+  document.addEventListener("DOMContentLoaded", function (event) {
+    var dropdown = document.querySelector(".dropdown");
+    var button = dropdown.querySelector(".dropdown-toggle");
+    var menu = dropdown.querySelector(".dropdown-menu");
 
-  function toggleMenu() {
-    if (menu.getAttribute("aria-hidden") === "true") {
-      menu.setAttribute("aria-hidden", "false");
-      button.setAttribute("aria-expanded", "true");
-      menu.style.display = "block";
-    } else {
-      menu.setAttribute("aria-hidden", "true");
-      button.setAttribute("aria-expanded", "false");
-      menu.style.display = "none";
+    function toggleMenu() {
+      if (menu.getAttribute("aria-hidden") === "true") {
+        menu.setAttribute("aria-hidden", "false");
+        button.setAttribute("aria-expanded", "true");
+        menu.style.display = "block";
+      } else {
+        menu.setAttribute("aria-hidden", "true");
+        button.setAttribute("aria-expanded", "false");
+        menu.style.display = "none";
+      }
     }
-  }
 
-  button.addEventListener("click", toggleMenu);
-  dropdown.addEventListener("keydown", function(event) {
-    if (event.code === "Space" || event.code === "Enter") {
-      event.preventDefault();
-      toggleMenu();
-    }
+    button.addEventListener("click", toggleMenu);
+    dropdown.addEventListener("keydown", function (event) {
+      if (event.code === "Space" || event.code === "Enter") {
+        event.preventDefault();
+        toggleMenu();
+      }
+    });
+    document.addEventListener("click", function (event) {
+      if (!dropdown.contains(event.target)) {
+        menu.setAttribute("aria-hidden", "true");
+        button.setAttribute("aria-expanded", "false");
+        menu.style.display = "none";
+      }
+    });
   });
-  document.addEventListener("click", function(event) {
-    if (!dropdown.contains(event.target)) {
-      menu.setAttribute("aria-hidden", "true");
-      button.setAttribute("aria-expanded", "false");
-      menu.style.display = "none";
-    }
-  });
-});
 </script>
 
-  <!-- <div id='chart_map' class='chart_map'>
+<!-- <div id='chart_map' class='chart_map'>
   <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
   <script type='text/javascript'>
       var graphs = {{ stadiums_map | safe}};

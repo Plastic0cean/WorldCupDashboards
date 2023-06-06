@@ -10,7 +10,7 @@ pio.templates.default = "ggplot2"
 
 def render_figure(func: Callable):
     # The decorator which is used to render a js scirpt for plotly visualisations.
-    # It requires that 'func' returns plotly figure object.
+    # It requires that "func" returns plotly figure object.
     def inner(*args, **kwargs):
         fig = func(*args, **kwargs)
         result = json.dumps(fig, cls=PlotlyJSONEncoder)
@@ -52,8 +52,8 @@ def players_goals_by_team(data_as_dict):
     }    
     fig = px.treemap(
         data, 
-        values='number_of_goals', 
-        names='team', 
+        values="number_of_goals", 
+        names="team", 
         title=title,
         labels=labels
         )
@@ -77,13 +77,13 @@ def player_appearances_by_tournament(data_as_dict):
 
 def render_goals_by_tournament(data):
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=data['year'], y=data["goals"],
-                        mode='markers',
-                        name='Scored goals'))
+    fig.add_trace(go.Scatter(x=data["year"], y=data["goals"],
+                        mode="markers",
+                        name="Scored goals"))
 
-    fig.add_trace(go.Scatter(x=data['year'], y=data["matches"],
-                        mode='markers',
-                        name='Matches played'))
+    fig.add_trace(go.Scatter(x=data["year"], y=data["matches"],
+                        mode="markers",
+                        name="Matches played"))
     return json.dumps(fig, cls=PlotlyJSONEncoder)
 
 
@@ -109,7 +109,7 @@ def starter_or_substitute(data):
     if not data:
         return None
     data = pd.DataFrame(data)
-    trace = go.Pie(labels=data["starer_or_sub"], values=data["number_of_matches"], textinfo='value', hole=0.4)
+    trace = go.Pie(labels=data["starer_or_sub"], values=data["number_of_matches"], textinfo="value", hole=0.4)
     fig = go.Figure(data=[trace])
     return fig
 
@@ -119,7 +119,7 @@ def overall_minutes_played(data):
     trace = go.Pie(
     labels=["Playing", "Bench"], 
     values=[data["minutes_played"][0], data["minutes_on_bench"][0]],
-    textinfo='value', hole=0.4)
+    textinfo="value", hole=0.4)
     fig = go.Figure(data=[trace])
     return fig
 
@@ -147,9 +147,9 @@ def players_with_most_minutes(data):
     data = pd.DataFrame(data)
     fig = px.treemap(
         data, 
-        path=['player_name'], 
-        values='minutes_played',
-        color='minutes_played',
+        path=["player_name"], 
+        values="minutes_played",
+        color="minutes_played",
         color_discrete_sequence=px.colors.diverging.balance)
     fig.update_layout(coloraxis_showscale=False)
     return fig
@@ -164,8 +164,8 @@ def all_matches_by_team(data):
 
     fig.add_trace(go.Bar(x=wins.match_id, y=wins.goal_differential,
                     base=0,
-                    marker_color='green',
-                    name='win',
+                    marker_color="green",
+                    name="win",
                     hovertext=[s for s in wins.score],
                     hoverinfo="text",
                     text=[match for match in wins.opponent_name] 
@@ -173,16 +173,16 @@ def all_matches_by_team(data):
 
     fig.add_trace(go.Bar(x=loses.match_id, y=loses.goal_differential.apply(abs),
                     base=[int(diff) for diff in loses.goal_differential],
-                    marker_color='crimson',
-                    name='lose',
+                    marker_color="crimson",
+                    name="lose",
                     hovertext=[f"Score: {s}" for s in loses.score],
                     hoverinfo="text",
                     text=[match for match in loses.opponent_name]))
-    fig.update_xaxes(categoryorder='array', categoryarray=data.match_id, visible=False, showticklabels=False)
+    fig.update_xaxes(categoryorder="array", categoryarray=data.match_id, visible=False, showticklabels=False)
     fig.update_yaxes(visible=False, showticklabels=False)
     fig.update_layout(
         margin=dict(l=15, r=15, t=15, b=15), 
-        plot_bgcolor='rgb(246, 246, 247)')
+        plot_bgcolor="rgb(246, 246, 247)")
     return fig
 
 @render_figure
@@ -196,7 +196,7 @@ def goals_by_minute_hist(data: pd.DataFrame):
 @render_figure
 def goals_difference_by_team_bubble(data: pd.DataFrame):
     data["goals_difference"] = data["goals_difference"] + abs(data.goals_difference.min())
-    fig = px.scatter(data, y="goals_for", x="goals_against", size="goals_difference", color="team_name")
+    fig = px.scatter(data, y="goals_for", x="goals_against", size="goals_difference", color="team_name", color_discrete_sequence=px.colors.diverging.balance)
     fig.update_yaxes(visible=False, showticklabels=False)
     fig.update_xaxes(visible=False, showticklabels=False)
     return fig

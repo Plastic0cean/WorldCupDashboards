@@ -10,6 +10,8 @@ SELECT
 	away_team_id,
 	away_team_name,
 	score,
+	home_team_score,
+	away_team_score,
 	CAST(home_team_score AS INT) + CAST(away_team_score AS INT) AS number_of_goals
 FROM matches
 WHERE tournament_id = COALESCE(@tournament_id, tournament_id))

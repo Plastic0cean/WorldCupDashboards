@@ -81,7 +81,7 @@ def tournaments():
     tournaments_list = tournament.get_tournaments_list()
     most_goals_in_single_game=tournament.get_most_goals_in_single_game(tournament_id)
     most_cards_in_single_game=tournament.get_most_cards_in_single_game(tournament_id)
-    top_scorers = tournament.get_top_scorers(tournament_id=tournament_id, how_many=20)
+    top_scorers = tournament.get_top_scorers(tournament_id=tournament_id, how_many=10)
     goals_by_tournament = render_goals_by_tournament(tournament.get_goals_and_games_by_tournament())
     goals_by_minutes = goals_by_minute_hist(tournament.get_goals_by_minutes(tournament_id))
     goals_difference = goals_difference_by_team_bubble(tournament.get_goals_difference_by_team(tournament_id))
