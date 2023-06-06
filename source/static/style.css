@@ -2,10 +2,11 @@
 	--blue-accent-color: #1e0461;
 	--grey-border-color: rgb(167, 169, 170);
 	--light-grey-border-color: rgb(210, 213, 214);
+	--grey-backgroud-color: rgb(246, 246, 247);
 }
 
 body {
-	background-color: rgb(246, 246, 247);
+	background-color: var(--grey-backgroud-color);
 }
 
 .center {
@@ -399,3 +400,162 @@ td, th {
 .team-cards-container .dashboard-card {
 	margin: 0 36px 48px 36px; 
 }
+
+
+.page-title h1 {
+	text-align: center;
+	margin: 30px;
+}
+
+.dropdown-button {
+	background-color: var(--blue-accent-color);
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+	color: white;
+	/* font-size: 16px; */
+	transition: all 0.2s ease-in-out;
+}
+
+
+.match-score-container {
+	background-color: white;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.match-card {
+	width: 380px;
+	background-color: white;
+}
+
+.match-card h4 {
+	color: var(--blue-accent-color);
+} 
+
+.match-card span {
+	font-size: 20px;
+}
+
+#tournament-reports-container {
+	display: flex;	
+	gap: 30px;
+	justify-content: space-between;
+	width: 90%;
+}
+
+.left-col {
+	width: 69%;
+	align-items: left;
+ }
+
+
+
+.right-col {
+	width: 30%;
+	align-items: right;
+}
+
+#goals-difference-by-team-container {
+	margin: 10px;
+}
+
+#tournament-top-scorers {
+	margin: 10px;
+}
+
+#goals-by-minutes-container {
+	margin: 10px;
+}
+
+#most-goals-in-match {
+	margin: 10px;
+}
+
+.dropbtn {
+	background-color: var(--blue-accent-color);
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+  }
+  
+.dropdown {
+	position: relative;
+	display: inline-block;
+  }
+  
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {display: block;}
+  
+
+
+.dropdown-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}  
+
+#most-goals-in-single-game-container { 
+	margin-bottom: 30px;
+}
+
+.match-info {
+	margin-bottom: 0;
+}
+
+  .match-date {
+	font-weight: bold;
+  }
+  
+  .cards {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: 10px;
+  }
+  
+  .yellow-card,
+  .red-card {
+	margin: 0 10px;
+	/* font-size: 14px; */
+  }
+  
+  .scoreboard {
+	display: flex;
+	justify-content: space-around;
+  }
+  
+  .team {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .team-name {
+	/* font-size: 20px; */
+	font-weight: bold;
+  }
+  
+  .team-score {
+	/* font-size: 40px; */
+	margin-top: 10px;
+  }
+  

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from Visualizations.plots import * 
 import Reports.players
 import Reports.teams as teams
-import Reports.tournaments
+import Reports.tournaments as tournament
 from SearchingEngine.Searching import fuzzy_filter_players
 
 app = Flask(__name__)
@@ -78,15 +78,13 @@ def player_details(player_id: str):
 @app.route("/tournaments")
 def tournaments():
     tournament_id = request.args.get('id', default=None)
-    print(tournament_id)
-    print(tournament_id is None, tournament_id == "")
-
-    tournaments_list = Reports.tournaments.get_tournaments_list()
-    most_goals_in_single_game=Reports.tournaments.get_most_goals_in_single_game(tournament_id)
-    most_cards_in_single_game=Reports.tournaments.get_most_cards_in_single_game(tournament_id)
-    top_scorers = Reports.tournaments.get_top_scorers(tournament_id=tournament_id, how_many=20)
-    goals_by_tournament=render_goals_by_tournament(Reports.tournaments.get_goals_and_games_by_tournament())
-    
+    tournaments_list = tournament.get_tournaments_list()
+    most_goals_in_single_game=tournament.get_most_goals_in_single_game(tournament_id)
+    most_cards_in_single_game=tournament.get_most_cards_in_single_game(tournament_id)
+    top_scorers = tournament.get_top_scorers(tournament_id=tournament_id, how_many=10)
+    goals_by_tournament = render_goals_by_tournament(tournament.get_goals_and_games_by_tournament())
+    goals_by_minutes = goals_by_minute_hist(tournament.get_goals_by_minutes(tournament_id))
+    goals_difference = goals_difference_by_team_bubble(tournament.get_goals_difference_by_team(tournament_id))
     
     return render_template(
         "tournaments.html",
@@ -96,8 +94,9 @@ def tournaments():
         most_goals_in_single_game=most_goals_in_single_game,
         most_cards_in_single_game=most_cards_in_single_game,
         tournament_id=tournament_id,
-        stadiums_map = show_stadiums_on_map(
-        Reports.tournaments.get_number_of_matches_on_stadiums(tournament_id))
+        # stadiums_map = show_stadiums_on_map(tournaments.get_number_of_matches_on_stadiums(tournament_id)),
+        goals_by_minutes=goals_by_minutes,
+        goals_difference=goals_difference
         )
 
 
