@@ -1,6 +1,7 @@
 beautifulsoup==4-4.12.2
 flask==2.2.3
 pandas==1.5.3
+pillow==9.5.0
 pytest==7.3.1
 plotly==5.14.0
 pyodbc==4.0.35
