@@ -82,6 +82,9 @@ def player_details(player_id: str):
 @app.route("/tournaments")
 def tournaments():
     tournament_id = request.args.get('id', default=None)
+    current_tournament = tournament.get_tournament_by_id(tournament_id)
+    print(current_tournament)
+    print(bool(current_tournament))
     tournaments_list = tournament.get_tournaments_list()
     most_goals_in_single_game=tournament.get_most_goals_in_single_game(tournament_id)
     most_cards_in_single_game=tournament.get_most_cards_in_single_game(tournament_id)
@@ -92,13 +95,13 @@ def tournaments():
     
     return render_template(
         "tournaments.html",
+        tournament=current_tournament,
         tournaments=tournaments_list,
         goals_by_tournament=goals_by_tournament,
         top_scorers=top_scorers,   
         most_goals_in_single_game=most_goals_in_single_game,
         most_cards_in_single_game=most_cards_in_single_game,
         tournament_id=tournament_id,
-        # stadiums_map = show_stadiums_on_map(tournaments.get_number_of_matches_on_stadiums(tournament_id)),
         goals_by_minutes=goals_by_minutes,
         goals_difference=goals_difference
         )
