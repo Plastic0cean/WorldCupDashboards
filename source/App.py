@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
+import os 
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from Visualizations.plots import * 
 import Reports.players
 import Reports.teams as teams
@@ -7,6 +8,9 @@ from SearchingEngine.Searching import fuzzy_filter_players
 
 app = Flask(__name__)
 
+@app.route("/flags/<filename>")
+def display_flag(filename):
+    return send_from_directory(os.path.join("static", "images", "flags"), filename)
 
 @app.route("/")
 @app.route("/home")
