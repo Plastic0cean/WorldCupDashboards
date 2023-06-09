@@ -191,10 +191,14 @@ td, th {
 }
 
 .profile-pic img {
-	border-radius: 50%;
+	/* border-radius: 50%; */
 	display: block;
 	height: auto;
 	max-width: 100%;
+}
+
+.player-pic {
+	border-radius: 50%;
 }
 
 .user-info {
