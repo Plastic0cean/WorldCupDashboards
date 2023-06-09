@@ -2,27 +2,26 @@
 {% block content %}
 <div class="page-title">
   <h1>FIFA Worldcup statistics</h1>
-  <h2>{% if tournament_id %} {{tournament}}</h2>{% endif %}
 </div>
 
 <div class="dropdown-container">
   <div id="tournament-list-dropdown" class="dropdown">
     <button type="submit" class="dropbtn">
-      {% if tournament_id %} {{tournament_id}}
+      {% if tournament %} {{tournament[0].tournament_name}}
       {% else %}
       Filter a tournament
       {% endif %}
     </button>
     <div class="dropdown-content">
-      {%for tournament in tournaments%}
-      <a href="{{'?id='+tournament.tournament_id}}">{{tournament.year + " - " +tournament.host_country}}</a>
+      {%for t in tournaments%}
+      <a href="{{'?id='+t.tournament_id}}">{{t.year + " - " +t.host_country}}</a>
       {%endfor%}
     </div>
   </div>
 </div>
 
-{% if not tournament_id %}
-<div class="dashboard-container">
+{% if not tournament %}
+<div id="goals-and-games-by-tournament" class="dashboard-container">
   <h3>Number of goals and games in different years</h3>
   <div id="chart" class="chart">
     <script>
@@ -35,7 +34,7 @@
 </div>
 {% endif %}
 
-<div id="tournament-reports-container">
+<div id="tournament-reports-container" class="grid-container">
   <div class="left-col">
 
     <div id="goals-difference-by-team-container" class="dashboard-container">
@@ -61,11 +60,10 @@
         </script>
       </div>
     </div>
-
   </div>
 
-  <div class="right-col">
 
+  <div class="right-col">
 
     <div id="most-goals-in-single-game-container" class="scoreboard-container dashboard-container">
       <h3>Most goals in a single match</h3>
@@ -76,13 +74,14 @@
         <div class="team">
           <span class="team-name">
             <a href="{{url_for('team_details', team_id=most_goals_in_single_game.home_team_id)}}">{{most_goals_in_single_game.home_team_name}}</a>
+            <img class="country-flag" src="{{url_for('.display_flag', filename='T-01.jpg')}}" alt="">
           </span>
-
           <span class="team-score">{{most_goals_in_single_game.home_team_score}}</span>
         </div>
         <div class="team">
           <span class="team-name">
             <a href="{{url_for('team_details', team_id=most_goals_in_single_game.away_team_id)}}">{{most_goals_in_single_game.away_team_name}}</a>
+            <img class="country-flag" src="{{url_for('.display_flag', filename='T-01.jpg')}}" alt="">
           </span>
           <span class="team-score">{{most_goals_in_single_game.away_team_score}}</span>
         </div>
@@ -102,10 +101,12 @@
     <div class="scoreboard">
       <div class="team">
         <span class="team-name">{{most_cards_in_single_game.home_team_name}}</span>
+        <img class="country-flag" src="{{url_for('.display_flag', filename='T-01.jpg')}}" alt="">
         <span class="team-score">{{most_cards_in_single_game.home_team_score}}</span>
       </div>
       <div class="team">
         <span class="team-name">{{most_cards_in_single_game.away_team_name}}</span>
+        <img class="country-flag" src="{{url_for('.display_flag', filename='T-01.jpg')}}" alt="">
         <span class="team-score">{{most_cards_in_single_game.away_team_score}}</span>
       </div>
     </div>
