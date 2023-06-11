@@ -5,7 +5,7 @@ from Config import config
 
 
 def create_connection_string(driver: str, server: str, database: str):
-    return "Driver={" + driver + "};" + f"Server={server};" + f"Database={database};"+ "Trusted_Connection=yes;"
+    return "Driver={" + driver + "};" + f"Server={server};" + f"Database={database};"+ "Trusted_Connection=yes;" + "MARS_Connection=yes;"
 
 
 class Singleton:
@@ -21,6 +21,7 @@ class DBConnection(Singleton):
 
     def __init__(self, connection_string: str) -> None:
         self.connection_string = connection_string
+        self.conn = None
 
     def _connect(self) -> None:
          self.conn = pyodbc.connect(self.connection_string)
@@ -37,11 +38,12 @@ class DBConnection(Singleton):
         cursor.executemany(sql, values)
 
     def __enter__(self):
-        self._connect()
+        if self.conn is None:
+            self._connect()
 
     def __exit__(self, exception_type, exception_value, exception_traceback):
         self.conn.commit()
-        self.conn.close()
+        # self.conn.close()
 
     def select_as_dict(self, sql: str) -> dict:
         result = defaultdict(list)
