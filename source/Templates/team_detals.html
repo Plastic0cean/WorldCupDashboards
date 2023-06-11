@@ -139,14 +139,16 @@
         <table id="team-biggest-defeat-table" class="table-data">
           <tr>
             <th>Tournament</th>
-            <th>Match</th>
+            <th>Opponent</th>
             <th>Date</th>
             <th>Score</th>
           </tr>
           {%for row in defeat%}
           <tr class="row-on-hover-grey">
             <td>{{row.tournament_name}}</td>
-            <td>{{row.match_name}}</td>
+            <td>
+              <a href="{{url_for('team_details', team_id=row.opponent_id)}}">{{row.opponent_name}}</a>
+            </td>
             <td>{{row.match_date}}</td>
             <td>{{row.score}}</td>
           </tr>
@@ -161,7 +163,7 @@
           <thead>
             <tr>
               <th>Tournament</th>
-              <th>Match</th>
+              <th>Opponent</th>
               <th>Date</th>
               <th>Score</th>
             </tr>
@@ -170,7 +172,9 @@
             {%for row in win%}
             <tr class="row-on-hover-grey">
               <td>{{row.tournament_name}}</td>
-              <td>{{row.match_name}}</td>
+              <td>
+                <a href="{{url_for('team_details', team_id=row.opponent_id)}}">{{row.opponent_name}}</a>
+              </td>
               <td>{{row.match_date}}</td>
               <td>{{row.score}}</td>
             </tr>
