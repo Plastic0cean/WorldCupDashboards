@@ -5,12 +5,18 @@ import Reports.players
 import Reports.teams as teams
 import Reports.tournaments as tournament
 from SearchingEngine.Searching import fuzzy_filter_players
+from utils.utils import retry_if_fail
 
 app = Flask(__name__)
 
+@retry_if_fail
+def get_flag_filename_from_db(team_id: str):
+    filename = teams.get_team_by_id(team_id).flag_img
+    return filename
+
 @app.route("/flags/<team_id>")
 def display_flag(team_id: str):
-    filename = teams.get_team_by_id(team_id).flag_img
+    filename = get_flag_filename_from_db(team_id)
     return send_from_directory(os.path.join("static", "images", "flags"), filename)
 
 @app.route("/")
