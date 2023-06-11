@@ -5,18 +5,24 @@ import Reports.players
 import Reports.teams as teams
 import Reports.tournaments as tournament
 from SearchingEngine.Searching import fuzzy_filter_players
+from utils.utils import retry_if_fail
 
 app = Flask(__name__)
 
-@app.route("/flags/<filename>")
-def display_flag(filename):
+@retry_if_fail
+def get_flag_filename_from_db(team_id: str):
+    filename = teams.get_team_by_id(team_id).flag_img
+    return filename
+
+@app.route("/flags/<team_id>")
+def display_flag(team_id: str):
+    filename = get_flag_filename_from_db(team_id)
     return send_from_directory(os.path.join("static", "images", "flags"), filename)
 
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template("main.html")
-
 
 @app.route("/teams/<team_id>", methods=("GET", "POST"))
 def team_details(team_id: str):
@@ -82,6 +88,7 @@ def player_details(player_id: str):
 @app.route("/tournaments")
 def tournaments():
     tournament_id = request.args.get('id', default=None)
+    current_tournament = tournament.get_tournament_by_id(tournament_id)
     tournaments_list = tournament.get_tournaments_list()
     most_goals_in_single_game=tournament.get_most_goals_in_single_game(tournament_id)
     most_cards_in_single_game=tournament.get_most_cards_in_single_game(tournament_id)
@@ -92,13 +99,13 @@ def tournaments():
     
     return render_template(
         "tournaments.html",
+        tournament=current_tournament,
         tournaments=tournaments_list,
         goals_by_tournament=goals_by_tournament,
         top_scorers=top_scorers,   
         most_goals_in_single_game=most_goals_in_single_game,
         most_cards_in_single_game=most_cards_in_single_game,
         tournament_id=tournament_id,
-        # stadiums_map = show_stadiums_on_map(tournaments.get_number_of_matches_on_stadiums(tournament_id)),
         goals_by_minutes=goals_by_minutes,
         goals_difference=goals_difference
         )

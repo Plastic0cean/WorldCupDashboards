@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="profile-pic">
-    <img class="country-flag" src="{{url_for('.display_flag', filename=team.flag_img)}}" alt="Profile Picture">
+    <img class="country-flag" src="{{url_for('.display_flag', team_id=team.team_id)}}" alt="Profile Picture">
   </div>
   <div class="user-info">
     <h1>{{team.team_name}}</h1>

@@ -5,6 +5,10 @@ from .utils import to_dataframe
 def get_tournaments_list():
     return DbTableFunction("TournamentList").select(conn)
 
+def get_tournament_by_id(tournament_id: str):
+    with conn:
+       return conn.execute(f"SELECT * FROM tournaments WHERE tournament_id = '{tournament_id}'", True)
+
 def get_goals_and_games_by_tournament():
     return DbTableFunction("GoalsAndMatchesByTournament").select_as_dict(conn)
 

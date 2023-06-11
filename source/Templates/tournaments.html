@@ -2,27 +2,26 @@
 {% block content %}
 <div class="page-title">
   <h1>FIFA Worldcup statistics</h1>
-  <h2>{% if tournament_id %} {{tournament}}</h2>{% endif %}
 </div>
 
 <div class="dropdown-container">
   <div id="tournament-list-dropdown" class="dropdown">
     <button type="submit" class="dropbtn">
-      {% if tournament_id %} {{tournament_id}}
+      {% if tournament %} {{tournament[0].tournament_name}}
       {% else %}
       Filter a tournament
       {% endif %}
     </button>
     <div class="dropdown-content">
-      {%for tournament in tournaments%}
-      <a href="{{'?id='+tournament.tournament_id}}">{{tournament.year + " - " +tournament.host_country}}</a>
+      {%for t in tournaments%}
+      <a href="{{'?id='+t.tournament_id}}">{{t.year + " - " +t.host_country}}</a>
       {%endfor%}
     </div>
   </div>
 </div>
 
-{% if not tournament_id %}
-<div class="dashboard-container">
+{% if not tournament %}
+<div id="goals-and-games-by-tournament" class="dashboard-container">
   <h3>Number of goals and games in different years</h3>
   <div id="chart" class="chart">
     <script>
@@ -35,7 +34,7 @@
 </div>
 {% endif %}
 
-<div id="tournament-reports-container">
+<div id="tournament-reports-container" class="grid-container">
   <div class="left-col">
 
     <div id="goals-difference-by-team-container" class="dashboard-container">
@@ -61,30 +60,30 @@
         </script>
       </div>
     </div>
-
   </div>
+
 
   <div class="right-col">
 
-
     <div id="most-goals-in-single-game-container" class="scoreboard-container dashboard-container">
       <h3>Most goals in a single match</h3>
-      <div class="match-info">
-        <span class="match-date">{{most_goals_in_single_game.match_date}}</span>
-      </div>
-      <div class="scoreboard">
+      <div class="scorecard">
         <div class="team">
-          <span class="team-name">
-            <a href="{{url_for('team_details', team_id=most_goals_in_single_game.home_team_id)}}">{{most_goals_in_single_game.home_team_name}}</a>
-          </span>
-
-          <span class="team-score">{{most_goals_in_single_game.home_team_score}}</span>
+          <a
+            href="{{url_for('team_details', team_id=most_goals_in_single_game.home_team_id)}}">{{most_goals_in_single_game.home_team_name}}</a>
+          <img src="{{url_for('.display_flag', team_id=most_goals_in_single_game.home_team_id)}}"
+            alt="{{most_goals_in_single_game.home_team_name}}">
+        </div>
+        <div class="match-result">
+          <span class="date">{{most_goals_in_single_game.match_date}}</span>
+          <span
+            class="score">{{most_goals_in_single_game.home_team_score}}-{{most_goals_in_single_game.away_team_score}}</span>
         </div>
         <div class="team">
-          <span class="team-name">
-            <a href="{{url_for('team_details', team_id=most_goals_in_single_game.away_team_id)}}">{{most_goals_in_single_game.away_team_name}}</a>
-          </span>
-          <span class="team-score">{{most_goals_in_single_game.away_team_score}}</span>
+          <a
+            href="{{url_for('team_details', team_id=most_goals_in_single_game.away_team_id)}}">{{most_goals_in_single_game.away_team_name}}</a>
+          <img src="{{url_for('.display_flag', team_id=most_goals_in_single_game.away_team_id)}}"
+            alt="{{most_goals_in_single_game.away_team_name}}">
         </div>
       </div>
     </div>
@@ -92,28 +91,34 @@
     {% if most_cards_in_single_game %}
     <div class="scoreboard-container dashboard-container">
       <h3> Most cards in a single match</h3>
-    <div class="match-info">
-      <span class="match-date">{{most_cards_in_single_game.match_date}}</span>
-      <span class="cards">
-        <span class="yellow-card">Yellow cards: {{most_cards_in_single_game.yellow_cards}}</span>
-        <span class="red-card">Red cards: {{most_cards_in_single_game.red_cards}}</span>
-      </span>
-    </div>
-    <div class="scoreboard">
-      <div class="team">
-        <span class="team-name">{{most_cards_in_single_game.home_team_name}}</span>
-        <span class="team-score">{{most_cards_in_single_game.home_team_score}}</span>
+      <div class="scorecard">
+        <div class="team">
+          <a
+            href="{{url_for('team_details', team_id=most_cards_in_single_game.home_team_id)}}">{{most_cards_in_single_game.home_team_name}}</a>
+          <img src="{{url_for('.display_flag', team_id=most_cards_in_single_game.home_team_id)}}"
+            alt="{{most_cards_in_single_game.home_team_name}}">
+        </div>
+        <div class="match-result">
+          <span class="date">{{most_cards_in_single_game.match_date}}</span>
+          <span
+            class="score">{{most_cards_in_single_game.home_team_score}}-{{most_cards_in_single_game.away_team_score}}</span>
+          <div class="cards">
+            <span class="cards">Yellow cards: {{most_cards_in_single_game.yellow_cards}}</span>
+            <span class="cards">Red cards: {{most_cards_in_single_game.red_cards}}</span>
+          </div>
+        </div>
+        <div class="team">
+          <a
+            href="{{url_for('team_details', team_id=most_cards_in_single_game.away_team_id)}}">{{most_cards_in_single_game.away_team_name}}</a>
+          <img src="{{url_for('.display_flag', team_id=most_cards_in_single_game.away_team_id)}}"
+            alt="{{most_cards_in_single_game.away_team_name}}">
+        </div>
       </div>
-      <div class="team">
-        <span class="team-name">{{most_cards_in_single_game.away_team_name}}</span>
-        <span class="team-score">{{most_cards_in_single_game.away_team_score}}</span>
-      </div>
     </div>
-  </div>
-  {% endif %}
+    {% endif %}
 
     <div id="tournament-top-scorers">
-      <h3> Top scorers </h3>
+      <h3>Top scorers </h3>
       <table class="table-data center">
         <thead>
           <tr>
@@ -124,7 +129,7 @@
         </thead>
         <tbody>
           {% for scorer in top_scorers %}
-          <tr>
+          <tr class="row-on-hover-grey">
             <td><a href="{{url_for('player_details', player_id=scorer.player_id)}}">{{scorer.player_name}}</a></td>
             <td><a href="{{url_for('team_details', team_id=scorer.team_id)}}">{{scorer.team}}</a></td>
             <td>{{scorer.goals}}</td>

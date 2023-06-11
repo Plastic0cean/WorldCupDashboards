@@ -78,12 +78,17 @@ def player_appearances_by_tournament(data_as_dict):
 def render_goals_by_tournament(data):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data["year"], y=data["goals"],
-                        mode="markers",
-                        name="Scored goals"))
+                        mode="lines+markers",
+                        name="Goals scored"))
 
     fig.add_trace(go.Scatter(x=data["year"], y=data["matches"],
-                        mode="markers",
+                        mode="lines+markers",
                         name="Matches played"))
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    fig.update_yaxes(visible=False, showticklabels=False)
+    fig.update_xaxes(nticks=5)
+    fig.data[0].line.color = "#171C42"
+    fig.data[1].line.color = "#0B66BD"
     return json.dumps(fig, cls=PlotlyJSONEncoder)
 
 
@@ -98,7 +103,6 @@ def show_stadiums_on_map(data):
         hover_name="stadium_name", 
         hover_data=["city_name", "country_name"],
         zoom=3)
-
     fig.update_layout(mapbox_style="open-street-map")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return json.dumps(fig, cls=PlotlyJSONEncoder)
@@ -191,13 +195,15 @@ def goals_by_minute_hist(data: pd.DataFrame):
     fig.update_layout(bargap=0.2)
     fig.layout["xaxis"].title = dict()
     fig.layout["yaxis"].title = dict()
+    fig.update_yaxes(visible=False, showticklabels=False)
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     return fig
 
 @render_figure
 def goals_difference_by_team_bubble(data: pd.DataFrame):
-    data["goals_difference"] = data["goals_difference"] + abs(data.goals_difference.min())
-    fig = px.scatter(data, y="goals_for", x="goals_against", size="goals_difference", color="team_name", color_discrete_sequence=px.colors.diverging.balance)
+    data["size"] = data["goals_difference"] + abs(data.goals_difference.min())
+    fig = px.scatter(data, y="goals_for", x="goals_against", size="size", color="team_name", color_discrete_sequence=px.colors.diverging.balance)
     fig.update_yaxes(visible=False, showticklabels=False)
     fig.update_xaxes(visible=False, showticklabels=False)
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     return fig
-

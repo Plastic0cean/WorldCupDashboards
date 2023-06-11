@@ -124,7 +124,8 @@ tr {
 }
 
 td, th {
-	padding-left: 70px;
+	padding: 10px;
+	text-align: center;
 }
 
 .row-on-hover-grey {
@@ -371,6 +372,14 @@ td, th {
 	text-align: center;
 }
 
+#tournament-top-scorers table {
+	width: 100%;
+}
+
+#tournament-top-scorers h3 {
+	text-align: center;
+}
+
 #team-records {
 	grid-column-start: 2;
 	grid-column-end: 4;
@@ -441,39 +450,25 @@ td, th {
 	font-size: 20px;
 }
 
-#tournament-reports-container {
-	display: flex;	
-	gap: 30px;
-	justify-content: space-between;
+#goals-and-games-by-tournament {
 	width: 90%;
+	margin: 0px auto 10px auto;
 }
+
 
 .left-col {
-	width: 69%;
-	align-items: left;
- }
-
-
+	grid-column: 1 / 3;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
 
 .right-col {
-	width: 30%;
-	align-items: right;
-}
+	grid-column: 3 / 3;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 
-#goals-difference-by-team-container {
-	margin: 10px;
-}
-
-#tournament-top-scorers {
-	margin: 10px;
-}
-
-#goals-by-minutes-container {
-	margin: 10px;
-}
-
-#most-goals-in-match {
-	margin: 10px;
 }
 
 .dropbtn {
@@ -483,6 +478,7 @@ td, th {
 	font-size: 16px;
 	cursor: pointer;
 	border-radius: 5px;
+	margin-bottom: 30px;
   }
   
 .dropdown {
@@ -519,47 +515,83 @@ td, th {
 }  
 
 #most-goals-in-single-game-container { 
-	margin-bottom: 30px;
+	max-height: 300px;
 }
 
 .match-info {
 	margin-bottom: 0;
 }
 
-  .match-date {
+.match-date {
 	font-weight: bold;
   }
   
-  .cards {
+.cards {
 	display: flex;
+	gap: 5px;
 	justify-content: center;
+    justify-self: center;
 	flex-direction: column;
-	margin-top: 10px;
   }
   
-  .yellow-card,
-  .red-card {
+.yellow-card,
+.red-card {
 	margin: 0 10px;
 	/* font-size: 14px; */
   }
   
-  .scoreboard {
-	display: flex;
-	justify-content: space-around;
-  }
-  
-  .team {
-	display: flex;
-	flex-direction: column;
-  }
-  
-  .team-name {
-	/* font-size: 20px; */
-	font-weight: bold;
-  }
-  
-  .team-score {
-	/* font-size: 40px; */
-	margin-top: 10px;
-  }
-  
+  .scorecard {
+    display: flex;
+    background-color: white;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px;
+	white-space: nowrap;
+
+}
+
+.team img {
+    width: 70px;
+    height: 50px;
+    margin: 10px;
+}
+
+.team {
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+    align-items: center;
+}
+.team a {
+    font-size: 20px;
+}
+
+.scorecard .team  {
+    flex-basis: 33.33%; 
+} 
+
+.scorecard .match-result  {
+    flex-basis: 33.33%; 
+    text-align: center;
+} 
+
+.score {
+    font-size: 45px;
+    margin: 5px 0px;
+}
+
+.match-result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+}
+
+.date {
+    justify-self: center;
+    color: gray;
+}
+
+.score {
+    align-self: center;
+}
