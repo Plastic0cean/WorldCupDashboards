@@ -8,15 +8,15 @@ from SearchingEngine.Searching import fuzzy_filter_players
 
 app = Flask(__name__)
 
-@app.route("/flags/<filename>")
-def display_flag(filename):
+@app.route("/flags/<team_id>")
+def display_flag(team_id: str):
+    filename = teams.get_team_by_id(team_id).flag_img
     return send_from_directory(os.path.join("static", "images", "flags"), filename)
 
 @app.route("/")
 @app.route("/home")
 def home():
     return render_template("main.html")
-
 
 @app.route("/teams/<team_id>", methods=("GET", "POST"))
 def team_details(team_id: str):
