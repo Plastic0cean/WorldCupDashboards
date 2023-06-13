@@ -148,8 +148,9 @@ def players_with_most_minutes(data):
         path=["player_name"], 
         values="minutes_played",
         color="minutes_played",
-        color_discrete_sequence=px.colors.diverging.balance)
-    fig.update_layout(coloraxis_showscale=False)
+        color_discrete_sequence=px.colors.diverging.balance,
+        hover_data="minutes_played")
+    fig.update_layout(coloraxis_showscale=False, hovermode=False)
     return fig
 
 
@@ -159,21 +160,24 @@ def all_matches_by_team(data):
     wins = data.query("win == '1'")
     loses = data.query("lose == '1'")
     fig = go.Figure()
+    print(data)
 
+    hovertext = [s + " vs " + opponent for s, opponent in zip(wins.score, wins.opponent_name)]
     fig.add_trace(go.Bar(x=wins.match_id, y=wins.goal_differential,
                     base=0,
                     marker_color="green",
                     name="win",
-                    hovertext=[s for s in wins.score],
+                    hovertext=hovertext,
                     hoverinfo="text",
                     text=[match for match in wins.opponent_name] 
                     ))
 
+    hovertext = [s + " vs " + opponent for s, opponent in zip(loses.score, loses.opponent_name)]
     fig.add_trace(go.Bar(x=loses.match_id, y=loses.goal_differential.apply(abs),
                     base=[int(diff) for diff in loses.goal_differential],
                     marker_color="crimson",
                     name="lose",
-                    hovertext=[f"Score: {s}" for s in loses.score],
+                    hovertext=hovertext,
                     hoverinfo="text",
                     text=[match for match in loses.opponent_name]))
     fig.update_xaxes(categoryorder="array", categoryarray=data.match_id, visible=False, showticklabels=False)
