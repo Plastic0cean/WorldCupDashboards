@@ -160,7 +160,6 @@ def all_matches_by_team(data):
     wins = data.query("win == '1'")
     loses = data.query("lose == '1'")
     fig = go.Figure()
-    print(data)
 
     hovertext = [s + " vs " + opponent for s, opponent in zip(wins.score, wins.opponent_name)]
     fig.add_trace(go.Bar(x=wins.match_id, y=wins.goal_differential,
@@ -202,7 +201,7 @@ def goals_by_minute_hist(data: pd.DataFrame):
 @render_figure
 def goals_difference_by_team_bubble(data: pd.DataFrame):
     data["size"] = data["goals_difference"] + abs(data.goals_difference.min())
-    labels = {"goals_for": "Goals scored", "goals_against": "Goals conceded"}
+    labels = {"goals_for": "Goals scored", "goals_against": "Goals conceded", "team_name": ""}
     fig = px.scatter(
         data, 
         y="goals_for", 
