@@ -31,9 +31,7 @@ def team_details(team_id: str):
     win = teams.get_biggest_win(team_id)
     defeat = teams.get_biggest_defeat(team_id)
     scorers = teams.get_top_scorers(team_id, 10)
-    results_pie_chart = PieChartPX(
-        teams.get_matches_results(team_id),
-        ["DarkBlue", "Red", "Green"], None)
+    results_pie_chart = results_of_matches_pie(teams.get_matches_results(team_id))
     position_by_tournament = Reports.teams.get_position_by_tournaments(team_id)
     return render_template(
         "team_detals.html",
@@ -42,7 +40,7 @@ def team_details(team_id: str):
         win=win,
         defeat=defeat,
         scorers=scorers,
-        results_chart=results_pie_chart.render(),
+        results_chart=results_pie_chart,
         position_by_tournament=position_by_tournament,
         goals_by_opponent=team_goals_by_opponent(teams.get_goals_by_opponent(team_id)),
         goals_by_tournament=team_goals_by_tournament(teams.get_goals_by_tournament(team_id)),

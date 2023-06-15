@@ -17,27 +17,17 @@ def render_figure(func: Callable):
         return None if result == "null" else result
     return inner
 
+@render_figure
+def results_of_matches_pie(data: dict[str, list]):
+    data = pd.DataFrame(data)
+    data = pd.DataFrame(data)
+    fig = px.pie(data, names="result", values="number", hole=0.5, color_discrete_sequence=px.colors.diverging.balance)
+    fig.update_traces(textinfo="value", textfont_size=14, pull=0.02)
+    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    hovertemplate = "Result: %{label}"
+    fig.update_traces(hovertemplate=hovertemplate)
+    return fig
 
-class PieChartPX:
-
-    def __init__(self, data: dict, colors: list, title: str):
-        self.colors = colors
-        self.title = title
-        self.data = data
-
-    def _transform_data(self):
-        return pd.DataFrame(self.data)
-    
-    def build_figure(self):
-        df = self._transform_data()
-        fig = px.pie(df, values=df.columns[1], names=df.columns[0], title=self.title, hole=0.4)
-        fig.update_traces(marker=dict(colors=px.colors.diverging.balance))
-        fig.update_traces(hoverinfo="percent", textinfo="value", textfont_size=14, pull=0.02)
-        return fig
-
-    def render(self):
-        fig = self.build_figure()
-        return json.dumps(fig, cls=PlotlyJSONEncoder)
 
 
 @render_figure
@@ -65,11 +55,9 @@ def player_appearances_by_tournament(data_as_dict):
     if not data_as_dict:
         return None
     data = pd.DataFrame(data_as_dict)
-
     label = {
     "tournament": "Tournament",
     "number_of_matches": "Number of matches"}
-
     fig = px.bar(data, labels=label, x="tournament", y="number_of_matches", color="stage", title=None)
     fig.update_yaxes(visible=True, showticklabels=False)
     return fig
@@ -79,11 +67,13 @@ def render_goals_by_tournament(data):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data["year"], y=data["goals"],
                         mode="lines+markers",
-                        name="Goals scored"))
+                        name="Goals scored",
+                        hovertemplate="Year: %{x}<br>Number of goals: %{y}<extra></extra>"))
 
     fig.add_trace(go.Scatter(x=data["year"], y=data["matches"],
                         mode="lines+markers",
-                        name="Matches played"))
+                        name="Matches played",
+                        hovertemplate="Year: %{x}<br>Number of matches: %{y}<extra></extra>"))
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig.update_yaxes(visible=False, showticklabels=False)
     fig.update_xaxes(nticks=5)
@@ -134,7 +124,9 @@ def team_goals_by_opponent(data):
     labels = {"opponent_name": "", "number_of_goals": ""}
     fig = px.bar(data, labels=labels, x="opponent_name", y="number_of_goals", color_discrete_sequence=px.colors.diverging.balance)
     fig.update_yaxes(visible=False, showticklabels=False)
-    fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
+    hovertemplate = "Number of goals: %{y}"
+    fig.update_traces(hovertemplate=hovertemplate)
     return fig
 
 @render_figure
@@ -143,6 +135,8 @@ def team_goals_by_tournament(data):
     fig = px.pie(data, names="tournament_name", values="number_of_goals", hole=0.5, color_discrete_sequence=px.colors.diverging.balance)
     fig.update_traces(hoverinfo="percent", textinfo="value", textfont_size=14, pull=0.02)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    hovertemplate = "Tournament: %{label}<br>Number of goals: %{value}<extra></extra>"
+    fig.update_traces(hovertemplate=hovertemplate)
     return fig
 
 
@@ -154,8 +148,9 @@ def players_with_most_minutes(data):
         path=["player_name"], 
         values="minutes_played",
         color="minutes_played",
-        color_discrete_sequence=px.colors.diverging.balance)
-    fig.update_layout(coloraxis_showscale=False)
+        color_discrete_sequence=px.colors.diverging.balance,
+        hover_data="minutes_played")
+    fig.update_layout(coloraxis_showscale=False, hovermode=False)
     return fig
 
 
@@ -166,20 +161,22 @@ def all_matches_by_team(data):
     loses = data.query("lose == '1'")
     fig = go.Figure()
 
+    hovertext = [s + " vs " + opponent for s, opponent in zip(wins.score, wins.opponent_name)]
     fig.add_trace(go.Bar(x=wins.match_id, y=wins.goal_differential,
                     base=0,
                     marker_color="green",
                     name="win",
-                    hovertext=[s for s in wins.score],
+                    hovertext=hovertext,
                     hoverinfo="text",
                     text=[match for match in wins.opponent_name] 
                     ))
 
+    hovertext = [s + " vs " + opponent for s, opponent in zip(loses.score, loses.opponent_name)]
     fig.add_trace(go.Bar(x=loses.match_id, y=loses.goal_differential.apply(abs),
                     base=[int(diff) for diff in loses.goal_differential],
                     marker_color="crimson",
                     name="lose",
-                    hovertext=[f"Score: {s}" for s in loses.score],
+                    hovertext=hovertext,
                     hoverinfo="text",
                     text=[match for match in loses.opponent_name]))
     fig.update_xaxes(categoryorder="array", categoryarray=data.match_id, visible=False, showticklabels=False)
@@ -191,19 +188,31 @@ def all_matches_by_team(data):
 
 @render_figure
 def goals_by_minute_hist(data: pd.DataFrame):
+    hovertemplate = "Minutes: %{x}<br>Number of goals: %{y}"
     fig = px.histogram(data, x="minute", color_discrete_sequence=px.colors.diverging.balance)
     fig.update_layout(bargap=0.2)
     fig.layout["xaxis"].title = dict()
     fig.layout["yaxis"].title = dict()
     fig.update_yaxes(visible=False, showticklabels=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    fig.update_traces(hovertemplate=hovertemplate)
     return fig
 
 @render_figure
 def goals_difference_by_team_bubble(data: pd.DataFrame):
     data["size"] = data["goals_difference"] + abs(data.goals_difference.min())
-    fig = px.scatter(data, y="goals_for", x="goals_against", size="size", color="team_name", color_discrete_sequence=px.colors.diverging.balance)
-    fig.update_yaxes(visible=False, showticklabels=False)
-    fig.update_xaxes(visible=False, showticklabels=False)
+    labels = {"goals_for": "Goals scored", "goals_against": "Goals conceded", "team_name": ""}
+    fig = px.scatter(
+        data, 
+        y="goals_for", 
+        x="goals_against", 
+        size=data["goals_difference"] + abs(data.goals_difference.min()),
+        color="team_name", 
+        color_discrete_sequence=px.colors.diverging.balance, 
+        labels=labels)
+    fig.update_yaxes(visible=True, showticklabels=False)
+    fig.update_xaxes(visible=True, showticklabels=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
+    hovertemplate = "<b>%{customdata}</b><br>Goals conceded: %{x}<br>Goals scored: %{y}<extra></extra>"
+    fig.update_traces(hovertemplate=hovertemplate, customdata=data["team_name"])
     return fig
