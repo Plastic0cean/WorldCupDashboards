@@ -8,22 +8,19 @@ class DbConfig:
     driver: str 
     database: str 
 
+@dataclass
+class Config:
+    db: DbConfig
+    searching_threshold: float
+
     @classmethod
     def from_ini_file(cls, file: str):
         config = ConfigParser()
         config.read(file)
         return cls(
-            config["DATABASE"]["server"],
-            config["DATABASE"]["driver"],
-            config["DATABASE"]["database"])
+            DbConfig(config["DATABASE"]["server"], config["DATABASE"]["driver"], config["DATABASE"]["database"]),
+            config["SEARCHING"]["threshold"]
+        )
 
 
-@dataclass
-class Config:
-    db: DbConfig
-
-
-
-
-db_config = DbConfig.from_ini_file("config.ini")
-config = Config(db_config)
+config = Config.from_ini_file("config.ini")
