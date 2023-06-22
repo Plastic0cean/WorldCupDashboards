@@ -19,7 +19,7 @@ class Config:
         config.read(file)
         return cls(
             DbConfig(config["DATABASE"]["server"], config["DATABASE"]["driver"], config["DATABASE"]["database"]),
-            config["SEARCHING"]["threshold"]
+            float(config["SEARCHING"]["threshold"])
         )
 
 
