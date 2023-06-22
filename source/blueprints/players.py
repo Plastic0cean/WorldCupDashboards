@@ -13,10 +13,10 @@ def generate_data(player_id):
         "appearances_summary": repository.get_apperances_summary(player_id)
     }
 
-def generate_visualisations(player_id):
+def generate_visualizations(player_id):
     return {
         "goals_by_team": vis.players_goals_by_team(repository.get_player_goals_by_team(player_id)),
-        "appearances_by_tournament": vis.player_appearances_by_tournament(repository.players.get_matches_by_tournament(player_id)),
+        "appearances_by_tournament": vis.player_appearances_by_tournament(repository.get_matches_by_tournament(player_id)),
         "minutes_played": vis.overall_minutes_played(repository.get_minutes_played(player_id)),
         "starer_or_sub": vis.starter_or_substitute(repository.get_number_of_games_as_starter(player_id))
     }
@@ -31,5 +31,5 @@ def players_selection():
 @players.route("/players/<player_id>")
 def player_details(player_id: str):
     data = generate_data(player_id)
-    visualisations = generate_visualisations(player_id)
-    return render_template("player_details.html", data=data, visualisations=visualisations)
+    visualizations = generate_visualizations(player_id)
+    return render_template("player_details.html", data=data, visualizations=visualizations)
