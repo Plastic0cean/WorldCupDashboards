@@ -1,14 +1,14 @@
 import os
 from flask import Blueprint, render_template, request, redirect, url_for, send_from_directory
-import Reports.teams as repository
+from Reports.teams import repository
 from utils.utils import retry_if_fail
 import Visualizations.plots as vis
 
 teams = Blueprint('teams', __name__)
 
-def generate_data(team_id: str):
+def generate_data(team_id: str, repository):
     return {
-        "team": repository.get_team_by_id(team_id),
+        "team": repository.get_by_id(team_id),
         "goals_and_matches": repository.get_goals_and_matches_summary(team_id),
         "biggest_win": repository.get_biggest_win(team_id),
         "biggest_defeat": repository.get_biggest_defeat(team_id),
@@ -16,7 +16,7 @@ def generate_data(team_id: str):
         "position_by_tournament": repository.get_position_by_tournaments(team_id)
     }
 
-def generate_visualizations(team_id):
+def generate_visualizations(team_id, repository):
     return {
         "matches_results": vis.results_of_matches_pie(repository.get_matches_results(team_id)),
         "goals_by_opponent": vis.team_goals_by_opponent(repository.get_goals_by_opponent(team_id)),
@@ -27,13 +27,13 @@ def generate_visualizations(team_id):
 
 @teams.route("/teams/<team_id>", methods=("GET", "POST"))
 def team_details(team_id: str):
-    data = generate_data(team_id)
-    visualizations = generate_visualizations(team_id)
+    data = generate_data(team_id, repository)
+    visualizations = generate_visualizations(team_id, repository)
     return render_template("team_detals.html", data=data, visualizations=visualizations)
 
 @teams.route("/teams", methods=("GET", "POST"))
 def teams_selection():
-    teams = repository.get_all_team_names()
+    teams = repository.get_all()
     if request.method == "POST":
         team_id = request.form["teams-dropdown"]
         return redirect(url_for("teams.team_details", team_id=team_id))
@@ -41,7 +41,7 @@ def teams_selection():
 
 @retry_if_fail
 def get_flag_filename(team_id: str):
-    filename = repository.get_team_by_id(team_id).flag_img
+    filename = repository.get_by_id(team_id).flag_img
     return filename
 
 @teams.route("/flags/<team_id>")

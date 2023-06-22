@@ -1,7 +1,8 @@
 from Db.DbConnection import conn, DBConnection
 from Db.DbTableFunction import DbTableFunction
 
-class PlayersRepository:
+
+class PlayerRepository:
 
     def __init__(self, conn: DBConnection) -> None:
         self.conn = conn
@@ -40,7 +41,6 @@ class PlayersRepository:
             """
             return self.conn.select_as_dict(query)
 
-
     def get_number_of_games_as_starter(self, player_id):
         with self.conn:
             query = f"""
@@ -58,4 +58,4 @@ class PlayersRepository:
         }
 
 
-repository = PlayersRepository(conn)
+repository = PlayerRepository(conn)
