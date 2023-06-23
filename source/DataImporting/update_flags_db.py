@@ -1,4 +1,3 @@
-import os 
 from Db.DbConnection import conn 
 from .files_functions import get_files_in_directory, get_filename_from_path
 

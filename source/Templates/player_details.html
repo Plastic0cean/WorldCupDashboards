@@ -7,14 +7,14 @@
     <img class="player-pic" src="https://via.placeholder.com/150" alt="Profile Picture">
   </div>
   <div class="user-info">
-    <h1>{{player.name}}</h1>
-    <h2>{{player.team}}</h2>
-    <p><span>Date of Birth:</span> {{player.birth_date}}</p>
-    <p><span>Position:</span> {{player.position}}</p>
+    <h1>{{data["player"].name}}</h1>
+    <h2>{{data["player"].team}}</h2>
+    <p><span>Date of Birth:</span> {{["player"].birth_date}}</p>
+    <p><span>Position:</span> {{data["player"].position}}</p>
     </div>
 </div>
 
-{%if appearances_summary%}
+{%if data["appearances_summary"]%}
 <div id="player-appearances-summary">
   <table class="table-data center">
     <thead>
@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in appearances_summary %}
+      {% for row in data["appearances_summary"] %}
       <tr class="row-on-hover-grey">
         <td>{{row.tournament}}</td>
         <td>{{row.number_of_matches}}</td>
@@ -83,11 +83,11 @@
     </div>
   </div>
 
-  {% if stats.goals>0 %}
+  {% if data["stats"].goals>0 %}
   <h4>Number of goals scored against different teams</h4>
   <div id="chart" class="chart">
     <script>
-      var graphs = {{ goals_by_team | safe}};
+      var graphs = {{ visualizations["goals_by_team"] | safe}};
       graphs.config = {'displayModeBar': false, 'responsive': true};
       Plotly.plot('chart', graphs, {displayModeBar: false});
     </script>
@@ -96,7 +96,7 @@
 </div>
 
 <div id="player-awards-section">
-  {% if awards %}
+  {% if data["awards"] %}
   <h1>Individual awards</h1>
 
   <table class="table table-hover">
@@ -108,7 +108,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for award in awards %}
+      {% for award in data["awards"] %}
       <tr>
         <td>{{award.name}}</td>
         <td>{{award.description}}</td>

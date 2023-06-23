@@ -63,7 +63,8 @@ def player_appearances_by_tournament(data_as_dict):
     return fig
 
 
-def render_goals_by_tournament(data):
+@render_figure
+def goals_by_tournament(data):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data["year"], y=data["goals"],
                         mode="lines+markers",
@@ -79,8 +80,7 @@ def render_goals_by_tournament(data):
     fig.update_xaxes(nticks=5)
     fig.data[0].line.color = "#171C42"
     fig.data[1].line.color = "#0B66BD"
-    return json.dumps(fig, cls=PlotlyJSONEncoder)
-
+    return fig
 
 
 def show_stadiums_on_map(data):
@@ -187,7 +187,7 @@ def all_matches_by_team(data):
     return fig
 
 @render_figure
-def goals_by_minute_hist(data: pd.DataFrame):
+def goals_by_minutes(data: pd.DataFrame):
     hovertemplate = "Minutes: %{x}<br>Number of goals: %{y}"
     fig = px.histogram(data, x="minute", color_discrete_sequence=px.colors.diverging.balance)
     fig.update_layout(bargap=0.2)
@@ -199,7 +199,7 @@ def goals_by_minute_hist(data: pd.DataFrame):
     return fig
 
 @render_figure
-def goals_difference_by_team_bubble(data: pd.DataFrame):
+def goals_difference_by_team(data: pd.DataFrame):
     data["size"] = data["goals_difference"] + abs(data.goals_difference.min())
     labels = {"goals_for": "Goals scored", "goals_against": "Goals conceded", "team_name": ""}
     fig = px.scatter(
