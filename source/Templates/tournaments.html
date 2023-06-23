@@ -7,7 +7,7 @@
 <div class="dropdown-container">
   <div id="tournament-list-dropdown" class="dropdown">
     <button type="submit" class="dropbtn">
-      {% if data["tournament"] %} {{data["tournament"].tournament_name}}
+      {% if data["tournament"] %} {{data["tournament"][0].tournament_name}}
       {% else %}
       Filter a tournament
       {% endif %}
