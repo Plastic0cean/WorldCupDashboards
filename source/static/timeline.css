@@ -88,6 +88,8 @@ img {
     height: 30px;
     border-radius: 50%;
     box-shadow: 0 0 0 4px #00000085, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+    color: white;
+    text-align: center;
 }
 
 .cd-timeline-img {
@@ -226,9 +228,15 @@ img {
         font-size: 1rem;
     }
 
-    .cd-timeline-block:nth-child(even) .cd-timeline-content {
+    
+
+    /* .cd-timeline-block:nth-child(even) .cd-timeline-content {
         float: right;
-    }
+    } */
+
+    
+
+    
 
     .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
         top: 24px;
@@ -247,4 +255,13 @@ img {
         right: 122%;
         text-align: right;
     }
+}
+
+.left {float: left;}
+.right {float: right;}
+
+
+.match-details-header {
+    width: 80%;
+    margin: 30px auto;
 }

@@ -35,4 +35,3 @@ SELECT
 FROM substitutions WHERE [match_id] = @match_id
 GO 
 
-SELECT * FROM MatchEvents('m-2022-10')

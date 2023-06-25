@@ -17,7 +17,7 @@ class MatchRepository:
         
     def get_events(self, match_id: str):
         with self.conn:
-            return DbTableFunction("MatchEvents", parameters=match_id).select(self.conn, sort_by="minute")
+            return DbTableFunction("MatchEvents", parameters=match_id).select(self.conn, sort_by="minute, team_id")
 
     def get_bookings_of_match(self, match_id: str):
             with self.conn:

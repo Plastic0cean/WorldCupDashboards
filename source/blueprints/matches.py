@@ -1,8 +1,20 @@
+from collections import defaultdict
 from flask import Blueprint, render_template, request
 from Reports.matches import repository
 
 matches = Blueprint("matches", __name__)
 
+
+def produce_match_events(events) -> dict:
+    def default_value():
+        return {"home_team": [], "away_team": []}
+    result_events = defaultdict(default_value)
+    for event in events:
+        if event.home_team == "1":
+            result_events[event.minute_label]["home_team"].append(event)
+        else:
+            result_events[event.minute_label]["away_team"].append(event)
+    return dict(result_events)
 
 @matches.route("/matches")
 def matches_list():
@@ -13,5 +25,5 @@ def matches_list():
 @matches.route("/match-details/<match_id>")
 def match_details(match_id: str):
     match = repository.get_by_id(match_id)
-    events = repository.get_events(match_id)
+    events = produce_match_events(repository.get_events(match_id))
     return render_template("match_details.html", events=events, match=match[0])
