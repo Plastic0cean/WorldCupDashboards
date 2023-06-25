@@ -7,7 +7,8 @@ SELECT
 	'goal' as [type],
 	minute_label,
 	CAST(minute_regulation as int) + CAST(minute_stoppage as int) as [minute],
-	team_id
+	team_id,
+	home_team
 FROM goals WHERE [match_id] = @match_id
 UNION ALL
 SELECT 
@@ -20,7 +21,8 @@ SELECT
 	END as [type],
 	minute_label,
 	CAST(minute_regulation as int) + CAST(minute_stoppage as int) as [minute],
-	team_id
+	team_id,
+	home_team
 FROM bookings WHERE [match_id] = @match_id
 UNION ALL
 
@@ -31,7 +33,8 @@ SELECT
 	IIF(going_off = '1', 'sub out', 'sub in') as [type],
 	minute_label,
 	CAST(minute_regulation as int) + CAST(minute_stoppage as int) as [minute],
-	team_id
+	team_id,
+	home_team
 FROM substitutions WHERE [match_id] = @match_id
 GO 
 
