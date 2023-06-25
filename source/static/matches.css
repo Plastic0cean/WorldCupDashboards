@@ -1,0 +1,13 @@
+.matches-list-container {
+    width: 90%;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-items: center;
+    justify-content: center;
+    margin: 40px auto;
+}
+
+.matches-list-container .scoreboard-container:hover {
+	box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+}

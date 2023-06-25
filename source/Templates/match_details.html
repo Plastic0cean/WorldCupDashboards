@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='timeline.css') }}">
+{% endblock head %}
+
+{% block content %}
+<section class="match-details-header">
+{{match.home_team_name}} - {{match.away_team_name}}
+</section>
+
+<section id="cd-timeline" class="cd-container">
+    {% for event in events%}
+
+    <div class="cd-timeline-block">
+        <div class="cd-timeline-img cd-movie"></div> <!-- cd-timeline-img -->
+
+        <div class="cd-timeline-content">
+            {% if event.type=="red card" %}
+            <img src="/static/red_card.png" alt="Red card">
+            {% elif event.type=="yellow card" %}
+            <img src="/static/yellow_card.png" alt="Yellow card">
+            {% elif event.type=="sub in" %}
+            <img src="/static/sub in.jpg" alt="Substitution">
+            {% elif event.type=="sub out" %}
+            <img src="/static/sub out.jpg" alt="Substitution">
+            {% elif event.type=="goal" %}
+            <img src="/static/goal.png" alt="Goal">
+            {% endif %}
+            <span>{{event.player_name}}</span>
+            <span class="cd-date">{{event.minute_label}}</span>
+        </div> <!-- cd-timeline-content -->
+    </div> <!-- cd-timeline-block -->
+    {% endfor %}
+
+</section> <!-- cd-timeline -->
+
+
+
+{% endblock content %}
