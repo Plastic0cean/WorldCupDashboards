@@ -28,14 +28,14 @@
 
 </section>
 
-<section id="cd-timeline" class="cd-container">
+<section id="timeline" class="cd-container">
     {% for minute, event in events.items()%}
 
-    <div class="cd-timeline-block">
-        <div class="cd-timeline-img cd-movie">{{minute}}</div> <!-- cd-timeline-img -->
+    <div class="timeline-block">
+        <div class="minute-bullet">{{minute}}</div>
 
         {% if event["home_team"]%}
-        <div class="cd-timeline-content left">
+        <div class="timeline-content left">
             {% for e in event["home_team"] %}
             {% if e.type=="red card" %}
             <img src="/static/red_card.png" alt="Red card">
@@ -50,11 +50,11 @@
             {% endif %}
             <a href="{{url_for('players.player_details', player_id=e.player_id)}}">{{e.player_name}}</a><br>
             {% endfor %}
-        </div> <!-- cd-timeline-content -->
+        </div>
         {% endif %}
 
         {% if event["away_team"]%}
-        <div class="cd-timeline-content right">
+        <div class="timeline-content right">
             {% for e in event["away_team"] %}
             {% if e.type=="red card" %}
             <img src="/static/red_card.png" alt="Red card">
@@ -69,13 +69,13 @@
             {% endif %}
             <a href="{{url_for('players.player_details', player_id=e.player_id)}}">{{e.player_name}}</a><br>
             {% endfor %}
-        </div> <!-- cd-timeline-content -->
+        </div>
         {% endif %}
 
-    </div> <!-- cd-timeline-block -->
+    </div>
     {% endfor %}
 
-</section> <!-- cd-timeline -->
+</section>
 
 
 
