@@ -1,0 +1,10 @@
+{% extends "main.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+{% endblock head %}
+
+
+{% block content %}
+<p class="quote">{{quote.words}} - {{quote.author}}</p>
+{% endblock content %}

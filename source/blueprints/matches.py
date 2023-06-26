@@ -1,5 +1,5 @@
 from collections import defaultdict
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template
 from Reports.matches import repository
 
 matches = Blueprint("matches", __name__)
