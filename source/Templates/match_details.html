@@ -6,34 +6,31 @@
 
 {% block content %}
 <section class="match-details-header">
-    <div class="scorecard">
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=match.home_team_id)}}">{{match.home_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=match.home_team_id)}}"
-            alt="{{match.home_team_name}}">
-        </div>
-        <div class="match-result">
-          <span class="date">{{match.match_date}}</span>
-          <span
-            class="score">{{match.home_team_score}}-{{match.away_team_score}}</span>
-        </div>
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=match.away_team_id)}}">{{match.away_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=match.away_team_id)}}"
-            alt="{{match.away_team_name}}">
-        </div>
+  <div class="scorecard">
+      <div class="team">
+        <a
+          href="{{url_for('teams.team_details', team_id=match.home_team_id)}}">{{match.home_team_name}}</a>
+        <img src="{{url_for('teams.display_flag', team_id=match.home_team_id)}}"
+          alt="{{match.home_team_name}}">
       </div>
-
+      <div class="match-result">
+        <span class="date">{{match.match_date}}</span>
+        <span
+          class="score">{{match.home_team_score}}-{{match.away_team_score}}</span>
+      </div>
+      <div class="team">
+        <a
+          href="{{url_for('teams.team_details', team_id=match.away_team_id)}}">{{match.away_team_name}}</a>
+        <img src="{{url_for('teams.display_flag', team_id=match.away_team_id)}}"
+          alt="{{match.away_team_name}}">
+      </div>
+    </div>
 </section>
 
 <section id="timeline" class="cd-container">
     {% for minute, event in events.items()%}
-
     <div class="timeline-block">
         <div class="minute-bullet">{{minute}}</div>
-
         {% if event["home_team"]%}
         <div class="timeline-content left">
             {% for e in event["home_team"] %}
@@ -74,9 +71,5 @@
 
     </div>
     {% endfor %}
-
 </section>
-
-
-
 {% endblock content %}

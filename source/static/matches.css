@@ -1,13 +1,31 @@
-.matches-list-container {
-    width: 90%;
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-items: center;
-    justify-content: center;
-    margin: 40px auto;
+:root {
+    --header-background: #333C42;
 }
 
-.matches-list-container .scoreboard-container:hover {
+.matches-list-container {
+    margin: auto;
+    width: 80%;
+}
+
+
+.scoreboard-container:hover {
 	box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.scorecard {
+    padding: 0;
+}
+
+.scoreboard-container {
+    margin: 10px;
+}
+
+.match-date-header {
+    align-items: center;
+    background-color: var(--header-background);
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    height: 50px;
+    justify-content: center;
 }
