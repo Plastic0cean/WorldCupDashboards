@@ -1,0 +1,75 @@
+{% extends "main.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='timeline.css') }}">
+{% endblock head %}
+
+{% block content %}
+<section class="match-details-header">
+  <div class="scorecard">
+      <div class="team">
+        <a
+          href="{{url_for('teams.team_details', team_id=match.home_team_id)}}">{{match.home_team_name}}</a>
+        <img src="{{url_for('teams.display_flag', team_id=match.home_team_id)}}"
+          alt="{{match.home_team_name}}">
+      </div>
+      <div class="match-result">
+        <span class="date">{{match.match_date}}</span>
+        <span
+          class="score">{{match.home_team_score}}-{{match.away_team_score}}</span>
+      </div>
+      <div class="team">
+        <a
+          href="{{url_for('teams.team_details', team_id=match.away_team_id)}}">{{match.away_team_name}}</a>
+        <img src="{{url_for('teams.display_flag', team_id=match.away_team_id)}}"
+          alt="{{match.away_team_name}}">
+      </div>
+    </div>
+</section>
+
+<section id="timeline" class="cd-container">
+    {% for minute, event in events.items()%}
+    <div class="timeline-block">
+        <div class="minute-bullet">{{minute}}</div>
+        {% if event["home_team"]%}
+        <div class="timeline-content left">
+            {% for e in event["home_team"] %}
+            {% if e.type=="red card" %}
+            <img src="/static/red_card.png" alt="Red card">
+            {% elif e.type=="yellow card" %}
+            <img src="/static/yellow_card.png" alt="Yellow card">
+            {% elif e.type=="sub in" %}
+            <img src="/static/sub in.jpg" alt="Substitution">
+            {% elif e.type=="sub out" %}
+            <img src="/static/sub out.jpg" alt="Substitution">
+            {% elif e.type=="goal" %}
+            <img src="/static/goal.png" alt="Goal">
+            {% endif %}
+            <a href="{{url_for('players.player_details', player_id=e.player_id)}}">{{e.player_name}}</a><br>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if event["away_team"]%}
+        <div class="timeline-content right">
+            {% for e in event["away_team"] %}
+            {% if e.type=="red card" %}
+            <img src="/static/red_card.png" alt="Red card">
+            {% elif e.type=="yellow card" %}
+            <img src="/static/yellow_card.png" alt="Yellow card">
+            {% elif e.type=="sub in" %}
+            <img src="/static/sub in.jpg" alt="Substitution">
+            {% elif e.type=="sub out" %}
+            <img src="/static/sub out.jpg" alt="Substitution">
+            {% elif e.type=="goal" %}
+            <img src="/static/goal.png" alt="Goal">
+            {% endif %}
+            <a href="{{url_for('players.player_details', player_id=e.player_id)}}">{{e.player_name}}</a><br>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+</section>
+{% endblock content %}
