@@ -30,7 +30,7 @@ def matches_list():
     matches = produce_matches_list(matches)
     return render_template("matches_list.html", matches=matches)
 
-@matches.route("/match-details/<match_id>")
+@matches.route("/match/<match_id>")
 def match_details(match_id: str):
     match = repository.get_by_id(match_id)
     events = produce_match_events(repository.get_events(match_id))
