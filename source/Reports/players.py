@@ -1,5 +1,6 @@
 from Db.DbConnection import conn, DBConnection
 from Db.DbTableFunction import DbTableFunction
+from .utils import to_dataframe
 
 
 class PlayerRepository:
@@ -13,6 +14,7 @@ class PlayerRepository:
     def get_by_id(self, player_id: str):
         return DbTableFunction("GetPlayerById", player_id).select(self.conn)[0]
 
+    @to_dataframe
     def get_goals_by_team(self, player_id: str):
         return DbTableFunction("PlayerGoalsByTeam", player_id).select_as_dict(self.conn, sort_by="number_of_goals")
     
@@ -22,6 +24,7 @@ class PlayerRepository:
     def get_basic_stats(self, player_id: str):
         return DbTableFunction("PlayerBasicStatistics", player_id).select(self.conn)[0]
 
+    @to_dataframe
     def get_matches_by_tournament(self, player_id: str):
         return DbTableFunction("PlayerApperancesByTournament", player_id).select_as_dict(self.conn)
 
@@ -41,6 +44,7 @@ class PlayerRepository:
             """
             return self.conn.select_as_dict(query)
 
+    @to_dataframe
     def get_number_of_games_as_starter(self, player_id):
         with self.conn:
             query = f"""
