@@ -18,9 +18,7 @@ def render_figure(func: Callable):
     return inner
 
 @render_figure
-def results_of_matches_pie(data: dict[str, list]):
-    data = pd.DataFrame(data)
-    data = pd.DataFrame(data)
+def results_of_matches_pie(data: pd.DataFrame) -> go.Figure:
     fig = px.pie(data, names="result", values="number", hole=0.5, color_discrete_sequence=px.colors.diverging.balance)
     fig.update_traces(textinfo="value", textfont_size=14, pull=0.02)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
@@ -28,43 +26,25 @@ def results_of_matches_pie(data: dict[str, list]):
     fig.update_traces(hovertemplate=hovertemplate)
     return fig
 
-
-
 @render_figure
-def players_goals_by_team(data_as_dict):
-    if not data_as_dict:
+def players_goals_by_team(data: pd.DataFrame) -> go.Figure:
+    if not data:
         return None
-    data = pd.DataFrame(data_as_dict)
-    title=None
-    labels = {
-        "number_of_goals": "Number of goals",
-        "team": ""
-    }    
-    fig = px.treemap(
-        data, 
-        values="number_of_goals", 
-        names="team", 
-        title=title,
-        labels=labels
-        )
+    labels = {"number_of_goals": "Number of goals", "team": ""}    
+    fig = px.treemap(data, values="number_of_goals", names="team", title=None, labels=labels)
     return fig
 
-
 @render_figure
-def player_appearances_by_tournament(data_as_dict):
-    if not data_as_dict:
+def player_appearances_by_tournament(data: pd.DataFrame) -> go.Figure:
+    if not data:
         return None
-    data = pd.DataFrame(data_as_dict)
-    label = {
-    "tournament": "Tournament",
-    "number_of_matches": "Number of matches"}
+    label = {"tournament": "Tournament", "number_of_matches": "Number of matches"}
     fig = px.bar(data, labels=label, x="tournament", y="number_of_matches", color="stage", title=None)
     fig.update_yaxes(visible=True, showticklabels=False)
     return fig
 
-
 @render_figure
-def goals_by_tournament(data):
+def goals_by_tournament(data) -> go.Figure:
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data["year"], y=data["goals"],
                         mode="lines+markers",
@@ -82,44 +62,25 @@ def goals_by_tournament(data):
     fig.data[1].line.color = "#0B66BD"
     return fig
 
-
-def show_stadiums_on_map(data):
-    data = pd.DataFrame(data)
-    fig = px.scatter_mapbox(
-        data, 
-        lat="coordinates_lat", lon="coordinates_long", 
-        color="number_of_games",
-        size="number_of_games",
-        hover_name="stadium_name", 
-        hover_data=["city_name", "country_name"],
-        zoom=3)
-    fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    return json.dumps(fig, cls=PlotlyJSONEncoder)
-
-
 @render_figure
-def starter_or_substitute(data):
+def starter_or_substitute(data: pd.DataFrame) -> go.Figure:
     if not data:
         return None
-    data = pd.DataFrame(data)
     trace = go.Pie(labels=data["starer_or_sub"], values=data["number_of_matches"], textinfo="value", hole=0.4)
     fig = go.Figure(data=[trace])
     return fig
 
-
 @render_figure
-def overall_minutes_played(data):
+def overall_minutes_played(data) -> go.Figure:
     trace = go.Pie(
-    labels=["Playing", "Bench"], 
-    values=[data["minutes_played"][0], data["minutes_on_bench"][0]],
-    textinfo="value", hole=0.4)
+        labels=["Playing", "Bench"], 
+        values=[data["minutes_played"][0], data["minutes_on_bench"][0]],
+        textinfo="value", hole=0.4)
     fig = go.Figure(data=[trace])
     return fig
 
-
 @render_figure
-def team_goals_by_opponent(data):
+def team_goals_by_opponent(data) -> go.Figure:
     data = pd.DataFrame(data)
     labels = {"opponent_name": "", "number_of_goals": ""}
     fig = px.bar(data, labels=labels, x="opponent_name", y="number_of_goals", color_discrete_sequence=px.colors.diverging.balance)
@@ -130,8 +91,7 @@ def team_goals_by_opponent(data):
     return fig
 
 @render_figure
-def team_goals_by_tournament(data):
-    data = pd.DataFrame(data)
+def team_goals_by_tournament(data: pd.DataFrame) -> go.Figure:
     fig = px.pie(data, names="tournament_name", values="number_of_goals", hole=0.5, color_discrete_sequence=px.colors.diverging.balance)
     fig.update_traces(hoverinfo="percent", textinfo="value", textfont_size=14, pull=0.02)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
@@ -141,8 +101,7 @@ def team_goals_by_tournament(data):
 
 
 @render_figure
-def players_with_most_minutes(data):
-    data = pd.DataFrame(data)
+def players_with_most_minutes(data: pd.DataFrame) -> go.Figure:
     fig = px.treemap(
         data, 
         path=["player_name"], 
@@ -155,8 +114,7 @@ def players_with_most_minutes(data):
 
 
 @render_figure
-def all_matches_by_team(data):
-    data = pd.DataFrame(data)
+def all_matches_by_team(data: pd.DataFrame) -> go.Figure:
     wins = data.query("win == '1'")
     loses = data.query("lose == '1'")
     fig = go.Figure()
@@ -187,7 +145,7 @@ def all_matches_by_team(data):
     return fig
 
 @render_figure
-def goals_by_minutes(data: pd.DataFrame):
+def goals_by_minutes(data: pd.DataFrame) -> go.Figure:
     hovertemplate = "Minutes: %{x}<br>Number of goals: %{y}"
     fig = px.histogram(data, x="minute", color_discrete_sequence=px.colors.diverging.balance)
     fig.update_layout(bargap=0.2)
@@ -199,7 +157,7 @@ def goals_by_minutes(data: pd.DataFrame):
     return fig
 
 @render_figure
-def goals_difference_by_team(data: pd.DataFrame):
+def goals_difference_by_team(data: pd.DataFrame) -> go.Figure:
     data["size"] = data["goals_difference"] + abs(data.goals_difference.min())
     labels = {"goals_for": "Goals scored", "goals_against": "Goals conceded", "team_name": ""}
     fig = px.scatter(
