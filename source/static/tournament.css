@@ -1,0 +1,31 @@
+#tournament-top-scorers h3 {
+	text-align: center;
+}
+
+h1 {
+	text-align: center;
+	margin: 30px;
+}
+
+#goals-and-games-by-tournament {
+	width: 90%;
+	margin: 0px auto 10px auto;
+}
+
+.left-col {
+	grid-column: 1 / 3;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.right-col {
+	grid-column: 3 / 3;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+#most-goals-in-single-game-container { 
+	max-height: 300px;
+}

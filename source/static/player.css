@@ -1,0 +1,28 @@
+#player-searching-form {
+	margin-top: 3%;
+}
+
+#player-table {
+	margin: 5% auto 0 auto; 
+	width: 70%;
+}
+
+#player-appearances-summary {
+	width: 80%;
+}
+
+#player-matches-section {
+	align-items: center;
+	justify-content: center;
+	margin-top: 15px;
+}
+
+#player-goals-cards-section {
+	display: flex;
+	justify-items: center;
+	justify-content: center;
+}
+
+#player-goals-cards-section .dashboard-card {
+	margin: 20px 40px;
+}

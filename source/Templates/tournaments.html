@@ -1,22 +1,22 @@
 {% extends "main.html" %}
-{% block content %}
-<div class="page-title">
-  <h1>FIFA Worldcup statistics</h1>
-</div>
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tournament.css') }}">
+{% endblock head %}
 
-<div class="dropdown-container">
-  <div id="tournament-list-dropdown" class="dropdown">
-    <button type="submit" class="dropbtn">
-      {% if data["tournament"] %} {{data["tournament"][0].tournament_name}}
-      {% else %}
-      Filter a tournament
-      {% endif %}
-    </button>
-    <div class="dropdown-content">
-      {%for t in data["tournaments_list"]%}
-      <a href="{{'?id='+t.tournament_id}}">{{t.year + " - " +t.host_country}}</a>
-      {%endfor%}
-    </div>
+{% block content %}
+<h1>FIFA Worldcup statistics</h1>
+
+<div id="tournament-list-dropdown">
+  <button type="submit" class="dropbtn">
+    {% if data["tournament"] %} {{data["tournament"][0].tournament_name}}
+    {% else %}
+    Filter a tournament
+    {% endif %}
+  </button>
+  <div class="dropdown-content">
+    {%for t in data["tournaments_list"]%}
+    <a href="{{'?id='+t.tournament_id}}">{{t.year + " - " +t.host_country}}</a>
+    {%endfor%}
   </div>
 </div>
 
@@ -34,9 +34,9 @@
 </div>
 {% endif %}
 
-<div id="tournament-reports-container" class="grid-container">
-  <div class="left-col">
+<div class="grid-container">
 
+  <div class="left-col">
     <div id="goals-difference-by-team-container" class="dashboard-container">
       <h3>Goals difference by a team</h3>
       <div id="goals-difference-by-team" class="chart">
@@ -60,6 +60,7 @@
         </script>
       </div>
     </div>
+
   </div>
 
 
@@ -69,10 +70,8 @@
       <h3>Most goals in a single match</h3>
       <div class="scorecard">
         <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['most_goals_in_single_game'].home_team_id)}}">{{data["most_goals_in_single_game"].home_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_goals_in_single_game'].home_team_id)}}"
-            alt="{{data['most_goals_in_single_game'].home_team_name}}">
+          <a href="{{url_for('teams.team_details', team_id=data['most_goals_in_single_game'].home_team_id)}}">{{data["most_goals_in_single_game"].home_team_name}}</a>
+          <img src="{{url_for('teams.display_flag', team_id=data['most_goals_in_single_game'].home_team_id)}}" alt="{{data['most_goals_in_single_game'].home_team_name}}">
         </div>
         <div class="match-result">
           <span class="date">{{data["most_goals_in_single_game"].match_date}}</span>
@@ -80,10 +79,8 @@
             class="score">{{data["most_goals_in_single_game"].home_team_score}}-{{data["most_goals_in_single_game"].away_team_score}}</span>
         </div>
         <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['most_goals_in_single_game'].away_team_id)}}">{{data["most_goals_in_single_game"].away_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_goals_in_single_game'].away_team_id)}}"
-            alt="{{data['most_goals_in_single_game'].away_team_name}}">
+          <a href="{{url_for('teams.team_details', team_id=data['most_goals_in_single_game'].away_team_id)}}">{{data["most_goals_in_single_game"].away_team_name}}</a>
+          <img src="{{url_for('teams.display_flag', team_id=data['most_goals_in_single_game'].away_team_id)}}" alt="{{data['most_goals_in_single_game'].away_team_name}}">
         </div>
       </div>
     </div>
@@ -93,33 +90,27 @@
       <h3> Most cards in a single match</h3>
       <div class="scorecard">
         <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['most_cards_in_single_game'].home_team_id)}}">{{data["most_cards_in_single_game"].home_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].home_team_id)}}"
-            alt="{{data['most_cards_in_single_game'].home_team_name}}">
+          <a href="{{url_for('teams.team_details', team_id=data['most_cards_in_single_game'].home_team_id)}}">{{data["most_cards_in_single_game"].home_team_name}}</a>
+          <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].home_team_id)}}" alt="{{data['most_cards_in_single_game'].home_team_name}}">
         </div>
         <div class="match-result">
           <span class="date">{{data["most_cards_in_single_game"].match_date}}</span>
-          <span
-            class="score">{{data["most_cards_in_single_game"].home_team_score}}-{{data["most_cards_in_single_game"].away_team_score}}</span>
+          <span class="score">{{data["most_cards_in_single_game"].home_team_score}}-{{data["most_cards_in_single_game"].away_team_score}}</span>
           <div class="cards">
             <span class="cards">Yellow cards: {{data["most_cards_in_single_game"].yellow_cards}}</span>
             <span class="cards">Red cards: {{data["most_cards_in_single_game"].red_cards}}</span>
           </div>
         </div>
         <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['most_cards_in_single_game'].away_team_id)}}">{{data["most_cards_in_single_game"].away_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].away_team_id)}}"
-            alt="{{data['most_cards_in_single_game'].away_team_name}}">
+          <a href="{{url_for('teams.team_details', team_id=data['most_cards_in_single_game'].away_team_id)}}">{{data["most_cards_in_single_game"].away_team_name}}</a>
+          <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].away_team_id)}}" alt="{{data['most_cards_in_single_game'].away_team_name}}">
         </div>
       </div>
     </div>
     {% endif %}
 
-    <div id="tournament-top-scorers">
-      <h3>Top scorers </h3>
       <table class="table-data center">
+        <caption>Top scorers</caption>
         <thead>
           <tr>
             <th scope="col">Player</th>
@@ -137,10 +128,9 @@
           {% endfor %}
         </tbody>
       </table>
-    </div>
 
+    </div>
   </div>
-</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {
@@ -176,12 +166,4 @@
     });
   });
 </script>
-
-<!-- <div id='chart_map' class='chart_map'>
-  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-  <script type='text/javascript'>
-      var graphs = {{ stadiums_map | safe}};
-      Plotly.plot('chart_map', graphs,{},);
-  </script>
-</div> -->
 {% endblock content %}
