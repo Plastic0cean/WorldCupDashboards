@@ -36,8 +36,9 @@ class TeamRepository:
 
     @to_dataframe
     def get_minutes_played_by_players(self, team_id: str):
-        return DbTableFunction("MinutesPlayedByTeamPLayers", team_id).select_as_dict(self.conn, sort_by="minutes_played", descending=True, limit=20)
+        return DbTableFunction("MinutesPlayedByTeamPlayers", team_id).select_as_dict(self.conn, sort_by="minutes_played", descending=True, limit=20)
 
+    @to_dataframe
     def get_goals_by_opponent(self, team_id: str):
         return DbTableFunction("GoalsByOpponent", team_id).select_as_dict(self.conn)
 

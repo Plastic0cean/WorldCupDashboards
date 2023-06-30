@@ -28,16 +28,16 @@ def results_of_matches_pie(data: pd.DataFrame) -> go.Figure:
 
 @render_figure
 def players_goals_by_team(data: pd.DataFrame) -> go.Figure:
-    if not data:
-        return None
+    if data.empty:
+        return
     labels = {"number_of_goals": "Number of goals", "team": ""}    
     fig = px.treemap(data, values="number_of_goals", names="team", title=None, labels=labels)
     return fig
 
 @render_figure
 def player_appearances_by_tournament(data: pd.DataFrame) -> go.Figure:
-    if not data:
-        return None
+    if data.empty():
+        return
     label = {"tournament": "Tournament", "number_of_matches": "Number of matches"}
     fig = px.bar(data, labels=label, x="tournament", y="number_of_matches", color="stage", title=None)
     fig.update_yaxes(visible=True, showticklabels=False)
@@ -64,8 +64,8 @@ def goals_by_tournament(data) -> go.Figure:
 
 @render_figure
 def starter_or_substitute(data: pd.DataFrame) -> go.Figure:
-    if not data:
-        return None
+    if data.empty:
+        return
     trace = go.Pie(labels=data["starer_or_sub"], values=data["number_of_matches"], textinfo="value", hole=0.4)
     fig = go.Figure(data=[trace])
     return fig
@@ -80,8 +80,9 @@ def overall_minutes_played(data) -> go.Figure:
     return fig
 
 @render_figure
-def team_goals_by_opponent(data) -> go.Figure:
-    data = pd.DataFrame(data)
+def team_goals_by_opponent(data: pd.DataFrame) -> go.Figure:
+    if data.empty:
+        return
     labels = {"opponent_name": "", "number_of_goals": ""}
     fig = px.bar(data, labels=labels, x="opponent_name", y="number_of_goals", color_discrete_sequence=px.colors.diverging.balance)
     fig.update_yaxes(visible=False, showticklabels=False)
@@ -92,6 +93,8 @@ def team_goals_by_opponent(data) -> go.Figure:
 
 @render_figure
 def team_goals_by_tournament(data: pd.DataFrame) -> go.Figure:
+    if data.empty:
+        return
     fig = px.pie(data, names="tournament_name", values="number_of_goals", hole=0.5, color_discrete_sequence=px.colors.diverging.balance)
     fig.update_traces(hoverinfo="percent", textinfo="value", textfont_size=14, pull=0.02)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))

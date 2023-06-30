@@ -32,6 +32,4 @@ FROM minutes_by_players)
 
 SELECT player_id, player_name, SUM(minutes_played) AS minutes_played FROM minutes_played_by_players
 GROUP BY player_id, player_name
-
-
-
+HAVING SUM(minutes_played) >=1
