@@ -4,9 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='player.css') }}">
 {% endblock head %}
 
-
 {% block content %}
-
 <div class="container">
   <div class="profile-pic">
     <img class="player-pic" src="https://via.placeholder.com/150" alt="Profile Picture">
@@ -20,30 +18,28 @@
 </div>
 
 {%if data["appearances_summary"]%}
-<div id="player-appearances-summary">
-  <table class="table-data center">
-    <thead>
-      <tr>
-        <th scope="col">Tournament</th>
-        <th scope="col">Number of matches</th>
-        <th scope="col">Goals</th>
-        <th scope="col">Yellow Cards</th>
-        <th scope="col">Red Cards</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in data["appearances_summary"] %}
-      <tr class="row-on-hover-grey">
-        <td>{{row.tournament}}</td>
-        <td>{{row.number_of_matches}}</td>
-        <td>{{row.number_of_goals}}</td>
-        <td>{{row.yellow_cards}}</td>
-        <td>{{row.red_cards}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+<table id="player-appearances-summary" class="table-data center">
+  <thead>
+    <tr>
+      <th scope="col">Tournament</th>
+      <th scope="col">Number of matches</th>
+      <th scope="col">Goals</th>
+      <th scope="col">Yellow Cards</th>
+      <th scope="col">Red Cards</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data["appearances_summary"] %}
+    <tr class="row-on-hover-grey">
+      <td>{{row.tournament}}</td>
+      <td>{{row.number_of_matches}}</td>
+      <td>{{row.number_of_goals}}</td>
+      <td>{{row.yellow_cards}}</td>
+      <td>{{row.red_cards}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {%endif%}
 
 <div id="player-matches-section">

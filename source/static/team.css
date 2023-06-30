@@ -1,15 +1,10 @@
-#team-searching h1 {
+h1 {
 	margin: 10% 0 5% 0;
 	text-align: center;
 }
 
-#team-searching input {
-	display: inline-block;
-	align-items: center;
-	height: 40px;
-	justify-content: center;
-	margin: 0 10px 0 5%;
-	width: 80%;
+.user-info h1 {
+	text-align: left;
 }
 
 .dropdown-list {
@@ -28,7 +23,7 @@
 	width: 70%;
 }
 
-#team-top-scorers-table {
+#top-scorers {
 	width: 100%;
 }
 
@@ -67,7 +62,7 @@
 	grid-row-end: 3;
 }
 
-#team-top-scorers-container {
+#top-scorers {
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 4;
@@ -82,16 +77,13 @@
 	grid-row-end: 4;
 }
 
-#team-biggest-defeat-table {
+#biggest-defeat {
 	width: 100%;
-}
-
-#team-biggest-win-table {
-	width: 100%;
-}
-
-#team-biggest-defeat-container {
 	margin-bottom: 20px;
+}
+
+#biggest-win {
+	width: 100%;
 }
 
 .team-cards-container {
@@ -102,4 +94,9 @@
 
 .team-cards-container .dashboard-card {
 	margin: 0 36px 48px 36px; 
+}
+
+#tournaments-stages {
+	margin-bottom: 40px;
+	width: 70%;
 }

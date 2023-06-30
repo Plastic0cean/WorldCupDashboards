@@ -82,17 +82,18 @@ td, th {
 	text-align: center;
 }
 
+.table-data caption {
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 1.17em;
+}
+
 .row-on-hover-grey {
 	color: rgb(73, 77, 80);
 }
 
 .row-on-hover-grey:hover {
 	background-color: rgba(192, 190, 190, 0.25);
-}
-
-
-#team-by-tournaments {
-	margin-bottom: 40px;
 }
 
 .container {
@@ -232,13 +233,8 @@ td, th {
 	border-radius: 5px;
 	margin-bottom: 30px;
   }
-  
-.dropdown {
-	position: relative;
-	display: inline-block;
-  }
-  
-.dropdown-content {
+
+  .dropdown-content {
 	display: none;
 	position: absolute;
 	background-color: #f9f9f9;
@@ -258,7 +254,7 @@ td, th {
 
 .dropdown:hover .dropdown-content {display: block;}
   
-.dropdown-container {
+#tournament-list-dropdown {
 	display: flex;
 	justify-content: center;
 	align-items: center;

@@ -6,19 +6,17 @@
 {% block content %}
 <h1>FIFA Worldcup statistics</h1>
 
-<div class="dropdown-container">
-  <div id="tournament-list-dropdown" class="dropdown">
-    <button type="submit" class="dropbtn">
-      {% if data["tournament"] %} {{data["tournament"][0].tournament_name}}
-      {% else %}
-      Filter a tournament
-      {% endif %}
-    </button>
-    <div class="dropdown-content">
-      {%for t in data["tournaments_list"]%}
-      <a href="{{'?id='+t.tournament_id}}">{{t.year + " - " +t.host_country}}</a>
-      {%endfor%}
-    </div>
+<div id="tournament-list-dropdown">
+  <button type="submit" class="dropbtn">
+    {% if data["tournament"] %} {{data["tournament"][0].tournament_name}}
+    {% else %}
+    Filter a tournament
+    {% endif %}
+  </button>
+  <div class="dropdown-content">
+    {%for t in data["tournaments_list"]%}
+    <a href="{{'?id='+t.tournament_id}}">{{t.year + " - " +t.host_country}}</a>
+    {%endfor%}
   </div>
 </div>
 
@@ -36,7 +34,8 @@
 </div>
 {% endif %}
 
-<div id="tournament-reports-container" class="grid-container">
+<div class="grid-container">
+
   <div class="left-col">
     <div id="goals-difference-by-team-container" class="dashboard-container">
       <h3>Goals difference by a team</h3>
@@ -49,6 +48,7 @@
         </script>
       </div>
     </div>
+
     <div id="goals-by-minutes-container" class="dashboard-container">
       <h3>Goals scored by minutes</h3>
       <div id="goals-by-minutes-hist" class="chart">
@@ -60,10 +60,12 @@
         </script>
       </div>
     </div>
+
   </div>
 
 
   <div class="right-col">
+
     <div id="most-goals-in-single-game-container" class="scoreboard-container dashboard-container">
       <h3>Most goals in a single match</h3>
       <div class="scorecard">
@@ -107,9 +109,8 @@
     </div>
     {% endif %}
 
-    <div id="tournament-top-scorers">
-      <h3>Top scorers </h3>
       <table class="table-data center">
+        <caption>Top scorers</caption>
         <thead>
           <tr>
             <th scope="col">Player</th>
@@ -127,10 +128,9 @@
           {% endfor %}
         </tbody>
       </table>
-    </div>
 
+    </div>
   </div>
-</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {
