@@ -16,13 +16,6 @@ class TeamRepository:
         with self.conn:
             return self.conn.execute(f"SELECT * FROM teams WHERE team_id='{team_id}'", True)[0]
 
-    def get_goal_ranking_by_team(self, team_id: str):
-        with self.conn: 
-            query = f"SELECT * FROM vGoalsRankingByTeam WHERE team_id = '{team_id}'"
-            result = self.conn.execute(query, get_results=True)
-        if result:
-            return result[0]
-
     def get_biggest_win(self, team_id: str):
         return DbTableFunction("BiggestWinOfTeam", team_id).select(self.conn)
 
