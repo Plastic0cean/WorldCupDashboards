@@ -94,6 +94,7 @@
     </div>
   </div>
 
+  {% if data["top_scorers"] %}
   <table id="top-scorers" class="table-data">
     <caption>Best scorers</caption>
     <thead>
@@ -106,13 +107,15 @@
       {%for scorer in data["top_scorers"]%}
       <tr class="row-on-hover-grey">
         <td><a href="{{url_for('players.player_details', player_id=scorer.player_id)}}">
-            {{scorer.player_name}}</a></td>
-        <td>{{scorer.goals_number}}</td>
-      </tr>
-      {%endfor%}
-    </tbody>
-  </table>
+          {{scorer.player_name}}</a></td>
+          <td>{{scorer.goals_number}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    {% endif %}
 
+  {% if visualizations["goals_by_opponent"] %}
   <div id="goals-by-opponent" class="dashboard-container">
     <h3>Goals scored againts different teams</h3>
     <div id="goals-by-opponent-bar" class="chart">
@@ -123,7 +126,9 @@
       </script>
     </div>
   </div>
+  {% endif %}
 
+  {% if visualizations["goals_by_tournament"] %}
   <div id="team-goals-by-tournament" class="dashboard-container">
     <h3>Goals scored by a tournament</h3>
     <div id="goals-by-tournament-pie" class="chart">
@@ -134,6 +139,7 @@
       </script>
     </div>
   </div>
+  {% endif %}
 
   <div id="team-records">
     <table id="biggest-defeat" class="table-data">
