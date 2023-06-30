@@ -2,40 +2,35 @@
 
 {% block content %}
 
-<div id="player-selection-content">
-  
-  <form id="player-searching-form" method="post">
-    <div class="input-group mb-3">
-      <input type="text" name="player" id="player" class="searching-bar" placeholder="Player's name"
-        aria-label="Player's username" aria-describedby="button-addon2">
-      <input type="submit" class="submit-button" id="button-addon2" value="Search">
-    </div>
-  </form>
 
-  <div id="player-table-container">
-    <table id="player-table" class="data-table">
-      <!--<table class="table table-hover">-->
-      <thead class="table-header">
-        <tr>
-          <th>Name</th>
-          <th>Nationality</th>
-          <th>Position</th>
-        </tr>
-      </thead>
-      <tbody class="table-body">
-        {%for player in players%}
-        <tr class="row-on-hover-grey">
-          <td>
-            <a href=" {{ url_for('players.player_details', player_id=player.PlayerId)}}"> {{player.Name}}</a>
-          </td>
-          <td>
-          <a href=" {{ url_for('teams.team_details', team_id=player.team_id)}}"> {{player.nationality}}</a>
-        </td>
-          <td>{{player.position}}</td>
-        </tr>
-        {%endfor%}
-      </tbody>
-    </table>
+<form id="player-searching-form" method="post">
+  <div class="input-group mb-3">
+    <input type="text" name="player" id="player" class="searching-bar" placeholder="Player's name"
+      aria-label="Player's username" aria-describedby="button-addon2">
+    <input type="submit" class="submit-button" id="button-addon2" value="Search">
   </div>
-</div>
+</form>
+
+<table id="player-table" class="table-data center">
+  <thead class="table-header">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Nationality</th>
+      <th scope="col">Position</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for player in players%}
+    <tr class="row-on-hover-grey">
+      <td>
+        <a href=" {{ url_for('players.player_details', player_id=player.PlayerId)}}"> {{player.Name}}</a>
+      </td>
+      <td>
+        <a href=" {{ url_for('teams.team_details', team_id=player.team_id)}}"> {{player.nationality}}</a>
+      </td>
+      <td>{{player.position}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
 {% endblock content %}

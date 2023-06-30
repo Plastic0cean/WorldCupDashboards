@@ -1,7 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
 
-
 <div class="container">
   <div class="profile-pic">
     <img class="country-flag" src="{{url_for('.display_flag', team_id=data['team'].team_id)}}" alt="Profile Picture">
@@ -11,7 +10,6 @@
     <h2>{{data["team"].region_name}}</h2>
   </div>
 </div>
-
 
 <div class="team-cards-container">
   <div class="dashboard-card">
@@ -37,18 +35,22 @@
 
 <div id="team-by-tournaments">
   <table id="team-tournaments-stages-table" class="table-data center">
-    <tr>
-      <th>Tournament</th>
-      <th>Number of matches</th>
-      <th>Position</th>
-    </tr>
-    {%for row in data["position_by_tournament"]%}
-    <tr class="row-on-hover-grey">
-      <td><a href="{{url_for('tournaments.tournament_details')}}">{{row.tournament_name}}</a></td>
-      <td>{{row.count_matches}}</td>
-      <td>{{row.position}}</td>
-    </tr>
-    {%endfor%}
+    <thead>
+      <tr>
+        <th scope="col">Tournament</th>
+        <th scope="col">Number of matches</th>
+        <th scope="col">Position</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for row in data["position_by_tournament"]%}
+      <tr class="row-on-hover-grey">
+        <td><a href="{{url_for('tournaments.tournament_details')}}">{{row.tournament_name}}</a></td>
+        <td>{{row.count_matches}}</td>
+        <td>{{row.position}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
   </table>
 </div>
 
@@ -60,8 +62,8 @@
       <div id="team-matches-results-pie" class="chart">
         <script>
           var graphs = {{ visualizations["matches_results"] | safe}};
-          var layout = {autosize: true}
-          graphs.config = {'displayModeBar': false, 'responsive': true};
+          var layout = { autosize: true }
+          graphs.config = { 'displayModeBar': false, 'responsive': true };
           Plotly.plot('team-matches-results-pie', graphs, layout);
         </script>
       </div>
@@ -73,9 +75,9 @@
       <div id="all-matches-bar" class="chart">
         <script>
           var graphs = {{ visualizations["matches_chart"] | safe}};
-          graphs.config = {'displayModeBar': false, 'responsive': true};
+          graphs.config = { 'displayModeBar': false, 'responsive': true };
           Plotly.plot('all-matches-bar', graphs, {});
-          
+
         </script>
       </div>
     </div>
@@ -87,7 +89,7 @@
       <div id="minutes-by-player-treemap" class="chart">
         <script>
           var graphs = {{ visualizations["most_minutes_by_player"] | safe}};
-          graphs.config = {'displayModeBar': false, 'responsive': true};
+          graphs.config = { 'displayModeBar': false, 'responsive': true };
           Plotly.plot('minutes-by-player-treemap', graphs, {});
         </script>
       </div>
@@ -97,17 +99,21 @@
     <div id="team-top-scorers-container">
       <h3>Best scorers</h3>
       <table id="team-top-scorers-table" class="table-data">
-        <tr>
-          <th>Name</th>
-          <th>Number of goals</th>
-        </tr>
-        {%for scorer in data["top_scorers"]%}
-        <tr class="row-on-hover-grey">
-          <td><a href="{{url_for('players.player_details', player_id=scorer.player_id)}}">
-              {{scorer.player_name}}</a></td>
-          <td>{{scorer.goals_number}}</td>
-        </tr>
-        {%endfor%}
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Number of goals</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for scorer in data["top_scorers"]%}
+          <tr class="row-on-hover-grey">
+            <td><a href="{{url_for('players.player_details', player_id=scorer.player_id)}}">
+                {{scorer.player_name}}</a></td>
+            <td>{{scorer.goals_number}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
       </table>
     </div>
 
@@ -116,7 +122,7 @@
       <div id="goals-by-opponent-bar" class="chart">
         <script>
           var graphs = {{ visualizations["goals_by_opponent"] | safe}};
-          graphs.config = {'displayModeBar': false, 'responsive': true};
+          graphs.config = { 'displayModeBar': false, 'responsive': true };
           Plotly.plot('goals-by-opponent-bar', graphs, {});
         </script>
       </div>
@@ -127,7 +133,7 @@
       <div id="goals-by-tournament-pie" class="chart">
         <script>
           var graphs = {{ visualizations["goals_by_tournament"] | safe}};
-          graphs.config = {'displayModeBar': false, 'responsive': true};
+          graphs.config = { 'displayModeBar': false, 'responsive': true };
           Plotly.plot('goals-by-tournament-pie', graphs, {});
         </script>
       </div>
@@ -137,22 +143,26 @@
       <div id="team-biggest-defeat-container">
         <h3>Biggest defeat</h3>
         <table id="team-biggest-defeat-table" class="table-data">
-          <tr>
-            <th>Tournament</th>
-            <th>Opponent</th>
-            <th>Date</th>
-            <th>Score</th>
-          </tr>
-          {%for row in data["biggest_defeat"]%}
-          <tr class="row-on-hover-grey">
-            <td>{{row.tournament_name}}</td>
-            <td>
-              <a href="{{url_for('teams.team_details', team_id=row.opponent_id)}}">{{row.opponent_name}}</a>
-            </td>
-            <td>{{row.match_date}}</td>
-            <td>{{row.score}}</td>
-          </tr>
-          {%endfor%}
+          <thead>
+            <tr>
+              <th scope="col">Tournament</th>
+              <th scope="col">Opponent</th>
+              <th scope="col">Date</th>
+              <th scope="col">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for row in data["biggest_defeat"]%}
+            <tr class="row-on-hover-grey">
+              <td>{{row.tournament_name}}</td>
+              <td>
+                <a href="{{url_for('teams.team_details', team_id=row.opponent_id)}}">{{row.opponent_name}}</a>
+              </td>
+              <td>{{row.match_date}}</td>
+              <td>{{row.score}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
         </table>
       </div>
 
@@ -162,10 +172,10 @@
         <table id="team-biggest-win-table" class="table-data">
           <thead>
             <tr>
-              <th>Tournament</th>
-              <th>Opponent</th>
-              <th>Date</th>
-              <th>Score</th>
+              <th scope="col">Tournament</th>
+              <th scope="col">Opponent</th>
+              <th scope="col">Date</th>
+              <th scope="col">Score</th>
             </tr>
           </thead>
           <tbody>

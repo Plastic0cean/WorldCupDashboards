@@ -5,10 +5,112 @@
 	--grey-backgroud-color: rgb(246, 246, 247);
 }
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Segoe UI', sans-serif;
+  }
+
 body {
 	background-color: var(--grey-backgroud-color);
 }
 
+nav {
+	height: 52px;  
+	background-color: #191e24f5;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 0px;
+	padding: 15px 50px;
+	color: white;
+  }
+  
+  nav ul {
+	list-style-type: none;
+	display: flex;
+	align-items: center;
+	gap: 0px;
+  }
+  
+  
+  li a {
+	font-size: 1.1rem;
+	cursor: pointer;
+	padding: 10px 15px;
+	color: white;
+	text-decoration: none;
+  }
+  
+  li a:hover {
+	color: #f1c40f;
+	border-bottom: 4px #f1c40f solid;
+	transition: 0.12s;
+  }
+  
+  .hide {
+	top: 70px;
+  }
+  
+  @media screen and (max-width: 700px) {
+	.hamburger {
+	  display: flex;
+	  flex-direction: column;
+	  gap: 8px;
+	  cursor: pointer;
+	  padding: 14px;
+	  margin-right: -10px;
+	}
+  
+	.lines {
+	  display: block;
+	  background-color: white;
+	  height: 2px;
+	  width: 35px;
+	}
+  
+	.lines-rotate {
+	  background-color: rgb(85, 84, 84);
+	  border-radius: 5px;
+	}
+  
+	nav {
+	  position: relative;
+	  padding: 15px 20px;
+	}
+  
+	ul {
+	  width: 100%;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: center;
+	  position: absolute;
+	  top: -300px;
+	  right: 0;
+	  background-color: #f1c40f;
+	  padding: 35px 0;
+	  border-radius: 0 0 20px 20px;
+	  box-shadow: 0px 5px 5px rgba(128, 128, 128, 0.363);
+	}
+  
+	li a {
+	  color: rgba(12, 11, 11, 0.836);
+	}
+  
+	li {
+	  text-align: center;
+	  width: 90vw;
+	}
+  
+	li a:hover {
+	  font-weight: bold;
+	  color: #191e24;
+	  border: none;
+	  letter-spacing: 3px;
+	}
+  }
+  
 
 .center {
 	margin: 0 auto;
@@ -82,39 +184,18 @@ a:hover {
 
 
 #player-table {
-	background-color: white;
-	border-color: var(--grey-border-color);
-	border-style: ridge;
-	border-width: 1px;
-	margin: 5% auto 0 auto;
-	width: 80%;
+	margin: 5% auto 0 auto; 
+	width: 70%;
 }
 
 .table-data {
 	background-color: white;
+	border-collapse: collapse;
 	border-color: var(--grey-border-color);
 	border-style: ridge;
-	border-width: 1px;
-}
-
-#team-tournaments-stages-table {
-	width: 70%;
-}
-
-#player-appearances-summary table {
-	width: 80%;
-}
-
-.table-header {
-	border-color: var(--grey-border-color);
-	border-style: ridge;
-	border-width: 1px;
-	height: 40px;
-	font-weight: bold;
-}
-
-#team-by-tournaments {
-	margin-bottom: 40px;
+	border-width: 0.5px;
+	table-layout: fixed;
+	width: 100%;
 }
 
 tr {
@@ -122,6 +203,10 @@ tr {
 	border-style: ridge;
 	border-width: 1px;
 	border-color: var(--light-grey-border-color);
+}
+
+th {
+	border-bottom: 1px solid black;
 }
 
 td, th {
@@ -136,6 +221,20 @@ td, th {
 .row-on-hover-grey:hover {
 	background-color: rgba(192, 190, 190, 0.25);
 }
+
+#team-tournaments-stages-table {
+	width: 70%;
+}
+
+#player-appearances-summary table {
+	width: 80%;
+
+}
+
+#team-by-tournaments {
+	margin-bottom: 40px;
+}
+
 
 #player-profile {
 	display: flex;
@@ -193,7 +292,6 @@ td, th {
 }
 
 .profile-pic img {
-	/* border-radius: 50%; */
 	display: block;
 	height: auto;
 	max-width: 100%;

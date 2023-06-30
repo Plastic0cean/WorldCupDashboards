@@ -4,49 +4,51 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title>Word Cup dashboards</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 	{% block head %}{% endblock %}
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
-
 
 <body>
 
-	<nav class="navbar navbar-expand-lg bg-dark">
-		<div class="container-fluid">
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link active text-white" aria-current="page" href="{{ url_for('home.home_page') }}">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active text-white" aria-current="page"
-							href="{{ url_for('teams.teams_selection') }}">Teams</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active text-white" aria-current="page"
-							href="{{ url_for('players.players_selection') }}">Players</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active text-white" aria-current="page"
-							href="{{ url_for('tournaments.tournament_details') }}">Tournaments</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active text-white" aria-current="page"
-							href="{{ url_for('matches.matches_list') }}">Matches</a>
-					</li>
-
-				</ul>
-			</div>
+	<nav>
+		<h1 id="logo">MB</h1>
+		<div class="hamburger">
+			<span class="lines"></span>
+			<span class="lines"></span>
+			<span class="lines"></span>
 		</div>
+		<ul id="nav-links">
+			<li><a href="{{ url_for('home.home_page') }}">Home</a></li>
+			<li><a href="{{ url_for('teams.teams_selection') }}">Teams</a></li>
+			<li><a href="{{ url_for('players.players_selection') }}">Players</a></li>
+			<li><a href="{{ url_for('tournaments.tournament_details') }}">Tournaments</a></li>
+			<li><a href="{{ url_for('matches.matches_list') }}">Matches</a></li>
+		</ul>
 	</nav>
-
-
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-		{% block content %}{% endblock %}
+	{% block content %}{% endblock %}
 
 </body>
 
 </html>
+
+<script>
+	let hamburger = document.querySelector('.hamburger');
+	let navLinks = document.getElementById('nav-links');
+	let links = document.querySelectorAll('.links');
+
+	hamburger.addEventListener('click', () => {
+		navLinks.classList.toggle('hide');
+		hamburger.classList.toggle('lines-rotate');
+	});
+
+	for (let i = 0; i < links.length; i++) {
+		links[i].addEventListener('click', () => {
+			navLinks.classList.toggle('hide');
+		});
+	}
+</script>

@@ -37,7 +37,7 @@ def teams_selection():
     if request.method == "POST":
         team_id = request.form["teams-dropdown"]
         return redirect(url_for("teams.team_details", team_id=team_id))
-    return render_template("selection.html", teams=teams)
+    return render_template("team_selection.html", teams=teams)
 
 @retry_if_fail
 def get_flag_filename(team_id: str):
