@@ -1,6 +1,10 @@
 {% extends "main.html" %}
-{% block content %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='team.css') }}">
+{% endblock head %}
+
+{% block content %}
 <div class="container">
   <div class="profile-pic">
     <img class="country-flag" src="{{url_for('.display_flag', team_id=data['team'].team_id)}}" alt="Profile Picture">
@@ -77,11 +81,9 @@
           var graphs = {{ visualizations["matches_chart"] | safe}};
           graphs.config = { 'displayModeBar': false, 'responsive': true };
           Plotly.plot('all-matches-bar', graphs, {});
-
         </script>
       </div>
     </div>
-
 
     <div id="minutes-by-players" class="dashboard-container">
       <h3>Players with the most minutes played</h3>
@@ -94,7 +96,6 @@
         </script>
       </div>
     </div>
-
 
     <div id="team-top-scorers-container">
       <h3>Best scorers</h3>
@@ -192,9 +193,9 @@
           </tbody>
         </table>
       </div>
+
       {% endif %}
     </div>
-
   </div>
 </div>
 {% endblock content %}

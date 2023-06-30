@@ -1,5 +1,10 @@
 {% extends "main.html" %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='player.css') }}">
+{% endblock head %}
+
+
 {% block content %}
 
 <div class="container">

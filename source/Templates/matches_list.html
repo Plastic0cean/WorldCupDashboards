@@ -5,7 +5,6 @@
 {% endblock head %}
 
 {% block content %}
-
 <div class="matches-list-container">
     {% for match_date, matches_of_date in matches.items()%}
     <span class="match-date-header">{{match_date}}</span>
@@ -30,5 +29,4 @@
     {% endfor %}
     {% endfor %}
 </div>
-
 {% endblock content %}

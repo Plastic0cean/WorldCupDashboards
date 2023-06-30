@@ -1,0 +1,105 @@
+#team-searching h1 {
+	margin: 10% 0 5% 0;
+	text-align: center;
+}
+
+#team-searching input {
+	display: inline-block;
+	align-items: center;
+	height: 40px;
+	justify-content: center;
+	margin: 0 10px 0 5%;
+	width: 80%;
+}
+
+.dropdown-list {
+	height: 40px;
+	margin-left: 5%;
+	margin-right: 2%;
+	width: 80%;
+	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.dropdown-list option {
+	font-size: 17px;
+}
+
+#team-tournaments-stages-table {
+	width: 70%;
+}
+
+#team-top-scorers-table {
+	width: 100%;
+}
+
+#team-matches-results {
+	grid-column-start: 1;
+	grid-column-end: 1;
+	grid-row-start: 1;
+	grid-row-end: 1;
+}
+
+#all-matches-of-team {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 1;
+	grid-row-end: 1;
+}
+
+#minutes-by-players {
+	grid-column-start: 1;
+	grid-column-end: 4;
+	grid-row-start: 2;
+	grid-row-end: 2;
+}
+
+#goals-by-opponent {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 3;
+	grid-row-end: 3;
+}
+
+#team-goals-by-tournament {
+	grid-column-start: 1;
+	grid-column-end: 1;
+	grid-row-start: 3;
+	grid-row-end: 3;
+}
+
+#team-top-scorers-container {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 4;
+	grid-row-end: 5;
+	text-align: center;
+}
+
+#team-records {
+	grid-column-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 4;
+	grid-row-end: 4;
+}
+
+#team-biggest-defeat-table {
+	width: 100%;
+}
+
+#team-biggest-win-table {
+	width: 100%;
+}
+
+#team-biggest-defeat-container {
+	margin-bottom: 20px;
+}
+
+.team-cards-container {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.team-cards-container .dashboard-card {
+	margin: 0 36px 48px 36px; 
+}
