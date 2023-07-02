@@ -33,6 +33,11 @@ class PlayerRepository:
 
     def get_number_of_matches(self, player_id: str):
         return DbTableFunction("PlayerNumberOfMatches", player_id).select(self.conn)[0]
+    
+    def get_positions(self, player_id: str):
+        with self.conn:
+            positions = self.conn.execute(f"SELECT DISTINCT position_name FROM player_appearances WHERE player_id = '{player_id}'", True)
+            return [position[0] for position in positions]
 
     def get_minutes_played(self, player_id: str):
         with self.conn:

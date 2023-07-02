@@ -8,6 +8,7 @@ players = Blueprint("players", __name__)
 def generate_data(player_id, repository):
     return {
         "player": repository.get_by_id(player_id),
+        "positions": repository.get_positions(player_id),
         "awards": repository.get_awards(player_id),
         "stats": repository.get_basic_stats(player_id),
         "appearances_summary": repository.get_apperances_summary(player_id)

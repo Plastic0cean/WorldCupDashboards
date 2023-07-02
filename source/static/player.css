@@ -1,5 +1,5 @@
 #player-searching-form {
-	margin-top: 3%;
+	margin: 40px auto;
 }
 
 #player-table {
@@ -25,4 +25,78 @@
 
 #player-goals-cards-section .dashboard-card {
 	margin: 20px 40px;
+}
+
+.pitch-positions {
+	position: relative;
+	margin: 0 auto 20px;
+	width: 500px;
+}
+
+.pitch-positions img {
+	width: 500px;
+	height: auto;
+}
+
+.marker {
+	background-color: black;
+	border-color: white;
+	border-radius: 50%;
+	box-shadow: 0 0 0 4px #00000085, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
+	color: white;
+	height: 50px;
+	line-height: 50px;
+	position: absolute;
+	text-align: center;
+	width: 50px;
+}
+
+.forward {
+	left: 400px;
+	top: 140px;
+}
+
+.left-winger {
+	left: 385px;
+	top: 30px;
+}
+
+.right-winger {
+	left: 385px;
+	top: 260px;
+}
+
+.attacking-midfielder {
+	left: 320px;
+	top: 140px;
+}
+
+.center-midfielder {
+	left: 228px;
+	top: 140px;
+}
+
+.defensive-midfielder {
+	left: 170px;
+	top: 140px;
+}
+
+.left-back {
+	left: 85px;
+	top: 30px;
+}
+
+.right-back {
+	left: 85px;
+	top: 260px;
+}
+
+.center-back {
+	left: 85px;
+	top: 140px;
+}
+
+.goalkeeper {
+	left: 25px;
+	top: 140px;
 }

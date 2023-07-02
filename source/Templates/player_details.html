@@ -11,13 +11,40 @@
   </div>
   <div class="user-info">
     <h1>{{data["player"].name}}</h1>
-    <h2>{{data["player"].team}}</h2>
-    <p><span>Date of Birth:</span> {{["player"].birth_date}}</p>
+    <a href="{{url_for('teams.team_details', team_id=data['player'].team_id)}}"><h2>{{data["player"].team}}</h2></a>
+    <p><span>Date of Birth:</span> {{data["player"].birth_date}}</p>
     <p><span>Position:</span> {{data["player"].position}}</p>
     </div>
 </div>
 
-{%if data["appearances_summary"]%}
+<div class="pitch-positions">
+  <img src="/static/pitch.png" alt="player positions">
+  {% for position in data["positions"] %}
+    {% if position=='forward' %}
+    <div class="marker forward">FW</div>
+    {% elif position=='left winger'%}
+    <div class="marker left-winger">LW</div>
+    {% elif position=='right winger'%}
+    <div class="marker right-winger">RW</div>
+    {% elif position=='attacking midfielder'%}
+    <div class="marker attacking-midfielder">AMF</div>
+    {% elif position=='center midfielder'%}
+    <div class="marker center-midfielder">CM</div>
+    {% elif position=='defensive midfielder'%}
+    <div class="marker defensive-midfielder">DM</div>
+    {% elif position=='center back'%}
+    <div class="marker center-back">CB</div>
+    {% elif position=='left back'%}
+    <div class="marker left-back">LB</div>
+    {% elif position=='right back'%}
+    <div class="marker right-back">RB</div>
+    {% else %}
+    <div class="marker goalkeeper">GK</div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% if data["appearances_summary"] %}
 <table id="player-appearances-summary" class="table-data center">
   <thead>
     <tr>
@@ -42,7 +69,9 @@
 </table>
 {%endif%}
 
-<div id="player-matches-section">
+
+
+<!-- <div id="player-matches-section">
 
   <div class="pie-chart">
     <h1>Number of minutes on the pitch and bench</h1>
@@ -119,5 +148,5 @@
     </tbody>
   </table>
   {% endif %}
-</div>
+</div> -->
 {% endblock content %}
