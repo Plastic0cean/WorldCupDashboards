@@ -71,24 +71,24 @@
 
 
 
-<!-- <div id="player-matches-section">
+<div id="charts">
 
-  <div class="pie-chart">
-    <h1>Number of minutes on the pitch and bench</h1>
+  <div id="minutes-played" class="dashboard-container">
+    <h3>Minutes spent on the pitch and bench</h3>
     <div id="minutes-played-pie" class="plotly-chart">
       <script>
-        var graphs = {{ minutes_played | safe}};
+        var graphs = {{ visualizations["minutes_played"] | safe}};
         graphs.config = {'displayModeBar': false, 'responsive': true};
         Plotly.plot('minutes-played-pie', graphs, {displayModeBar: false});
       </script>
     </div>
   </div>
 
-  <div class="pie-chart">
-    <h1>Number of games in starting 11 and as a substitution</h1>
+  <div id="starting" class="dashboard-container">
+    <h3>Games in starting 11 and as a substitution</h3>
     <div id="starter-or-substitute-pie" class="plotly-chart">
       <script>
-        var graphs = {{ starer_or_sub | safe}};
+        var graphs = {{ visualizations["starer_or_sub"] | safe}};
         graphs.config = {'displayModeBar': false, 'responsive': true};
         Plotly.plot('starter-or-substitute-pie', graphs, {displayModeBar: false});
       </script>
@@ -96,57 +96,25 @@
   </div>
 </div>
 
-<div id="player-goals-section">
-
-  <div id="player-goals-cards-section">
-    <div class="dashboard-card">
-      <h3>3</h3>
-      <p>Goals scored overall</p>
-    </div>
-    <div class="dashboard-card">
-      <h3>0.28</h3>
-      <p>Goals per game ratio</p>
-    </div>
-    <div class="dashboard-card">
-      <h3>60</h3>
-      <p>Average minutes to score a goal</p>
-    </div>
-  </div>
-
-  {% if data["stats"].goals>0 %}
-  <h4>Number of goals scored against different teams</h4>
-  <div id="chart" class="chart">
-    <script>
-      var graphs = {{ visualizations["goals_by_team"] | safe}};
-      graphs.config = {'displayModeBar': false, 'responsive': true};
-      Plotly.plot('chart', graphs, {displayModeBar: false});
-    </script>
-  </div>
-  {% endif %}
-</div>
-
-<div id="player-awards-section">
-  {% if data["awards"] %}
-  <h1>Individual awards</h1>
-
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Award</th>
-        <th scope="col">Description</th>
-        <th scope="col">Tournament</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for award in data["awards"] %}
-      <tr>
-        <td>{{award.name}}</td>
-        <td>{{award.description}}</td>
-        <td>{{award.year + " " + award.country}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% endif %}
-</div> -->
+{% if data["awards"] %}
+<table id="awards" class="table-data center">
+  <caption>Individual award</caption>
+  <thead>
+    <tr>
+      <th scope="col">Award</th>
+      <th scope="col">Description</th>
+      <th scope="col">Tournament</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for award in data["awards"] %}
+    <tr class="row-on-hover-grey">
+      <td>{{award.name}}</td>
+      <td>{{award.description}}</td>
+      <td>{{award.year + " " + award.country}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
 {% endblock content %}

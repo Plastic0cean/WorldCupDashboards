@@ -100,3 +100,22 @@
 	left: 25px;
 	top: 140px;
 }
+
+#charts {
+	margin: 20px auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
+}
+
+#charts .dashboard-container {
+	width: 500px;
+	height: auto;
+}
+
+#awards {
+	width: 70%;
+}
