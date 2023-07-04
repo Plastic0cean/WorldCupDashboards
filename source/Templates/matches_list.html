@@ -5,28 +5,33 @@
 {% endblock head %}
 
 {% block content %}
-<div class="matches-list-container">
-    {% for match_date, matches_of_date in matches.items()%}
-    <span class="match-date-header">{{match_date}}</span>
+
+{% for match_date, matches_of_date in matches.items()%}
+<button type="button" class="accordion match-date-header">{{match_date}}</button>
+<div class="panel">
     {% for match in matches_of_date%}
     <div class="scoreboard-container dashboard-container">
         <a href="{{url_for('matches.match_details', match_id=match.match_id)}}">
             <div class="scorecard">
                 <div class="team">
                     {{match.home_team_name}}
-                    <img src="{{url_for('teams.display_flag', team_id=match.home_team_id)}}" alt="{{match.home_team_name}}">
+                    <img src="{{url_for('teams.display_flag', team_id=match.home_team_id)}}"
+                        alt="{{match.home_team_name}}">
                 </div>
                 <div class="match-result">
                     <span class="score">{{match.score}}</span>
                 </div>
                 <div class="team">
                     {{match.away_team_name}}
-                    <img src="{{url_for('teams.display_flag', team_id=match.away_team_id)}}" alt="{{match.away_team_name}}">
+                    <img src="{{url_for('teams.display_flag', team_id=match.away_team_id)}}"
+                        alt="{{match.away_team_name}}">
                 </div>
             </div>
         </a>
     </div>
     {% endfor %}
-    {% endfor %}
 </div>
+{% endfor %}
+
+<script src="{{ url_for('static', filename='accordion.js')}}"></script>
 {% endblock content %}

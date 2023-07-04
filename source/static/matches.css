@@ -1,31 +1,52 @@
 :root {
-    --header-background: #333C42;
+  --header-background: #333C42;
 }
 
+
 .match-date-header {
-    align-items: center;
-    background-color: var(--header-background);
-    border-radius: 10px;
-    color: white;
-    display: flex;
-    height: 50px;
-    justify-content: center;
-    margin-top: 30px;
+  align-items: center;
+  background-color: var(--header-background);
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  font-size: 18px;
 }
 
 .matches-list-container {
-    margin: auto;
-    width: 80%;
+  margin: auto;
+  width: 80%;
 }
 
 .scoreboard-container:hover {
-    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .scorecard {
-    padding: 0;
+  padding: 0;
 }
 
 .scoreboard-container {
-    margin: 10px;
+  margin: 10px;
+}
+
+.accordion {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+.accordion, .panel {
+  width: 80%;
+  margin: auto;
+}
+.match-date-header {
+  margin-top: 20px;
+}
+
+.panel {
+  display: block;
+  overflow: hidden;
 }
