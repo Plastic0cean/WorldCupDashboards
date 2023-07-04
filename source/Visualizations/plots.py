@@ -1,5 +1,6 @@
 import json 
 from typing import Callable
+import numpy as np 
 import pandas as pd
 from plotly.utils import PlotlyJSONEncoder
 import plotly.express as px
@@ -7,6 +8,9 @@ import plotly.graph_objects as go
 import plotly.io as pio
 pio.templates.default = "ggplot2"
 
+
+def zero_to_nan(values):
+    return [float('nan') if x==0 else x for x in values]
 
 def render_figure(func: Callable):
     # The decorator which is used to render a js scirpt for plotly visualisations.
@@ -17,6 +21,7 @@ def render_figure(func: Callable):
         return None if result == "null" else result
     return inner
 
+
 @render_figure
 def results_of_matches_pie(data: pd.DataFrame) -> go.Figure:
     fig = px.pie(data, names="result", values="number", hole=0.5, color_discrete_sequence=px.colors.diverging.balance)
@@ -26,6 +31,7 @@ def results_of_matches_pie(data: pd.DataFrame) -> go.Figure:
     fig.update_traces(hovertemplate=hovertemplate)
     return fig
 
+
 @render_figure
 def players_goals_by_team(data: pd.DataFrame) -> go.Figure:
     if data.empty:
@@ -34,14 +40,16 @@ def players_goals_by_team(data: pd.DataFrame) -> go.Figure:
     fig = px.treemap(data, values="number_of_goals", names="team", title=None, labels=labels)
     return fig
 
+
 @render_figure
 def player_appearances_by_tournament(data: pd.DataFrame) -> go.Figure:
-    if data.empty():
+    if data.empty:
         return
     label = {"tournament": "Tournament", "number_of_matches": "Number of matches"}
     fig = px.bar(data, labels=label, x="tournament", y="number_of_matches", color="stage", title=None)
     fig.update_yaxes(visible=True, showticklabels=False)
     return fig
+
 
 @render_figure
 def goals_by_tournament(data) -> go.Figure:
@@ -62,22 +70,30 @@ def goals_by_tournament(data) -> go.Figure:
     fig.data[1].line.color = "#0B66BD"
     return fig
 
+
 @render_figure
 def starter_or_substitute(data: pd.DataFrame) -> go.Figure:
     if data.empty:
         return
-    trace = go.Pie(labels=data["starer_or_sub"], values=data["number_of_matches"], textinfo="value", hole=0.4)
-    fig = go.Figure(data=[trace])
+    fig = px.pie(
+        data, names="starer_or_sub", values=zero_to_nan(data["number_of_matches"]), 
+        hole=0.7, color_discrete_sequence=px.colors.diverging.balance)
+    fig.update_traces(textinfo='value')
+    fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
     return fig
+
 
 @render_figure
 def overall_minutes_played(data) -> go.Figure:
-    trace = go.Pie(
+    fig = px.pie(
         labels=["Playing", "Bench"], 
-        values=[data["minutes_played"][0], data["minutes_on_bench"][0]],
-        textinfo="value", hole=0.4)
-    fig = go.Figure(data=[trace])
+        values=zero_to_nan([data["minutes_played"][0], data["minutes_on_bench"][0]]),
+        hole=0.7,
+        color_discrete_sequence=px.colors.diverging.balance)
+    fig.update_traces(textinfo='value')
+    fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
     return fig
+
 
 @render_figure
 def team_goals_by_opponent(data: pd.DataFrame) -> go.Figure:
@@ -90,6 +106,7 @@ def team_goals_by_opponent(data: pd.DataFrame) -> go.Figure:
     hovertemplate = "Number of goals: %{y}"
     fig.update_traces(hovertemplate=hovertemplate)
     return fig
+
 
 @render_figure
 def team_goals_by_tournament(data: pd.DataFrame) -> go.Figure:
@@ -147,6 +164,7 @@ def all_matches_by_team(data: pd.DataFrame) -> go.Figure:
         plot_bgcolor="rgb(246, 246, 247)")
     return fig
 
+
 @render_figure
 def goals_by_minutes(data: pd.DataFrame) -> go.Figure:
     hovertemplate = "Minutes: %{x}<br>Number of goals: %{y}"
@@ -158,6 +176,7 @@ def goals_by_minutes(data: pd.DataFrame) -> go.Figure:
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
     fig.update_traces(hovertemplate=hovertemplate)
     return fig
+
 
 @render_figure
 def goals_difference_by_team(data: pd.DataFrame) -> go.Figure:

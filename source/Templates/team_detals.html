@@ -107,13 +107,13 @@
       {%for scorer in data["top_scorers"]%}
       <tr class="row-on-hover-grey">
         <td><a href="{{url_for('players.player_details', player_id=scorer.player_id)}}">
-          {{scorer.player_name}}</a></td>
-          <td>{{scorer.goals_number}}</td>
-        </tr>
-        {%endfor%}
-      </tbody>
-    </table>
-    {% endif %}
+            {{scorer.player_name}}</a></td>
+        <td>{{scorer.goals_number}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  {% endif %}
 
   {% if visualizations["goals_by_opponent"] %}
   <div id="goals-by-opponent" class="dashboard-container">
@@ -142,56 +142,53 @@
   {% endif %}
 
   <div id="team-records">
-    <table id="biggest-defeat" class="table-data">
-        <caption>Biggest defeat</caption>
-        <thead>
-          <tr>
-            <th scope="col">Tournament</th>
-            <th scope="col">Opponent</th>
-            <th scope="col">Date</th>
-            <th scope="col">Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {%for row in data["biggest_defeat"]%}
-          <tr class="row-on-hover-grey">
-            <td>{{row.tournament_name}}</td>
-            <td>
-              <a href="{{url_for('teams.team_details', team_id=row.opponent_id)}}">{{row.opponent_name}}</a>
-            </td>
-            <td>{{row.match_date}}</td>
-            <td>{{row.score}}</td>
-          </tr>
-          {%endfor%}
-        </tbody>
-      </table>
+
+    <div id="biggest-defeat" class="scoreboard-container dashboard-container">
+      <h3>Biggest defeat</h3>
+      <div class="scorecard">
+        <div class="team">
+          <a
+            href="{{url_for('teams.team_details', team_id=data['team'].team_id)}}">{{data["biggest_defeat"][0].team_name}}</a>
+          <img src="{{url_for('teams.display_flag', team_id=data['team'].team_id)}}"
+            alt="{{data['biggest_defeat'][0].team_name}}">
+        </div>
+        <div class="match-result">
+          <span class="date">{{data["biggest_defeat"][0].match_date}}</span>
+          <span class="score">{{data["biggest_defeat"][0].score}}</span>
+        </div>
+        <div class="team">
+          <a
+            href="{{url_for('teams.team_details', team_id=data['biggest_defeat'][0].opponent_id)}}">{{data["biggest_defeat"][0].opponent_name}}</a>
+          <img src="{{url_for('teams.display_flag', team_id=data['biggest_defeat'][0].opponent_id)}}"
+            alt="{{data['biggest_defeat'][0].opponent_name}}">
+        </div>
+      </div>
+    </div>
 
     {% if data["biggest_win"] %}
-    <table id="biggest-win" class="table-data">
-      <caption>Biggest win</caption>
-      <thead>
-        <tr>
-          <th scope="col">Tournament</th>
-          <th scope="col">Opponent</th>
-          <th scope="col">Date</th>
-          <th scope="col">Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        {%for row in data["biggest_win"]%}
-        <tr class="row-on-hover-grey">
-          <td>{{row.tournament_name}}</td>
-          <td>
-            <a href="{{url_for('teams.team_details', team_id=row.opponent_id)}}">{{row.opponent_name}}</a>
-          </td>
-          <td>{{row.match_date}}</td>
-          <td>{{row.score}}</td>
-        </tr>
-        {%endfor%}
-      </tbody>
-    </table>
-
+    <div id="biggest_win" class="scoreboard-container dashboard-container">
+      <h3>Biggest win</h3>
+      <div class="scorecard">
+        <div class="team">
+          <a
+            href="{{url_for('teams.team_details', team_id=data['team'].team_id)}}">{{data["biggest_win"][0].team_name}}</a>
+          <img src="{{url_for('teams.display_flag', team_id=data['team'].team_id)}}"
+            alt="{{data['biggest_win'][0].team_name}}">
+        </div>
+        <div class="match-result">
+          <span class="date">{{data["biggest_win"][0].match_date}}</span>
+          <span class="score">{{data["biggest_win"][0].score}}</span>
+        </div>
+        <div class="team">
+          <a
+            href="{{url_for('teams.team_details', team_id=data['biggest_win'][0].opponent_id)}}">{{data["biggest_win"][0].opponent_name}}</a>
+          <img src="{{url_for('teams.display_flag', team_id=data['biggest_win'][0].opponent_id)}}"
+            alt="{{data['biggest_win'][0].opponent_name}}">
+        </div>
+      </div>
+    </div>
     {% endif %}
+
   </div>
 </div>
 {% endblock content %}
