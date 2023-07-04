@@ -13,4 +13,4 @@ FROM bookings
 WHERE tournament_id = COALESCE(@tournament_id, tournament_id)
 GROUP BY tournament_id, match_id, match_name)
 
-SELECT * FROM BookingsByGame WHERE cards_overall = (SELECT MAX(cards_overall) FROM BookingsByGame)
+SELECT TOP 1 * FROM BookingsByGame WHERE cards_overall = (SELECT MAX(cards_overall) FROM BookingsByGame)
