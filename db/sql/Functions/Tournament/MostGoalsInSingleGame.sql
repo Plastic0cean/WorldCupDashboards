@@ -16,4 +16,4 @@ SELECT
 FROM matches
 WHERE tournament_id = COALESCE(@tournament_id, tournament_id))
 
-SELECT * FROM MatchResults WHERE number_of_goals = (SELECT MAX(number_of_goals) FROM MatchResults)
+SELECT TOP 1 * FROM MatchResults WHERE number_of_goals = (SELECT MAX(number_of_goals) FROM MatchResults)
