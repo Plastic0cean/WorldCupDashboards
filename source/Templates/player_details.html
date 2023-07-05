@@ -1,3 +1,6 @@
+{% import 'scorecard.html' as scorecard %}
+
+
 {% extends "main.html" %}
 
 {% block head %}
@@ -58,12 +61,19 @@
   <tbody>
     {% for row in data["appearances_summary"] %}
     <tr class="row-on-hover-grey">
-      <td>{{row.tournament}}</td>
+      <td class="expand">{{row.tournament}}</td>
       <td>{{row.number_of_matches}}</td>
       <td>{{row.number_of_goals}}</td>
       <td>{{row.yellow_cards}}</td>
       <td>{{row.red_cards}}</td>
     </tr>
+    <tr class="hidden">
+      <td colspan="3">
+      {% for match in data["matches"][row.tournament_id]%}
+      {{ scorecard.scorecard(match)}}
+      {% endfor %}
+      </td></tr>
+
     {% endfor %}
   </tbody>
 </table>
@@ -72,7 +82,6 @@
 
 
 <div id="charts">
-
   <div id="minutes-played" class="dashboard-container">
     <h3>Minutes spent on the pitch and bench</h3>
     <div id="minutes-played-pie" class="plotly-chart">
@@ -117,4 +126,6 @@
   </tbody>
 </table>
 {% endif %}
+
+<script src="{{ url_for('static', filename='scripts/collapsible_table.js')}}"></script>
 {% endblock content %}

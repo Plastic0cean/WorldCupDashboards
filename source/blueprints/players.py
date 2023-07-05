@@ -6,10 +6,19 @@ import Visualizations.plots as vis
 
 players = Blueprint("players", __name__)
 
+def produce_matches_list(matches) -> dict:
+    result = dict()
+    for match in matches:
+        if match.tournament_id in result:
+            result[match.tournament_id].append(match)
+        else:
+            result[match.tournament_id] = [match]
+    return result
+
 def generate_data(player_id, player_repository, matches_repository):
     return {
         "appearances_summary": player_repository.get_apperances_summary(player_id),
-        "matches": matches_repository.get_matches_by_player(player_id),
+        "matches": produce_matches_list(matches_repository.get_matches_by_player(player_id)),
         "awards": player_repository.get_awards(player_id),
         "player": player_repository.get_by_id(player_id),
         "positions": player_repository.get_positions(player_id)
