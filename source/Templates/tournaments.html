@@ -1,3 +1,6 @@
+{% import 'tournaments_dropdown.html' as dropdown %}
+
+
 {% extends "main.html" %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/tournament.css') }}">
@@ -8,20 +11,7 @@
 <h1>FIFA Worldcup statistics</h1>
 
 
-
-<div class="dropdown">
-  <button type="submit" class="dropbtn">
-    {% if data["tournament"] %} {{data["tournament"][0].tournament_name}}
-    {% else %}
-    Filter a tournament
-    {% endif %}
-  </button>
-  <div class="dropdown-content">
-    {%for t in data["tournaments_list"]%}
-    <a href="{{'?id='+t.tournament_id}}">{{t.year + " - " +t.host_country}}</a>
-    {%endfor%}
-  </div>
-</div>
+{{ dropdown.tournaments(data["tournament"], data["tournaments_list"]) }}
 
 {% if not data["tournament"] %}
 <div id="goals-and-games-by-tournament" class="dashboard-container">
