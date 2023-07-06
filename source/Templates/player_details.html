@@ -68,7 +68,7 @@
       <td>{{row.red_cards}}</td>
     </tr>
     <tr class="hidden">
-      <td colspan="3">
+      <td colspan="5">
       {% for match in data["matches"][row.tournament_id]%}
       {{ scorecard.scorecard(match)}}
       {% endfor %}
