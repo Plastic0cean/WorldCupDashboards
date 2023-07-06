@@ -29,3 +29,9 @@ h1 {
 #most-goals-in-single-game-container { 
 	max-height: 300px;
 }
+
+#dropbtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}  

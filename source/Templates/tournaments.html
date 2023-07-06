@@ -1,12 +1,15 @@
 {% extends "main.html" %}
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/tournament.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dropdown_button.css') }}">
 {% endblock head %}
 
 {% block content %}
 <h1>FIFA Worldcup statistics</h1>
 
-<div id="tournament-list-dropdown">
+
+
+<div class="dropdown">
   <button type="submit" class="dropbtn">
     {% if data["tournament"] %} {{data["tournament"][0].tournament_name}}
     {% else %}
