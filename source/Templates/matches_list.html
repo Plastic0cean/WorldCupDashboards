@@ -1,10 +1,17 @@
+{% import 'tournaments_dropdown.html' as dropdown %}
 {% extends "main.html" %}
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/matches.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dropdown_button.css') }}">
+
 {% endblock head %}
 
 {% block content %}
+
+<div class="dropdown-centered">
+    {{ dropdown.tournaments(selected_tournament, tournaments) }}
+</div>
 
 {% for match_date, matches_of_date in matches.items()%}
 <button type="button" class="accordion match-date-header">{{match_date}}</button>

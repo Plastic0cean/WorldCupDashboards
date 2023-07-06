@@ -1,0 +1,15 @@
+{% macro tournaments(chosen_tournament, all_tournaments) %}
+<div class="dropdown">
+    <button type="submit" class="dropbtn">
+      {% if chosen_tournament %} {{chosen_tournament[0].tournament_name}}
+      {% else %}
+      Filter a tournament
+      {% endif %}
+    </button>
+    <div class="dropdown-content">
+      {%for tournament in all_tournaments%}
+      <a href="{{'?id='+tournament.tournament_id}}">{{tournament.year + " - " +tournament.host_country}}</a>
+      {%endfor%}
+    </div>
+  </div>
+{% endmacro %}

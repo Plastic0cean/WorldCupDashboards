@@ -4,7 +4,7 @@
 
 h1 {
 	text-align: center;
-	margin: 30px;
+	margin-top: 20px;
 }
 
 #goals-and-games-by-tournament {
@@ -29,3 +29,9 @@ h1 {
 #most-goals-in-single-game-container { 
 	max-height: 300px;
 }
+
+#dropbtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}  
