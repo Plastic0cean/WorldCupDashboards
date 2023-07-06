@@ -66,18 +66,18 @@ a:hover {
 	width: 100%;
 }
 
-tr {
+.table-data tr {
 	height: 50px;
 	border-style: ridge;
 	border-width: 1px;
 	border-color: var(--light-grey-border-color);
 }
 
-th {
+.table-data th {
 	border-bottom: 1px solid black;
 }
 
-td, th {
+.table-data td, th {
 	padding: 10px;
 	text-align: center;
 }
@@ -191,39 +191,6 @@ td, th {
 	text-align: center;
 }
 
-.chart-container {
-	background-color: white;
-	text-align: center;
-}
-
-.dropdown-button {
-	background-color: var(--blue-accent-color);
-	border: none;
-	border-radius: 5px;
-	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-	color: white;
-	transition: all 0.2s ease-in-out;
-}
-
-.match-score-container {
-	background-color: white;
-	text-align: center;
-	border-radius: 10px;
-}
-
-.match-card {
-	width: 380px;
-	background-color: white;
-}
-
-.match-card h4 {
-	color: var(--blue-accent-color);
-} 
-
-.match-card span {
-	font-size: 20px;
-}
-
 .dropbtn {
 	background-color: var(--blue-accent-color);
 	color: white;
@@ -259,10 +226,6 @@ td, th {
 	justify-content: center;
 	align-items: center;
 }  
-
-.match-info {
-	margin-bottom: 0;
-}
 
 .match-date {
 	font-weight: bold;
