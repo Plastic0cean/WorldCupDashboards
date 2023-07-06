@@ -35,15 +35,15 @@
         <div class="timeline-content left">
             {% for e in event["home_team"] %}
             {% if e.type=="red card" %}
-            <img src="/static/red_card.png" alt="Red card">
+            <img src="/static/images/icons/red_card.png" alt="Red card">
             {% elif e.type=="yellow card" %}
-            <img src="/static/yellow_card.png" alt="Yellow card">
+            <img src="/static/images/icons/yellow_card.png" alt="Yellow card">
             {% elif e.type=="sub in" %}
-            <img src="/static/sub in.jpg" alt="Substitution">
+            <img src="/static/images/icons/sub in.jpg" alt="Substitution">
             {% elif e.type=="sub out" %}
-            <img src="/static/sub out.jpg" alt="Substitution">
+            <img src="/static/images/icons/sub out.jpg" alt="Substitution">
             {% elif e.type=="goal" %}
-            <img src="/static/goal.png" alt="Goal">
+            <img src="/static/images/icons/goal.png" alt="Goal">
             {% endif %}
             <a href="{{url_for('players.player_details', player_id=e.player_id)}}">{{e.player_name}}</a><br>
             {% endfor %}
@@ -54,15 +54,15 @@
         <div class="timeline-content right">
             {% for e in event["away_team"] %}
             {% if e.type=="red card" %}
-            <img src="/static/red_card.png" alt="Red card">
+            <img src="/static/images/icons/red_card.png" alt="Red card">
             {% elif e.type=="yellow card" %}
-            <img src="/static/yellow_card.png" alt="Yellow card">
+            <img src="/static/images/icons/yellow_card.png" alt="Yellow card">
             {% elif e.type=="sub in" %}
-            <img src="/static/sub in.jpg" alt="Substitution">
+            <img src="/static/images/icons/sub in.jpg" alt="Substitution">
             {% elif e.type=="sub out" %}
-            <img src="/static/sub out.jpg" alt="Substitution">
+            <img src="/static/images/icons/sub out.jpg" alt="Substitution">
             {% elif e.type=="goal" %}
-            <img src="/static/goal.png" alt="Goal">
+            <img src="/static/images/icons/goal.png" alt="Goal">
             {% endif %}
             <a href="{{url_for('players.player_details', player_id=e.player_id)}}">{{e.player_name}}</a><br>
             {% endfor %}
