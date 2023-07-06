@@ -4,7 +4,7 @@
 {% extends "main.html" %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='player.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/player.css') }}">
 {% endblock head %}
 
 {% block content %}
@@ -21,7 +21,7 @@
 </div>
 
 <div class="pitch-positions">
-  <img src="/static/pitch.png" alt="player positions">
+  <img src="/static/images/pitch.png" alt="player positions">
   {% for position in data["positions"] %}
     {% if position=='forward' %}
     <div class="marker forward">FW</div>
