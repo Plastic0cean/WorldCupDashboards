@@ -1,11 +1,14 @@
 :root {
   --header-background: #333C42;
+  --element-width: 70%
 }
+
+
 
 .match-date-header {
   align-items: center;
   background-color: var(--header-background);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   color: white;
   display: flex;
   height: 50px;
@@ -15,7 +18,7 @@
 
 .matches-list-container {
   margin: auto;
-  width: 80%;
+  width: var(--element-width);
 }
 
 .scoreboard-container:hover {
@@ -38,7 +41,7 @@
 }
 
 .accordion, .panel {
-  width: 80%;
+  width: var(--element-width);
   margin: auto;
 }
 .match-date-header {
@@ -51,10 +54,18 @@
 }
 
 .match-details {
+  border-radius: var(--border-radius);
   margin: auto;
-  width: 70%;
+  width: var(--element-width);
+  background-color: white;
+  padding: 10px;
 }
 
+
+table {
+  margin: auto;
+  width: 65%;
+}
 .left {
   float: left;
 }
@@ -63,16 +74,24 @@
   float: right; 
 }
 
-.match-details td {
+.match-details table tbody td {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.match-details table tbody tr {
+  line-height: 32px;
 }
 
 .name::after {
   content: "|";
   color: gray;
   margin: 2px;
+}
+
+.name {
+  font-weight: 300;
 }
 
 img {
@@ -82,4 +101,10 @@ img {
 
 .break {
   width: 100%;
+}
+
+
+.scorecard {
+  width: var(--element-width);
+  margin: 30px auto;  
 }

@@ -4,6 +4,8 @@
 	--light-grey-border-color: rgb(210, 213, 214);
 	--grey-backgroud-color: rgb(246, 246, 247);
 	--top-margin: 40px;
+	--main-element-width: 80%;
+	--border-radius: 10px;
 }
 
 * {
