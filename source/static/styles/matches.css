@@ -1,9 +1,8 @@
 :root {
   --header-background: #333C42;
-  --element-width: 70%
+  --element-width: 65%;
+  --shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
-
 
 .match-date-header {
   align-items: center;
@@ -40,10 +39,12 @@
   transition: 0.4s;
 }
 
-.accordion, .panel {
+.accordion,
+.panel {
   width: var(--element-width);
   margin: auto;
 }
+
 .match-date-header {
   margin-top: 20px;
 }
@@ -53,34 +54,35 @@
   overflow: hidden;
 }
 
-.match-details {
+.events {
   border-radius: var(--border-radius);
   margin: auto;
   width: var(--element-width);
   background-color: white;
-  padding: 10px;
+  padding: 20px;
+  box-shadow: var(--shadow);
 }
 
-
-table {
-  margin: auto;
-  width: 65%;
-}
 .left {
   float: left;
 }
 
 .right {
-  float: right; 
+  float: right;
 }
 
-.match-details table tbody td {
+.events table {
+  margin: auto;
+  width: 65%;
+}
+
+.events table tbody td {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.match-details table tbody tr {
+.events table tbody tr {
   line-height: 32px;
 }
 
@@ -99,12 +101,9 @@ img {
   height: auto;
 }
 
-.break {
-  width: 100%;
-}
-
-
-.scorecard {
+.summary .scorecard {
+  padding: 20px;
   width: var(--element-width);
-  margin: 30px auto;  
+  box-shadow: var(--shadow);
+  margin: 30px auto;
 }
