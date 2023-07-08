@@ -1,7 +1,7 @@
 :root {
   --header-background: #333C42;
   --element-width: 65%;
-  --shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+  --shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .match-date-header {
