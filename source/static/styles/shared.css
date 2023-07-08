@@ -152,7 +152,7 @@ a:hover {
 
 .dashboard-card {
 	background-color: white;
-	border-radius: 10px;
+	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
 	height: 125px;
 	margin: 5px;
@@ -185,11 +185,10 @@ a:hover {
 
 .dashboard-container {
 	background-color: white;
-	border-radius: 5%;
+	border-radius: var(--border-radius);
 	padding: 10px;
 	text-align: center;
 }
-
   
 .match-date {
 	font-weight: bold;
@@ -212,7 +211,7 @@ a:hover {
     display: flex;
     background-color: white;
     margin: auto;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     padding: 20px;
 	white-space: nowrap;
 
