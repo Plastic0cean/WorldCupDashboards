@@ -24,10 +24,6 @@
   box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.scorecard {
-  padding: 0;
-}
-
 .scoreboard-container {
   margin: 10px;
 }
@@ -67,6 +63,18 @@
   float: left;
 }
 
+.left .minute {
+  order: 1;
+}
+
+.left img {
+  order: 3;
+}
+
+.left .name { 
+  order: 2; 
+}
+
 .right {
   float: right;
 }
@@ -86,7 +94,13 @@
   line-height: 32px;
 }
 
-.name::after {
+.right .name::after {
+  content: "|";
+  color: gray;
+  margin: 2px;
+}
+
+.left .name::before {
   content: "|";
   color: gray;
   margin: 2px;
