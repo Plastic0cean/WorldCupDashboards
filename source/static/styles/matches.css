@@ -2,7 +2,6 @@
   --header-background: #333C42;
 }
 
-
 .match-date-header {
   align-items: center;
   background-color: var(--header-background);
@@ -49,4 +48,38 @@
 .panel {
   display: block;
   overflow: hidden;
+}
+
+.match-details {
+  margin: auto;
+  width: 70%;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right; 
+}
+
+.match-details td {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.name::after {
+  content: "|";
+  color: gray;
+  margin: 2px;
+}
+
+img {
+  width: 20px;
+  height: auto;
+}
+
+.break {
+  width: 100%;
 }
