@@ -26,7 +26,6 @@ def generate_data(player_id, player_repository, matches_repository):
 
 def generate_visualizations(player_id, repository):
     return {
-        "goals_by_team": vis.players_goals_by_team(repository.get_goals_by_team(player_id)),
         "minutes_played": vis.overall_minutes_played(repository.get_minutes_played(player_id)),
         "starer_or_sub": vis.starter_or_substitute(repository.get_number_of_games_as_starter(player_id))
     }

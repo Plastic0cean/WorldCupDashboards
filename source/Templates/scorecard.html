@@ -1,16 +1,26 @@
-{% macro scorecard(data) %}
+{% macro scorecard(data, render_links=True, show_date=True) %}
 
 <div class="scorecard">
     <div class="team">
+        {% if render_links %}
         <a href="{{url_for('teams.team_details', team_id=data.home_team_id)}}">{{data.home_team_name}}</a>
+        {% else %}
+        {{data.home_team_name}}
+        {% endif %}
         <img src="{{url_for('teams.display_flag', team_id=data.home_team_id)}}" alt="{{data.home_team_name}}">
     </div>
     <div class="match-result">
+        {% if show_date %}
         <span class="date">{{data.match_date}}</span>
+        {% endif %}
         <span class="score">{{data.score}}</span>
     </div>
     <div class="team">
+        {% if render_links %}
         <a href="{{url_for('teams.team_details', team_id=data.away_team_id)}}">{{data.away_team_name}}</a>
+        {% else %}
+        {{data.away_team_name}}
+        {% endif %}
         <img src="{{url_for('teams.display_flag', team_id=data.away_team_id)}}" alt="{{data.away_team_name}}">
     </div>
 </div>

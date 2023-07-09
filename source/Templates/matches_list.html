@@ -1,10 +1,10 @@
 {% import 'tournaments_dropdown.html' as dropdown %}
+{% import 'scorecard.html' as scorecard %}
 {% extends "main.html" %}
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/matches.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dropdown_button.css') }}">
-
 {% endblock head %}
 
 {% block content %}
@@ -19,21 +19,7 @@
     {% for match in matches_of_date%}
     <div class="scoreboard-container dashboard-container">
         <a href="{{url_for('matches.match_details', match_id=match.match_id)}}">
-            <div class="scorecard">
-                <div class="team">
-                    {{match.home_team_name}}
-                    <img src="{{url_for('teams.display_flag', team_id=match.home_team_id)}}"
-                        alt="{{match.home_team_name}}">
-                </div>
-                <div class="match-result">
-                    <span class="score">{{match.score}}</span>
-                </div>
-                <div class="team">
-                    {{match.away_team_name}}
-                    <img src="{{url_for('teams.display_flag', team_id=match.away_team_id)}}"
-                        alt="{{match.away_team_name}}">
-                </div>
-            </div>
+            {{ scorecard.scorecard(match, False, False) }}
         </a>
     </div>
     {% endfor %}

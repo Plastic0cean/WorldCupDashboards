@@ -1,12 +1,11 @@
 :root {
-  --header-background: #333C42;
+  --element-width: 65%;
 }
-
 
 .match-date-header {
   align-items: center;
   background-color: var(--header-background);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   color: white;
   display: flex;
   height: 50px;
@@ -16,19 +15,12 @@
 
 .matches-list-container {
   margin: auto;
-  width: 80%;
-}
-
-.scoreboard-container:hover {
-  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.scorecard {
-  padding: 0;
+  width: var(--element-width);
 }
 
 .scoreboard-container {
   margin: 10px;
+  box-shadow: var(--shadow);
 }
 
 .accordion {
@@ -38,10 +30,12 @@
   transition: 0.4s;
 }
 
-.accordion, .panel {
-  width: 80%;
+.accordion,
+.panel {
+  width: var(--element-width);
   margin: auto;
 }
+
 .match-date-header {
   margin-top: 20px;
 }
@@ -49,4 +43,76 @@
 .panel {
   display: block;
   overflow: hidden;
+}
+
+.events {
+  border-radius: var(--border-radius);
+  margin: auto;
+  width: var(--element-width);
+  background-color: white;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.left {
+  float: left;
+}
+
+.left .minute {
+  order: 1;
+}
+
+.left img {
+  order: 3;
+}
+
+.left .name { 
+  order: 2; 
+}
+
+.right {
+  float: right;
+}
+
+.events table {
+  margin: auto;
+  width: 65%;
+}
+
+.events table tbody td {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.events table tbody tr {
+  line-height: 32px;
+}
+
+.right .name::after {
+  content: "|";
+  color: gray;
+  margin: 2px;
+}
+
+.left .name::before {
+  content: "|";
+  color: gray;
+  margin: 2px;
+}
+
+.name {
+  font-weight: 300;
+}
+
+img {
+  width: 20px;
+  height: auto;
+}
+
+.summary .scorecard {
+  padding: 20px;
+  width: var(--element-width);
+  box-shadow: var(--shadow);
+  margin: 30px auto;
 }

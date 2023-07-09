@@ -38,9 +38,7 @@ def matches_list():
 
 @matches.route("/match/<match_id>")
 def match_details(match_id: str):
-    
-
     match = repository.get_by_id(match_id)
-    events = produce_match_events(repository.get_events(match_id))
+    events = repository.get_events(match_id)
     return render_template("match_details.html", events=events,  match=match[0])
         
