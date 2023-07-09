@@ -64,8 +64,8 @@ a:hover {
 	background-color: white;
 	border-collapse: collapse;
 	border-color: var(--grey-border-color);
-	border-style: ridge;
-	border-width: 0.5px;
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
 	table-layout: fixed;
 	width: 100%;
 }
