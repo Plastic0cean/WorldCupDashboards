@@ -14,10 +14,6 @@ class PlayerRepository:
     def get_by_id(self, player_id: str):
         return DbTableFunction("GetPlayerById", player_id).select(self.conn)[0]
 
-    @to_dataframe
-    def get_goals_by_team(self, player_id: str):
-        return DbTableFunction("PlayerGoalsByTeam", player_id).select_as_dict(self.conn, sort_by="number_of_goals")
-    
     def get_awards(self, player_id: str):
         return DbTableFunction("PlayerAwards", player_id).select(self.conn)
     
