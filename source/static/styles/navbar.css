@@ -1,6 +1,6 @@
 nav {
     height: 52px;
-    background-color: #191e24f5;
+    background-color: var(--header-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
