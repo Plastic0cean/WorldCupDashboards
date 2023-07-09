@@ -186,6 +186,7 @@ a:hover {
 .dashboard-container {
 	background-color: white;
 	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
 	padding: 10px;
 	text-align: center;
 }

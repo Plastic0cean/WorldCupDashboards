@@ -24,9 +24,12 @@ li a {
     text-decoration: none;
 }
 
+li a:hover, #logo:hover {
+    color: white;
+}
+
 li a:hover {
-    color: #f1c40f;
-    border-bottom: 4px #f1c40f solid;
+    background-color: #A6C5E229;
     transition: 0.12s;
 }
 
@@ -90,4 +93,9 @@ li a:hover {
         border: none;
         letter-spacing: 3px;
     }
+}
+
+#logo {
+    font-size: 24px;
+    text-decoration: none;
 }
