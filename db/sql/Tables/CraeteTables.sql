@@ -132,7 +132,6 @@ CREATE TABLE substitutions (
 	coming_on BIT
 );
 
-DROP TABLE team_appearances;
 CREATE TABLE team_appearances (
 	team_appearance_id INT AUTO_INCREMENT PRIMARY KEY,
 	tournament_id VARCHAR(10),
@@ -156,7 +155,6 @@ CREATE TABLE teams (
 	region_name VARCHAR(1000),
 	confederation_name VARCHAR(1000),
 	confederation_code VARCHAR(1000),
-	team_wikipedia_link VARCHAR(2000),
 	flag_img varchar(200) 
 ); 
 
