@@ -63,6 +63,24 @@ def add_minutes_played(player_apperances: pd.DataFrame, substitutions: pd.DataFr
     minutes = get_minutes_played(player_apperances, substitutions, matches)
     return player_apperances.merge(minutes, on=["match_id", "player_id"])
 
+def format_positions(df: pd.DataFrame) -> pd.DataFrame:
+    mapping = {
+        "center forward": "forward",
+        "defender": "center back",
+        "left forward": "left winger",
+        "left midfielder": "left winger",
+        "left wing back": "left winger",
+        "midfielder": "center midfielder",
+        "right forward": "right winger",
+        "right midfielder": "right winger",
+        "right wing back": "right winger",
+        "second striker": "forward",
+        "sweeper": "center back"
+        }
+    for to_replace, value in mapping.items():
+        df.position = df.position.replace(to_replace, value)
+    return df
+
 
 def process():
     player_apperances = common.read_dataset(common.DataSource.PLAYER_APPEARANCES)
@@ -72,6 +90,7 @@ def process():
     player_apperances = add_minutes_played(player_apperances, substitutions, matches)
     player_apperances = common.delete_columns(player_apperances, COLUMNS_TO_DELETE)
     player_apperances = common.rename_columns(player_apperances, COLUMNS_MAPPING)
+    player_apperances = format_positions(player_apperances)
     common.import_to_db(player_apperances, "player_appearances")
 
 
