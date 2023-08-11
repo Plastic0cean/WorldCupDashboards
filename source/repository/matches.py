@@ -17,7 +17,7 @@ class MatchRepository:
         return StoredProcedure("MatchesResultsByTournament", tournamentid=tournament_id).call(self.conn)
         
     def get_matches_by_player(self, player_id: str):
-        return StoredProcedure("MatchEvents", playerid=player_id).call(self.conn)
+        return StoredProcedure("PlayerMatches", playerid=player_id).call(self.conn)
         
     def get_events(self, match_id: str):
         return StoredProcedure("MatchEvents", matchid=match_id).call(self.conn)

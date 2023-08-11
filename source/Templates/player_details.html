@@ -67,7 +67,7 @@
   <tbody>
     {% for row in data["appearances_summary"] %}
     <tr class="row-on-hover-grey">
-      <td class="expand">{{row.tournament}}</td>
+      <td class="expand">{{row.tournament_name}}</td>
       <td>{{row.number_of_matches}}</td>
       <td>{{row.number_of_goals}}</td>
       <td>{{row.yellow_cards}}</td>
@@ -75,8 +75,8 @@
     </tr>
     <tr class="hidden">
       <td colspan="5">
-        {% for match in data["matches"][row.tournament_id]%}
-        {{ scorecard.scorecard(match)}}
+        {% for match in data["matches"][row.tournament_id] %}
+        {{ scorecard.scorecard(match) }}
         {% endfor %}
       </td>
     </tr>
