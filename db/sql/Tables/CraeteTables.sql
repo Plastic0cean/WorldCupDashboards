@@ -1,8 +1,26 @@
+DROP TABLE award_winners;
+DROP TABLE awards;
+DROP TABLE bookings;
+DROP TABLE goals;
+DROP TABLE group_standings;
+DROP TABLE matches;
+DROP TABLE player_appearances;
+DROP TABLE players;
+DROP TABLE qualified_squads;
+DROP TABLE qualified_teams;
+DROP TABLE squads;
+DROP TABLE substitutions;
+DROP TABLE tasks;
+DROP TABLE team_appearances;
+DROP TABLE teams;
+DROP TABLE tournament_standings;
+DROP TABLE tournaments;
+
 CREATE TABLE award_winners (
 	award_winners_id INT PRIMARY KEY,
 	tournament_id VARCHAR(10),
 	award_id VARCHAR(10),
-	shared BIT,
+	shared BOOLEAN,
 	player_id VARCHAR(10)
 );
 
@@ -21,10 +39,10 @@ CREATE TABLE bookings (
 	player_id VARCHAR(10),
 	minute_regulation INT,
 	minute_stoppage INT,
-	yellow_card BIT,
-	red_card BIT,
-	second_yellow_card BIT,
-	sending_off BIT
+	yellow_card BOOLEAN,
+	red_card BOOLEAN,
+	second_yellow_card BOOLEAN,
+	sending_off BOOLEAN
 );
 
 CREATE TABLE goals (
@@ -36,8 +54,8 @@ CREATE TABLE goals (
 	minute_regulation INT,
 	minute_stoppage INT,
 	match_period VARCHAR(100),
-	own_goal BIT,
-	penalty BIT
+	own_goal BOOLEAN,
+	penalty BOOLEAN
 );
 
 CREATE TABLE group_standings (
@@ -68,13 +86,13 @@ CREATE TABLE matches(
 	away_team_id VARCHAR(10),
 	home_team_score INT,
 	away_team_score INT,
-	extra_time BIT,
-	penalty_shootout BIT,
+	extra_time BOOLEAN,
+	penalty_shootout BOOLEAN,
 	home_team_score_penalties INT,
 	away_team_score_penalties INT,
-	home_team_win BIT,
-	away_team_win BIT,
-	draw BIT,
+	home_team_win BOOLEAN,
+	away_team_win BOOLEAN,
+	draw BOOLEAN,
 	stage_name VARCHAR(100)
 );
 
@@ -84,9 +102,9 @@ CREATE TABLE player_appearances (
 	player_id VARCHAR(10),
     team_id VARCHAR(10),
 	position VARCHAR(100),
-	starter BIT,
-	substitute BIT,
-	captain BIT,
+	starter BOOLEAN,
+	substitute BOOLEAN,
+	captain BOOLEAN,
     minutes_played INT,
 	UNIQUE KEY (match_id, player_id)
 );
@@ -128,8 +146,8 @@ CREATE TABLE substitutions (
 	minute_regulation INT,
 	minute_stoppage INT,
 	match_period VARCHAR(100),
-	going_off BIT,
-	coming_on BIT
+	going_off BOOLEAN,
+	coming_on BOOLEAN
 );
 
 CREATE TABLE team_appearances (
@@ -138,11 +156,11 @@ CREATE TABLE team_appearances (
 	match_id VARCHAR(10),
 	team_id VARCHAR(10),
 	opponent_id VARCHAR(10),
-	home_team BIT,
-	away_team BIT,
-	win BIT, 
-	lose BIT, 
-	draw BIT,
+	home_team BOOLEAN,
+	away_team BOOLEAN,
+	win BOOLEAN, 
+	lose BOOLEAN, 
+	draw BOOLEAN,
 	goals_for INT,
 	goals_against INT
 );
