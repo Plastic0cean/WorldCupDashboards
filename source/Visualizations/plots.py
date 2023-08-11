@@ -23,7 +23,7 @@ def render_figure(func: Callable):
 
 
 @render_figure
-def results_of_matches_pie(data: pd.DataFrame) -> go.Figure:
+def results_of_matches(data: pd.DataFrame) -> go.Figure:
     fig = px.pie(data, names="result", values="number", hole=0.5, color_discrete_sequence=px.colors.diverging.balance)
     fig.update_traces(textinfo="value", textfont_size=14, pull=0.02)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
@@ -87,7 +87,7 @@ def starter_or_substitute(data: pd.DataFrame) -> go.Figure:
 def overall_minutes_played(data) -> go.Figure:
     fig = px.pie(
         labels=["Playing", "Bench"], 
-        values=zero_to_nan([data["minutes_played"][0], data["minutes_on_bench"][0]]),
+        values=zero_to_nan([data.minutes_played, data.minutes_on_bench]),
         hole=0.7,
         color_discrete_sequence=px.colors.diverging.balance)
     fig.update_traces(textinfo='value')
@@ -135,8 +135,8 @@ def players_with_most_minutes(data: pd.DataFrame) -> go.Figure:
 
 @render_figure
 def all_matches_by_team(data: pd.DataFrame) -> go.Figure:
-    wins = data.query("win == '1'")
-    loses = data.query("lose == '1'")
+    wins = data.query("win == 1")
+    loses = data.query("lose == 1")
     fig = go.Figure()
 
     hovertext = [s + " vs " + opponent for s, opponent in zip(wins.score, wins.opponent_name)]
@@ -180,13 +180,14 @@ def goals_by_minutes(data: pd.DataFrame) -> go.Figure:
 
 @render_figure
 def goals_difference_by_team(data: pd.DataFrame) -> go.Figure:
-    data["size"] = data["goals_difference"] + abs(data.goals_difference.min())
+    size = data["goals_difference"] + abs(data.goals_difference.min())
+    size = [int(size) for size in size]
     labels = {"goals_for": "Goals scored", "goals_against": "Goals conceded", "team_name": ""}
     fig = px.scatter(
         data, 
         y="goals_for", 
         x="goals_against", 
-        size=data["goals_difference"] + abs(data.goals_difference.min()),
+        size=size,
         color="team_name", 
         color_discrete_sequence=px.colors.diverging.balance, 
         labels=labels)

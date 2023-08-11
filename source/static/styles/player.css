@@ -38,6 +38,7 @@
 	height: auto;
 }
 
+
 .marker {
 	background-color: black;
 	border-color: white;
@@ -141,3 +142,20 @@ td.expand:before {
 td.expand.collapsed:before {
     content: '-';
 }
+
+
+.player-nationalities { 
+	display: inline-flex;
+	gap: 5px;
+} 
+
+.player-nationalities ul { 
+	display: flex; 
+	padding-inline-start: 0; 
+	list-style: none; 
+}
+
+.nationality ~ .nationality::before {
+	content: '/'; 
+}
+  

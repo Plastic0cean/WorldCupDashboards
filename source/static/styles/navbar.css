@@ -16,7 +16,7 @@ nav ul {
     gap: 0px;
 }
 
-li a {
+#nav-links li a {
     font-size: 1.1rem;
     cursor: pointer;
     padding: 10px 15px;
@@ -24,11 +24,11 @@ li a {
     text-decoration: none;
 }
 
-li a:hover, #logo:hover {
+#nav-links li a:hover, #logo:hover {
     color: white;
 }
 
-li a:hover {
+#nav-links li a:hover {
     background-color: #A6C5E229;
     transition: 0.12s;
 }
@@ -78,16 +78,16 @@ li a:hover {
         box-shadow: var(--shadow);
     }
 
-    li a {
+    #nav-links li a {
         color: rgba(12, 11, 11, 0.836);
     }
 
-    li {
+    #nav-links li {
         text-align: center;
         width: 90vw;
     }
 
-    li a:hover {
+    #nav-links li a:hover {
         font-weight: bold;
         color: #191e24;
         border: none;

@@ -1,9 +1,9 @@
 from .ImageDownloader import ImageWebDownloader, ImageWebDownloadMenager
-from Reports.teams import get_all_team_names
+from repository.teams import team_repository
 
 directory = r"static\images\flags"
+teams = team_repository.get_all()
 
-teams = get_all_team_names()
 for team in teams:
     img = ImageWebDownloader(f"{team.team_name} flag", directory)
     img_downloader = ImageWebDownloadMenager(img)

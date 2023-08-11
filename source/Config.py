@@ -4,9 +4,12 @@ from dataclasses import dataclass
 
 @dataclass
 class DbConfig:
-    server: str  
-    driver: str 
-    database: str 
+    host: str
+    user: str
+    password: str
+    database: str
+    port: str
+
 
 @dataclass
 class Config:
@@ -17,10 +20,14 @@ class Config:
     def from_ini_file(cls, file: str):
         config = ConfigParser()
         config.read(file)
-        return cls(
-            DbConfig(config["DATABASE"]["server"], config["DATABASE"]["driver"], config["DATABASE"]["database"]),
-            float(config["SEARCHING"]["threshold"])
-        )
-
+        db = DbConfig(
+            config["DATABASE"]["host"], 
+            config["DATABASE"]["user"], 
+            config["DATABASE"]["password"], 
+            config["DATABASE"]["database"],
+            config["DATABASE"]["port"])
+        
+        searching = float(config["SEARCHING"]["threshold"])
+        return cls(db, searching)
 
 config = Config.from_ini_file("config.ini")

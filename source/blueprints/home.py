@@ -26,5 +26,4 @@ def get_random_quote():
 @home.route("/home")
 def home_page():
     quote = get_random_quote()
-    print(quote)
     return render_template("home.html", quote=quote)
