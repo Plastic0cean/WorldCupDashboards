@@ -11,39 +11,47 @@
     <img class="player-pic" src="https://via.placeholder.com/150" alt="Profile Picture">
   </div>
   <div class="user-info">
-    <h1>{{data["player"].name}}</h1>
-    <a href="{{url_for('teams.team_details', team_id=data['player'].team_id)}}"><h2>{{data["player"].team}}</h2></a>
-    <p><span>Date of Birth:</span> {{data["player"].birth_date}}</p>
-    <p><span>Position:</span> {{data["player"].position}}</p>
+    <h1>{{ data["player"].name }}</h1>
+    <div class="player-nationalities">
+      <span>Nationality:</span>
+      <ul>
+        {% for team_id, team_name in data["player"].get_teams() %}
+        <li class="nationality"><a href="{{url_for('teams.team_details', team_id=team_id)}}">{{ team_name }}</a></li>
+        {% endfor %}
+      </ul>
     </div>
+    <p><span>Date of Birth:</span> {{ data["player"].birth_date }}</p>
+  </div>
 </div>
+
 
 <div class="pitch-positions">
   <img src="/static/images/pitch.png" alt="player positions">
-  {% for position in data["positions"] %}
-    {% if position=='forward' %}
-    <div class="marker forward">FW</div>
-    {% elif position=='left winger'%}
-    <div class="marker left-winger">LW</div>
-    {% elif position=='right winger'%}
-    <div class="marker right-winger">RW</div>
-    {% elif position=='attacking midfielder'%}
-    <div class="marker attacking-midfielder">AMF</div>
-    {% elif position=='center midfielder'%}
-    <div class="marker center-midfielder">CM</div>
-    {% elif position=='defensive midfielder'%}
-    <div class="marker defensive-midfielder">DM</div>
-    {% elif position=='center back'%}
-    <div class="marker center-back">CB</div>
-    {% elif position=='left back'%}
-    <div class="marker left-back">LB</div>
-    {% elif position=='right back'%}
-    <div class="marker right-back">RB</div>
-    {% else %}
-    <div class="marker goalkeeper">GK</div>
-    {% endif %}
+  {% for position in data["player"].positions %}
+  {% if position=='forward' %}
+  <div class="marker forward">FW</div>
+  {% elif position=='left winger'%}
+  <div class="marker left-winger">LW</div>
+  {% elif position=='right winger'%}
+  <div class="marker right-winger">RW</div>
+  {% elif position=='attacking midfielder'%}
+  <div class="marker attacking-midfielder">AMF</div>
+  {% elif position=='center midfielder'%}
+  <div class="marker center-midfielder">CM</div>
+  {% elif position=='defensive midfielder'%}
+  <div class="marker defensive-midfielder">DM</div>
+  {% elif position=='center back'%}
+  <div class="marker center-back">CB</div>
+  {% elif position=='left back'%}
+  <div class="marker left-back">LB</div>
+  {% elif position=='right back'%}
+  <div class="marker right-back">RB</div>
+  {% else %}
+  <div class="marker goalkeeper">GK</div>
+  {% endif %}
   {% endfor %}
 </div>
+
 
 {% if data["appearances_summary"] %}
 <table id="player-appearances-summary" class="table-data center">
@@ -67,17 +75,16 @@
     </tr>
     <tr class="hidden">
       <td colspan="5">
-      {% for match in data["matches"][row.tournament_id]%}
-      {{ scorecard.scorecard(match)}}
-      {% endfor %}
-      </td></tr>
+        {% for match in data["matches"][row.tournament_id]%}
+        {{ scorecard.scorecard(match)}}
+        {% endfor %}
+      </td>
+    </tr>
 
     {% endfor %}
   </tbody>
 </table>
 {%endif%}
-
-
 
 <div id="charts">
   <div id="minutes-played" class="dashboard-container">
@@ -85,8 +92,8 @@
     <div id="minutes-played-pie" class="plotly-chart">
       <script>
         var graphs = {{ visualizations["minutes_played"] | safe}};
-        graphs.config = {'displayModeBar': false, 'responsive': true};
-        Plotly.plot('minutes-played-pie', graphs, {displayModeBar: false});
+        graphs.config = { 'displayModeBar': false, 'responsive': true };
+        Plotly.plot('minutes-played-pie', graphs, { displayModeBar: false });
       </script>
     </div>
   </div>
@@ -96,8 +103,8 @@
     <div id="starter-or-substitute-pie" class="plotly-chart">
       <script>
         var graphs = {{ visualizations["starer_or_sub"] | safe}};
-        graphs.config = {'displayModeBar': false, 'responsive': true};
-        Plotly.plot('starter-or-substitute-pie', graphs, {displayModeBar: false});
+        graphs.config = { 'displayModeBar': false, 'responsive': true };
+        Plotly.plot('starter-or-substitute-pie', graphs, { displayModeBar: false });
       </script>
     </div>
   </div>
@@ -118,7 +125,7 @@
     <tr class="row-on-hover-grey">
       <td>{{award.name}}</td>
       <td>{{award.description}}</td>
-      <td>{{award.year + " " + award.country}}</td>
+      <td>{{award.tournament_name}}</td>
     </tr>
     {% endfor %}
   </tbody>

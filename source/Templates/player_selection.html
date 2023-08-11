@@ -23,10 +23,10 @@
     {%for player in players%}
     <tr class="row-on-hover-grey">
       <td>
-        <a href=" {{ url_for('players.player_details', player_id=player.PlayerId)}}"> {{player.Name}}</a>
+        <a href=" {{ url_for('players.player_details', player_id=player.player_id)}}"> {{player.name}}</a>
       </td>
       <td>
-        <a href=" {{ url_for('teams.team_details', team_id=player.team_id)}}"> {{player.nationality}}</a>
+        <a href=" {{ url_for('teams.team_details', team_id=player.team_id)}}"> {{player.team_name}}</a>
       </td>
       <td>{{player.position}}</td>
     </tr>

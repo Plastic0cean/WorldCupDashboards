@@ -14,20 +14,6 @@
   {{ dropdown.tournaments(data["tournament"], data["tournaments_list"]) }}
 </div>
 
-{% if not data["tournament"] %}
-<div id="goals-and-games-by-tournament" class="dashboard-container">
-  <h3>Number of goals and games in different years</h3>
-  <div id="chart" class="chart">
-    <script>
-      var graphs = {{ visualizations["goals_by_tournament"] | safe}};
-      var layout = { autosize: true }
-      graphs.config = { 'displayModeBar': false, 'responsive': true };
-      Plotly.plot('chart', graphs, layout);
-    </script>
-  </div>
-</div>
-{% endif %}
-
 <div class="grid-container">
 
   <div class="left-col">
