@@ -11,9 +11,9 @@ def update_names_of_flag_img_in_db(path: str) -> None:
             file_name = get_filename_from_path(file)
             team_id = file_name.split(".")[0]
             conn.execute(f"""
-            UPDATE [teams] SET [flag_img] = '{file_name}'
-            WHERE [team_id] = '{team_id}'
-            """)
+            UPDATE teams SET flag_img = '{file_name}'
+            WHERE team_id = '{team_id}'
+            """, get_output=False)
 
 
 if __name__ == "__main__":
