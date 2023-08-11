@@ -1,4 +1,5 @@
 {% import 'tournaments_dropdown.html' as dropdown %}
+{% import 'scorecard.html' as scorecard %}
 {% extends "main.html" %}
 
 {% block head %}
@@ -48,21 +49,7 @@
 
     <div id="most-goals-in-single-game-container" class="scoreboard-container dashboard-container">
       <h3>Most goals in a single match</h3>
-      <div class="scorecard">
-        <div class="team">
-          <a href="{{url_for('teams.team_details', team_id=data['most_goals_in_single_game'].home_team_id)}}">{{data["most_goals_in_single_game"].home_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_goals_in_single_game'].home_team_id)}}" alt="{{data['most_goals_in_single_game'].home_team_name}}">
-        </div>
-        <div class="match-result">
-          <span class="date">{{data["most_goals_in_single_game"].match_date}}</span>
-          <span
-            class="score">{{data["most_goals_in_single_game"].home_team_score}}-{{data["most_goals_in_single_game"].away_team_score}}</span>
-        </div>
-        <div class="team">
-          <a href="{{url_for('teams.team_details', team_id=data['most_goals_in_single_game'].away_team_id)}}">{{data["most_goals_in_single_game"].away_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_goals_in_single_game'].away_team_id)}}" alt="{{data['most_goals_in_single_game'].away_team_name}}">
-        </div>
-      </div>
+      {{ scorecard.scorecard(data["most_goals_in_single_game"][0]) }}
     </div>
 
     {% if data["most_cards_in_single_game"] %}
@@ -75,7 +62,7 @@
         </div>
         <div class="match-result">
           <span class="date">{{data["most_cards_in_single_game"].match_date}}</span>
-          <span class="score">{{data["most_cards_in_single_game"].home_team_score}}-{{data["most_cards_in_single_game"].away_team_score}}</span>
+          <span class="score">{{data["most_cards_in_single_game"].score}}</span>
           <div class="cards">
             <span class="cards">Yellow cards: {{data["most_cards_in_single_game"].yellow_cards}}</span>
             <span class="cards">Red cards: {{data["most_cards_in_single_game"].red_cards}}</span>
@@ -89,28 +76,29 @@
     </div>
     {% endif %}
 
-      <table class="table-data center">
-        <caption>Top scorers</caption>
-        <thead>
-          <tr>
-            <th scope="col">Player</th>
-            <th scope="col">Nationality</th>
-            <th scope="col">Goals Scored</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for scorer in data["top_scorers"] %}
-          <tr class="row-on-hover-grey">
-            <td><a href="{{url_for('players.player_details', player_id=scorer.player_id)}}">{{scorer.player_name}}</a></td>
-            <td><a href="{{url_for('teams.team_details', team_id=scorer.team_id)}}">{{scorer.team}}</a></td>
-            <td>{{scorer.goals}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <table class="table-data center">
+      <caption>Top scorers</caption>
+      <thead>
+        <tr>
+          <th scope="col">Player</th>
+          <th scope="col">Nationality</th>
+          <th scope="col">Goals Scored</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for scorer in data["top_scorers"] %}
+        <tr class="row-on-hover-grey">
+          <td><a href="{{url_for('players.player_details', player_id=scorer.player_id)}}">{{scorer.player_name}}</a>
+          </td>
+          <td><a href="{{url_for('teams.team_details', team_id=scorer.team_id)}}">{{scorer.team}}</a></td>
+          <td>{{scorer.goals}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
-    </div>
   </div>
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {
