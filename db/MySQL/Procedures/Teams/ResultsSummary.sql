@@ -1,4 +1,3 @@
-DELIMITER //
 CREATE PROCEDURE ResultsSummary (teamid VARCHAR(10))
 BEGIN
 	SELECT 
@@ -6,6 +5,5 @@ BEGIN
 		SUM(lose) AS loses,
 		SUM(draw) AS draws
 	FROM team_appearances 
-	WHERE team_id = teamId;
-END //
-DELIMITER ; 
+	WHERE team_id = teamid;
+END 

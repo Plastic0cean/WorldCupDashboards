@@ -1,4 +1,4 @@
-CREATE PROCEDURE TopScorersOfTournament (tournamentid VARCHAR(10))
+CREATE PROCEDURE TopScorersOfTournament (tournamentid VARCHAR(10), how_many INT)
 	SELECT 
 		g.player_id,
         parse_name (p.given_name, p.family_name) AS player_name,

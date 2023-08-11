@@ -8,7 +8,7 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 			minute_label(g.minute_regulation, g.minute_stoppage) as minute_label,
 			a.team_id,
 			a.home_team,
-			'goal' as event_type
+			'goal' as type
 		FROM goals g
 		JOIN players p ON g.player_id = p.player_id 
 		JOIN player_appearances pa ON pa.player_id = g.player_id AND pa.match_id = g.match_id
@@ -28,7 +28,7 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 			CASE 
 				WHEN b.yellow_card = 1 THEN 'yellow card' 
 				WHEN b.red_card = 1 THEN 'red card' 
-			END as event_type
+			END as type
 		FROM bookings b 
 		JOIN player_appearances p ON p.player_id = b.player_id AND p.match_id = b.match_id
 		JOIN team_appearances a ON b.match_id = a.match_id AND a.team_id = p.team_id
@@ -42,7 +42,7 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 			s.minute_regulation + s.minute_stoppage AS minute,
 			s.team_id,
 			home_team,
-			IF(s.going_off = 1, 'sub out', 'sub in') as event_type
+			IF(s.going_off = 1, 'sub out', 'sub in') as type
 		FROM substitutions s 
 		JOIN team_appearances a ON s.match_id = a.match_id AND s.team_id = a.team_id
 		WHERE s.match_id = matchid),
@@ -62,7 +62,7 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 		e.team_id, 
 		t.team_name,
 		e.home_team, 
-		e.event_type 
+		e.type 
 	FROM AllEvents e
 	JOIN teams t ON e.team_id = t.team_id
 	JOIN players p ON e.player_id = p.player_id 
