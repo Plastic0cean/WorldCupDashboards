@@ -1,24 +1,26 @@
+
+
 :root {
 	--accent-color: #1e0461;
-	--grey-border-color: rgb(167, 169, 170);
-	--light-grey-border-color: rgb(210, 213, 214);
-	--grey-backgroud-color: rgb(246, 246, 247);
+	--border-color: rgb(226, 226, 226);
+	--backgroud-color: #f6f6f9;
 	--top-margin: 40px;
 	--main-element-width: 80%;
 	--border-radius: 10px;
 	--shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 	--header-background: #333C42;
+	--table-padding: 1.8rem;
 }
 
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Segoe UI', sans-serif;
   }
 
 body {
-	background-color: var(--grey-backgroud-color);
+	background-color: var(--backgroud-color);
+	font-family: 'Helvetica', serif;
 }
 
 .center {
@@ -62,28 +64,35 @@ a:hover {
 
 .table-data {
 	background-color: white;
+	border: none;
 	border-collapse: collapse;
-	border-color: var(--grey-border-color);
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
+	padding: var(--table-padding);
 	table-layout: fixed;
+	text-align: center;
+	transition: all 0.3s ease;
 	width: 100%;
 }
 
+
 .table-data tr {
 	height: 50px;
-	border-style: ridge;
-	border-width: 1px;
-	border-color: var(--light-grey-border-color);
 }
 
-.table-data th {
-	border-bottom: 1px solid black;
+.table-data thead {
+	border-bottom-color: var(--border-color);
+	border-bottom-style: ridge;
+	border-bottom-width: 1px;
+}
+
+
+table tbody tr:last-child td{
+    border: none;
 }
 
 .table-data td, th {
-	padding: 10px;
-	text-align: center;
+	padding: 1.4rem;
 }
 
 .table-data caption {
