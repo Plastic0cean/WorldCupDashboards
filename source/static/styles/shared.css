@@ -315,3 +315,6 @@ td.expand.collapsed:before {
     content: '-';
 }
 
+td .scorecard {
+	padding: 1rem;
+}
