@@ -273,3 +273,22 @@ table tbody tr:last-child td{
 .score {
     align-self: center;
 }
+
+.button-centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+
+.show-more {
+	margin: 1rem;
+	background-color: white;
+	border-color: var(--accent-color);
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow);
+	padding: 10px 20px;
+}
+
+.show-more:hover {
+	cursor: pointer;
+}

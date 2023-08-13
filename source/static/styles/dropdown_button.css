@@ -40,9 +40,3 @@
 .dropdown:hover .dropbtn {
   background-color: var(--accent-color);
 }
-
-.dropdown-centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

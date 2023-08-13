@@ -33,4 +33,11 @@
     {%endfor%}
   </tbody>
 </table>
+
+<div class="button-centered">
+  <button type="button" class="show-more" onclick="showMore()">Show more</button>
+</div>
+
+<script src="{{ url_for('static', filename='scripts/showmore.js')}}"></script>
+
 {% endblock content %}
