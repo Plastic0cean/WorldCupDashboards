@@ -1,6 +1,7 @@
 import os
 from flask import Blueprint, render_template, request, redirect, url_for, send_from_directory
 from repository.teams import team_repository, team_stats_repository
+from repository.matches import match_repository
 from utils.utils import retry_if_fail
 import Visualizations.plots as vis
 
@@ -12,7 +13,8 @@ def generate_data(team_id: str):
         "biggest_win": team_stats_repository.get_biggest_win(team_id),
         "biggest_defeat": team_stats_repository.get_biggest_defeat(team_id),
         "top_scorers": team_stats_repository.get_top_scorers(team_id, 10),
-        "position_by_tournament": team_stats_repository.get_position_by_tournaments(team_id)
+        "position_by_tournament": team_stats_repository.get_position_by_tournaments(team_id),
+        "matches": match_repository.get_matches_by_team(team_id).to_dict()
     }
 
 def generate_visualizations(team_id):

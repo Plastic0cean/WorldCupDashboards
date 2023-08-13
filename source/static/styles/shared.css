@@ -292,3 +292,26 @@ table tbody tr:last-child td{
 .show-more:hover {
 	cursor: pointer;
 }
+
+tr.hidden {
+    display: none;
+}
+
+tr.hidden td {
+    padding: 0;
+}
+
+td.expand {
+    cursor: pointer;
+}
+
+td.expand:before {
+    content: '+';
+    display: inline-block;
+    margin-right: 5px;
+}
+
+td.expand.collapsed:before {
+    content: '-';
+}
+
