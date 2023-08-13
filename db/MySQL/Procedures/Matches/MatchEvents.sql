@@ -38,8 +38,8 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 		SELECT 
 			s.match_id,
 			s.player_id,
-			minute_label(s.minute_regulation, s.minute_stoppage) as minute_label,
 			s.minute_regulation + s.minute_stoppage AS minute,
+			minute_label(s.minute_regulation, s.minute_stoppage) as minute_label,
 			s.team_id,
 			home_team,
 			IF(s.going_off = 1, 'sub out', 'sub in') as type
@@ -59,6 +59,7 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 		e.player_id, 
 		parse_name (p.given_name, p.family_name) AS player_name,
 		e.minute_label, 
+		e.minute,
 		e.team_id, 
 		t.team_name,
 		e.home_team, 
@@ -66,4 +67,4 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 	FROM AllEvents e
 	JOIN teams t ON e.team_id = t.team_id
 	JOIN players p ON e.player_id = p.player_id 
-	ORDER BY minute;
+	ORDER BY minute ASC;
