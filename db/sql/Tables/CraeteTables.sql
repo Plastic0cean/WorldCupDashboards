@@ -106,6 +106,7 @@ CREATE TABLE player_appearances (
 	substitute BOOLEAN,
 	captain BOOLEAN,
     minutes_played INT,
+	shirt_number INT,
 	UNIQUE KEY (match_id, player_id)
 );
 
