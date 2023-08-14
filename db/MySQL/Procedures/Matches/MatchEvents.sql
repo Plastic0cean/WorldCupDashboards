@@ -1,22 +1,18 @@
 CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 
 	WITH GoalEvents AS (
-		SELECT 
-			g.match_id,
-			g.player_id,
-			g.minute_regulation + g.minute_stoppage as minute,
-			minute_label(g.minute_regulation, g.minute_stoppage) as minute_label,
-			a.team_id,
-			a.home_team,
-			'goal' as type
-		FROM goals g
-		JOIN players p ON g.player_id = p.player_id 
-		JOIN player_appearances pa ON pa.player_id = g.player_id AND pa.match_id = g.match_id
-
-		JOIN team_appearances a ON g.match_id = a.match_id AND a.team_id = pa.team_id
-		JOIN teams t ON a.team_id = t.team_id
-		WHERE g.match_id = matchid),
-
+	SELECT 
+		g.match_id,
+		g.player_id,
+		g.minute_regulation + g.minute_stoppage as minute,
+		minute_label(g.minute_regulation, g.minute_stoppage) as minute_label,
+		g.player_team_id AS team_id, 
+		IF(ISNULL(m1.home_team_id), 0, 1) AS home_team,
+		"goal" as type
+	FROM goals g 
+	LEFT JOIN matches m1 ON m1.match_id = g.match_id AND g.player_team_id = m1.home_team_id
+	LEFT JOIN matches m2 ON m2.match_id = g.match_id AND g.player_team_id = m2.away_team_id
+	WHERE g.match_id = matchid),
 	CardEvents AS (
 		SELECT 
 			b.match_id,
