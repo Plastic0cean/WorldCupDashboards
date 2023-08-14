@@ -1,5 +1,18 @@
 #player-searching-form {
-	margin: 40px auto;
+	margin: 40px 0;
+}
+
+
+input {
+	margin: 0;
+	border: none;
+	border-radius: var(--border-radius);
+	background-origin: var(--shadow);
+	width: 80%;
+}
+
+form img {
+	left: 10px;
 }
 
 #player-table {

@@ -49,33 +49,40 @@
 
     <div id="most-goals-in-single-game-container" class="scoreboard-container dashboard-container">
       <h3>Most goals in a single match</h3>
-      {{ scorecard.scorecard(data["most_goals_in_single_game"][0]) }}
+      <a href="{{url_for('matches.match_details', match_id=data['most_goals_in_single_game'][0].match_id)}}">
+        {{ scorecard.scorecard(data["most_goals_in_single_game"][0], False) }}
+      </a>
     </div>
 
     {% if data["most_cards_in_single_game"] %}
     <div class="scoreboard-container dashboard-container">
       <h3> Most cards in a single match</h3>
-      <div class="scorecard">
-        <div class="team">
-          <a href="{{url_for('teams.team_details', team_id=data['most_cards_in_single_game'].home_team_id)}}">{{data["most_cards_in_single_game"].home_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].home_team_id)}}" alt="{{data['most_cards_in_single_game'].home_team_name}}">
-        </div>
-        <div class="match-result">
-          <span class="date">{{data["most_cards_in_single_game"].match_date}}</span>
-          <span class="score">{{data["most_cards_in_single_game"].score}}</span>
-          <div class="cards">
-            <span class="cards">Yellow cards: {{data["most_cards_in_single_game"].yellow_cards}}</span>
-            <span class="cards">Red cards: {{data["most_cards_in_single_game"].red_cards}}</span>
+      <a href="{{url_for('matches.match_details', match_id=data['most_cards_in_single_game'].match_id)}}">
+        <div class="scorecard">
+          <div class="team">
+            {{data["most_cards_in_single_game"].home_team_name}}
+            <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].home_team_id)}}"
+              alt="{{data['most_cards_in_single_game'].home_team_name}}">
           </div>
-        </div>
-        <div class="team">
-          <a href="{{url_for('teams.team_details', team_id=data['most_cards_in_single_game'].away_team_id)}}">{{data["most_cards_in_single_game"].away_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].away_team_id)}}" alt="{{data['most_cards_in_single_game'].away_team_name}}">
-        </div>
-      </div>
+          <div class="match-result">
+            <span class="date">{{data["most_cards_in_single_game"].match_date}}</span>
+            <span class="score">{{data["most_cards_in_single_game"].score}}</span>
+            <div class="cards">
+              <span class="cards">Yellow cards: {{data["most_cards_in_single_game"].yellow_cards}}</span>
+              <span class="cards">Red cards: {{data["most_cards_in_single_game"].red_cards}}</span>
+            </div>
+          </div>
+          <div class="team">
+            {{data["most_cards_in_single_game"].away_team_name}}
+            <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].away_team_id)}}"
+              alt="{{data['most_cards_in_single_game'].away_team_name}}">
+          </div>
+        </div> 
+      </a>
     </div>
     {% endif %}
 
+    {% if data["top_scorers"] %}
     <table class="table-data center">
       <caption>Top scorers</caption>
       <thead>
@@ -96,6 +103,7 @@
         {% endfor %}
       </tbody>
     </table>
+    {% endif %}
 
   </div>
 </div>

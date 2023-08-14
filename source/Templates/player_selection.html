@@ -6,9 +6,11 @@
 {% endblock head %}
 
 <form id="player-searching-form" method="post">
-    <input type="text" name="player" id="player" class="searching-bar" placeholder=" Player's name"
+  <span><img src="/static/images/icons/search.svg" alt=""></span>
+  <span>
+    <input type="text" name="player" id="player" class="searching-bar" placeholder="Search player's name"
       aria-label="Player's username">
-    <input type="submit" class="submit-button" value="Search">
+  </span>
 </form>
 
 <table id="player-table" class="table-data center">

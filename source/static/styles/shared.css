@@ -4,6 +4,8 @@
 	--accent-color: #1e0461;
 	--border-color: rgb(226, 226, 226);
 	--backgroud-color: #f6f6f9;
+	--hover-bg-color: rgba(192, 190, 190, 0.25);
+	--hover-text-color: rgb(73, 77, 80);
 	--top-margin: 40px;
 	--main-element-width: 80%;
 	--border-radius: 10px;
@@ -102,11 +104,11 @@ table tbody tr:last-child td{
 }
 
 .row-on-hover-grey {
-	color: rgb(73, 77, 80);
+	color: var(--hover-text-color)
 }
 
 .row-on-hover-grey:hover {
-	background-color: rgba(192, 190, 190, 0.25);
+	background-color: var(--hover-bg-color)
 }
 
 .container {
@@ -232,6 +234,7 @@ table tbody tr:last-child td{
     width: 70px;
     height: 50px;
     margin: 10px;
+	box-shadow: var(--shadow);
 }
 
 .team {

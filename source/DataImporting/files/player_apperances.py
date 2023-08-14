@@ -6,7 +6,7 @@ COLUMNS_TO_DELETE = [
     'key_id', 'tournament_id', 'tournament_name', 'match_name',
     'match_date', 'stage_name', 'group_name', 'team_name',
     'team_code', 'home_team', 'away_team', 'family_name',
-    'given_name', 'shirt_number', 'position_code'
+    'given_name', 'position_code'
 ]
 
 COLUMNS_MAPPING = {"position_name": "position"}

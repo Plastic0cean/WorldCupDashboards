@@ -34,7 +34,9 @@
     <tr class="hidden">
       <td colspan="3">
         {% for match in data["matches"][row.tournament_id] %}
-        {{ scorecard.scorecard(match) }}
+        <a href="{{url_for('matches.match_details', match_id=match.match_id)}}">
+          {{ scorecard.scorecard(match, False, True) }}
+        </a>
         {% endfor %}
       </td>
     </tr>
