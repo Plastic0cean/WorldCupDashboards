@@ -116,3 +116,24 @@ img {
   box-shadow: var(--shadow);
   margin: 30px auto;
 }
+
+
+.squads-section {
+  width: var(--element-width);
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin: auto;
+}
+
+.squads {
+  display: flex;
+  justify-content: space-around;
+}
+
+.team-squad {
+  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

@@ -1,4 +1,4 @@
-CREATE PROCEDURE SquadsOfMatch (matchid VARCHAR(10))
+CREATE PROCEDURE SquadsByMatch (matchid VARCHAR(10))
 SELECT 
 	a.player_id,
 	parse_name (p.given_name, p.family_name) AS player_name,
@@ -21,4 +21,5 @@ SELECT
 FROM player_appearances a
 JOIN players p ON a.player_id = p.player_id
 JOIN matches m ON m.match_id = a.match_id AND a.team_id = m.away_team_id
-WHERE a.match_id = matchid;
+WHERE a.match_id = matchid
+ORDER BY shirt_number;
