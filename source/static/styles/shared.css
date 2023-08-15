@@ -56,14 +56,6 @@ a:hover {
 	color: var(--accent-color);
 }
 
-.searching-bar {
-	box-shadow: var(--shadow);
-	height: 40px;
-	margin-left: 5%;
-	margin-right: 2%;
-	width: 80%;
-}
-
 .table-data {
 	background-color: white;
 	border: none;
@@ -284,9 +276,8 @@ table tbody tr:last-child td{
   }
 
 .show-more {
-	margin: 1rem;
-	background-color: white;
-	border-color: var(--accent-color);
+	color: white;
+	background-color: var(--header-background);
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
 	padding: 10px 20px;

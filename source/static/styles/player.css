@@ -1,22 +1,42 @@
+:root {
+	--margin: 40px;
+}
+
+.show-more {
+	margin: var(--margin);
+}
+
 #player-searching-form {
-	margin: 40px 0;
+	margin: var(--margin) 0;
+	border-radius: var(--border-radius);
+	border: none;
+	display: flex;
+	justify-content: center;
 }
 
 
-input {
-	margin: 0;
+svg {
+	width: 40px;
+	height: 30px;
+	background-color: white;
+	cursor: pointer;
+}
+
+#player-searching-form button, .searching-bar {
+	box-shadow: var(--shadow);
 	border: none;
-	border-radius: var(--border-radius);
-	background-origin: var(--shadow);
+}
+
+#player-searching-form button {
+	background-color: white;
+}
+
+.searching-bar {
+	height: 40px;
 	width: 80%;
 }
 
-form img {
-	left: 10px;
-}
-
 #player-table {
-	margin: 5% auto 0 auto; 
 	width: 70%;
 }
 
