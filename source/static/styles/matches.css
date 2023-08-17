@@ -134,3 +134,22 @@ img {
   flex-direction: column;
   gap: 1.5rem;
 }
+
+.choice-button {
+  background-color: var(--button-background-color);
+  border: solid;
+  border-color: var(--border-color);
+  border-radius: var(--border-radius);
+  border-width: 1px;
+  padding: 10px 20px;
+}
+
+.choice-button {
+  cursor: pointer;
+}
+
+.section-choice {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}

@@ -3,14 +3,16 @@
 :root {
 	--accent-color: #1e0461;
 	--border-color: rgb(226, 226, 226);
+	--border-radius: 10px;
 	--backgroud-color: #f6f6f9;
+	--button-background-color: white;
+	--header-background: #1D2125;
 	--hover-bg-color: rgba(192, 190, 190, 0.25);
 	--hover-text-color: rgb(73, 77, 80);
 	--top-margin: 40px;
 	--main-element-width: 80%;
-	--border-radius: 10px;
+	--second-text-color: rgb(128,128,128);
 	--shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-	--header-background: #1D2125;
 	--table-padding: 1.8rem;
 }
 
@@ -311,4 +313,13 @@ td.expand.collapsed:before {
 
 td .scorecard {
 	padding: 1rem;
+}
+
+.hidden {
+	display: none;
+}
+
+.active-button {
+	background-color: var(--header-background);
+	color: white;
 }
