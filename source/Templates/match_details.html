@@ -12,11 +12,14 @@
   {{ scorecard.scorecard(match) }}
 </section>
 
+{% if home_team_squad or away_team_squad %}
 <div class="section-choice">
   <button type="button" id="events-choice-button" class="choice-button active-button">Match events</button>
   <button type="button" id="squads-choice-button" class="choice-button">Squads</button>
 </div>
+{% endif %}
 
+{% if events %}
 <div class="events">
   <table>
     <tbody>
@@ -43,10 +46,11 @@
     </tbody>
   </table>
 </div>
+{% endif %}
 
 <section class="squads-section hidden">
     <div class="team-squad">
-      {% for player in squads %}
+      {% for player in home_team_squad %}
       <span>{{player.shirt_number}}
         <a href="{{url_for('players.player_details', player_id=player.player_id)}}">{{player.player_name}}</a>
       </span>
@@ -54,7 +58,7 @@
     </div>
 
     <div class="team-squad">
-      {% for player in squads %}
+      {% for player in away_team_squad %}
       <span>{{player.shirt_number}}
         <a href="{{url_for('players.player_details', player_id=player.player_id)}}">{{player.player_name}}</a>
       </span>

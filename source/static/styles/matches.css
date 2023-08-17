@@ -47,7 +47,7 @@
 
 .events {
   border-radius: var(--border-radius);
-  margin: auto;
+  margin: 30px auto;
   width: var(--element-width);
   background-color: white;
   padding: 20px;
@@ -123,9 +123,10 @@ img {
   background-color: white;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  margin: auto;
+  margin: 30px auto;
   display: flex;
   justify-content: space-around;
+  padding: 20px;
 }
 
 .team-squad {
@@ -152,4 +153,9 @@ img {
   display: flex;
   justify-content: center;
   gap: 2rem;
+}
+
+.events {
+  transition: 0.5s;
+
 }

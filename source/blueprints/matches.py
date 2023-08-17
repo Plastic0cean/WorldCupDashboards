@@ -43,5 +43,8 @@ def matches_list():
 def match_details(match_id: str):
     match = match_repository.get_result(match_id)
     events = match_repository.get_events(match_id)
-    squads = squads_repository.get_team_squad_by_match(match_id)
-    return render_template("match_details.html", events=events, match=match[0], squads=squads)
+    home_team_squad = squads_repository.get_team_squad_by_match(match_id, True)
+    away_team_squad = squads_repository.get_team_squad_by_match(match_id, False)
+    return render_template(
+        "match_details.html", events=events, match=match[0], 
+        home_team_squad=home_team_squad, away_team_squad=away_team_squad)

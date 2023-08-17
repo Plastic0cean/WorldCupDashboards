@@ -37,9 +37,9 @@ class Matches:
         return matches_dict
     
     @classmethod
-    def from_named_object(cls, named_tuple):
+    def from_named_object(cls, named):
         matches_list = []
-        for obj in named_tuple:
+        for obj in named:
             matches_list.append(MatchSummary(tournament_id=obj.tournament_id, 
                         match_id=obj.match_id, 
                         home_team_id=obj.home_team_id, 
