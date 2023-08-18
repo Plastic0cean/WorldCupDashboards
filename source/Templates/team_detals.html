@@ -102,47 +102,18 @@
 
     <div id="biggest-defeat" class="scoreboard-container dashboard-container">
       <h3>Biggest defeat</h3>
-      <div class="scorecard">
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['team'].team_id)}}">{{data["team"].team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['team'].team_id)}}"
-            alt="{{data['team'].team_name}}">
-        </div>
-        <div class="match-result">
-          <span class="date">{{data["biggest_defeat"][0].match_date}}</span>
-          <span class="score">{{data["biggest_defeat"][0].score}}</span>
-        </div>
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['biggest_defeat'][0].opponent_id)}}">{{data["biggest_defeat"][0].opponent_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['biggest_defeat'][0].opponent_id)}}"
-            alt="{{data['biggest_defeat'][0].opponent_name}}">
-        </div>
-      </div>
+      <a href="{{url_for('matches.match_details', match_id=data['biggest_defeat'][0].match_id)}}">
+        {{ scorecard.scorecard(data["biggest_defeat"][0], False) }}
+      </a>
     </div>
 
     {% if data["biggest_win"] %}
     <div id="biggest_win" class="scoreboard-container dashboard-container">
       <h3>Biggest win</h3>
-      <div class="scorecard">
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['team'].team_id)}}">{{data["team"].team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['team'].team_id)}}"
-            alt="{{data['team'].team_name}}">
-        </div>
-        <div class="match-result">
-          <span class="date">{{data["biggest_win"][0].match_date}}</span>
-          <span class="score">{{data["biggest_win"][0].score}}</span>
-        </div>
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['biggest_win'][0].opponent_id)}}">{{data["biggest_win"][0].opponent_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['biggest_win'][0].opponent_id)}}"
-            alt="{{data['biggest_win'][0].opponent_name}}">
-        </div>
-      </div>
+      <a href="{{url_for('matches.match_details', match_id=data['biggest_win'][0].match_id)}}">
+        {{ scorecard.scorecard(data["biggest_win"][0], False) }}
+      </a>
+
     </div>
     {% endif %}
 
