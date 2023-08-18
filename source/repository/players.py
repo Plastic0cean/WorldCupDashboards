@@ -15,7 +15,7 @@ class Player:
 
     @property
     def name(self) -> str:
-        return f"{self.given_name} {self.family_name}" if self.given_name else {self.family_name}
+        return f"{self.given_name} {self.family_name}" if self.given_name else self.family_name
     
     @property
     def positions_str(self, sep: str="/") -> str:

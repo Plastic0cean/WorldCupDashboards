@@ -1,16 +1,23 @@
 {% extends "main.html" %}
 
-{% block content %}{% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/player.css') }}">
+{% block content %}
 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/player.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/not_found.css') }}">
 {% endblock head %}
 
 <form id="player-searching-form" method="post">
-    <input type="text" name="player" id="player" class="searching-bar" placeholder=" Player's name"
+    <input type="text" name="player" id="player" class="searching-bar" placeholder="Search player's name"
       aria-label="Player's username">
-    <input type="submit" class="submit-button" value="Search">
+      <button type="submit" id="search-button">
+        <svg id="search-icon" class="search-icon" viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+            <path d="M0 0h24v24H0z" fill="none"/></svg>
+    </button>
 </form>
 
+{% if players %}
 <table id="player-table" class="table-data center">
   <thead class="table-header">
     <tr>
@@ -20,7 +27,7 @@
     </tr>
   </thead>
   <tbody>
-    {%for player in players%}
+    {% for player in players %}
     <tr class="row-on-hover-grey">
       <td>
         <a href=" {{ url_for('players.player_details', player_id=player.player_id)}}"> {{player.name}}</a>
@@ -33,6 +40,9 @@
     {%endfor%}
   </tbody>
 </table>
+{% else %}
+{% include "not_found.html" %}
+{% endif %}
 
 <div class="button-centered">
   <button type="button" class="show-more" onclick="showMore()">Show more</button>

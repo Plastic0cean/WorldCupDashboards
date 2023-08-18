@@ -2,8 +2,8 @@
 {% extends "main.html" %}
 
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/timeline.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/matches.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/shared.css') }}">
 {% endblock head %}
 
 {% block content %}
@@ -12,12 +12,20 @@
   {{ scorecard.scorecard(match) }}
 </section>
 
+{% if home_team_squad or away_team_squad %}
+<div class="section-choice">
+  <button type="button" id="events-choice-button" class="choice-button active-button">Match events</button>
+  <button type="button" id="squads-choice-button" class="choice-button">Squads</button>
+</div>
+{% endif %}
+
+{% if events %}
 <div class="events">
   <table>
     <tbody>
       {% for event in events %}
       <tr>
-        <td {% if event.home_team == 1 %} class="left" {% else %} class="right" {% endif %}>
+        <td {% if event.home_team==1 %} class="left" {% else %} class="right" {% endif %}>
           {% if event.type=="red card" %}
           <img src="/static/images/icons/red_card.png" alt="Red card">
           {% elif event.type=="yellow card" %}
@@ -29,7 +37,8 @@
           {% elif event.type=="goal" %}
           <img src="/static/images/icons/goal.png" alt="Goal">
           {% endif %}
-          <a class="name" href="{{url_for('players.player_details', player_id=event.player_id)}}">{{ event.player_name }}</a><br>
+          <a class="name" href="{{url_for('players.player_details', player_id=event.player_id)}}">{{ event.player_name
+            }}</a><br>
           <span class="minute">{{ event.minute_label }}</span>
         </td>
       </tr>
@@ -37,4 +46,26 @@
     </tbody>
   </table>
 </div>
+{% endif %}
+
+<section class="squads-section hidden">
+    <div class="team-squad">
+      {% for player in home_team_squad %}
+      <span>{{player.shirt_number}}
+        <a href="{{url_for('players.player_details', player_id=player.player_id)}}">{{player.player_name}}</a>
+      </span>
+      {% endfor %}
+    </div>
+
+    <div class="team-squad">
+      {% for player in away_team_squad %}
+      <span>{{player.shirt_number}}
+        <a href="{{url_for('players.player_details', player_id=player.player_id)}}">{{player.player_name}}</a>
+      </span>
+      {% endfor %}
+    </div>
+</section>
+
+
+<script src="{{ url_for('static', filename='scripts/match_details_choice.js')}}"></script>
 {% endblock content %}

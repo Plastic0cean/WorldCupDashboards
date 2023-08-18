@@ -3,12 +3,16 @@
 :root {
 	--accent-color: #1e0461;
 	--border-color: rgb(226, 226, 226);
+	--border-radius: 10px;
 	--backgroud-color: #f6f6f9;
+	--button-background-color: white;
+	--header-background: #1D2125;
+	--hover-bg-color: rgba(192, 190, 190, 0.25);
+	--hover-text-color: rgb(73, 77, 80);
 	--top-margin: 40px;
 	--main-element-width: 80%;
-	--border-radius: 10px;
+	--second-text-color: rgb(128,128,128);
 	--shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-	--header-background: #1D2125;
 	--table-padding: 1.8rem;
 }
 
@@ -54,14 +58,6 @@ a:hover {
 	color: var(--accent-color);
 }
 
-.searching-bar {
-	box-shadow: var(--shadow);
-	height: 40px;
-	margin-left: 5%;
-	margin-right: 2%;
-	width: 80%;
-}
-
 .table-data {
 	background-color: white;
 	border: none;
@@ -102,11 +98,11 @@ table tbody tr:last-child td{
 }
 
 .row-on-hover-grey {
-	color: rgb(73, 77, 80);
+	color: var(--hover-text-color)
 }
 
 .row-on-hover-grey:hover {
-	background-color: rgba(192, 190, 190, 0.25);
+	background-color: var(--hover-bg-color)
 }
 
 .container {
@@ -232,6 +228,7 @@ table tbody tr:last-child td{
     width: 70px;
     height: 50px;
     margin: 10px;
+	box-shadow: var(--shadow);
 }
 
 .team {
@@ -281,9 +278,8 @@ table tbody tr:last-child td{
   }
 
 .show-more {
-	margin: 1rem;
-	background-color: white;
-	border-color: var(--accent-color);
+	color: white;
+	background-color: var(--header-background);
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
 	padding: 10px 20px;
@@ -291,4 +287,39 @@ table tbody tr:last-child td{
 
 .show-more:hover {
 	cursor: pointer;
+}
+
+tr.hidden {
+    display: none;
+}
+
+tr.hidden td {
+    padding: 0;
+}
+
+td.expand {
+    cursor: pointer;
+}
+
+td.expand:before {
+    content: '+';
+    display: inline-block;
+    margin-right: 5px;
+}
+
+td.expand.collapsed:before {
+    content: '-';
+}
+
+td .scorecard {
+	padding: 1rem;
+}
+
+.hidden {
+	display: none;
+}
+
+.active-button {
+	background-color: var(--header-background);
+	color: white;
 }

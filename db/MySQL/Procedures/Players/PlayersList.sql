@@ -16,5 +16,5 @@ CREATE PROCEDURE PlayersList ()
 	FROM all_players a
 	JOIN players p ON a.player_id = p.player_id 
 	JOIN teams t ON a.team_id = t.team_id
-	WHERE player_number = 1
+	WHERE player_number = 1 AND a.player_id IN (SELECT player_id FROM player_appearances)
     ORDER BY name ASC;

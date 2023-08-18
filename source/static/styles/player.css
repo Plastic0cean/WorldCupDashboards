@@ -1,9 +1,41 @@
+:root {
+	--margin: 40px;
+}
+
+.show-more {
+	margin: var(--margin);
+}
+
 #player-searching-form {
-	margin: 40px auto;
+	margin: var(--margin) 0;
+	border-radius: var(--border-radius);
+	border: none;
+	display: flex;
+	justify-content: center;
+}
+
+.search-icon {
+	width: 40px;
+	height: 30px;
+	background-color: white;
+	cursor: pointer;
+}
+
+#player-searching-form button, .searching-bar {
+	box-shadow: var(--shadow);
+	border: none;
+}
+
+#player-searching-form button {
+	background-color: white;
+}
+
+.searching-bar {
+	height: 40px;
+	width: 80%;
 }
 
 #player-table {
-	margin: 5% auto 0 auto; 
 	width: 70%;
 }
 
@@ -119,28 +151,6 @@
 
 #awards {
 	width: 70%;
-}
-
-tr.hidden {
-    display: none;
-}
-
-tr.hidden td {
-    padding: 0;
-}
-
-td.expand {
-    cursor: pointer;
-}
-
-td.expand:before {
-    content: '+';
-    display: inline-block;
-    margin-right: 5px;
-}
-
-td.expand.collapsed:before {
-    content: '-';
 }
 
 

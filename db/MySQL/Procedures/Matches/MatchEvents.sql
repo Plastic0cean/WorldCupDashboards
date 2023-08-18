@@ -1,22 +1,18 @@
 CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 
 	WITH GoalEvents AS (
-		SELECT 
-			g.match_id,
-			g.player_id,
-			g.minute_regulation + g.minute_stoppage as minute,
-			minute_label(g.minute_regulation, g.minute_stoppage) as minute_label,
-			a.team_id,
-			a.home_team,
-			'goal' as type
-		FROM goals g
-		JOIN players p ON g.player_id = p.player_id 
-		JOIN player_appearances pa ON pa.player_id = g.player_id AND pa.match_id = g.match_id
-
-		JOIN team_appearances a ON g.match_id = a.match_id AND a.team_id = pa.team_id
-		JOIN teams t ON a.team_id = t.team_id
-		WHERE g.match_id = matchid),
-
+	SELECT 
+		g.match_id,
+		g.player_id,
+		g.minute_regulation + g.minute_stoppage as minute,
+		minute_label(g.minute_regulation, g.minute_stoppage) as minute_label,
+		g.player_team_id AS team_id, 
+		IF(ISNULL(m1.home_team_id), 0, 1) AS home_team,
+		"goal" as type
+	FROM goals g 
+	LEFT JOIN matches m1 ON m1.match_id = g.match_id AND g.player_team_id = m1.home_team_id
+	LEFT JOIN matches m2 ON m2.match_id = g.match_id AND g.player_team_id = m2.away_team_id
+	WHERE g.match_id = matchid),
 	CardEvents AS (
 		SELECT 
 			b.match_id,
@@ -38,8 +34,8 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 		SELECT 
 			s.match_id,
 			s.player_id,
-			minute_label(s.minute_regulation, s.minute_stoppage) as minute_label,
 			s.minute_regulation + s.minute_stoppage AS minute,
+			minute_label(s.minute_regulation, s.minute_stoppage) as minute_label,
 			s.team_id,
 			home_team,
 			IF(s.going_off = 1, 'sub out', 'sub in') as type
@@ -59,6 +55,7 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 		e.player_id, 
 		parse_name (p.given_name, p.family_name) AS player_name,
 		e.minute_label, 
+		e.minute,
 		e.team_id, 
 		t.team_name,
 		e.home_team, 
@@ -66,4 +63,4 @@ CREATE PROCEDURE MatchEvents (matchid VARCHAR(10))
 	FROM AllEvents e
 	JOIN teams t ON e.team_id = t.team_id
 	JOIN players p ON e.player_id = p.player_id 
-	ORDER BY minute;
+	ORDER BY minute ASC;

@@ -1,3 +1,5 @@
+{% import 'scorecard.html' as scorecard %}
+{% import 'plot.html' as plot %}
 {% extends "main.html" %}
 
 {% block head %}
@@ -26,9 +28,18 @@
   <tbody>
     {%for row in data["position_by_tournament"]%}
     <tr class="row-on-hover-grey">
-      <td><a href="{{url_for('tournaments.tournament_details')}}">{{row.tournament_name}}</a></td>
+      <td class="expand">{{row.tournament_name}}</td>
       <td>{{row.count_matches}}</td>
       <td>{{row.performance}} {% if "group" in row.performace %} ({{row.group_position}} position) {% endif %}</td>
+    </tr>
+    <tr class="hidden">
+      <td colspan="3">
+        {% for match in data["matches"][row.tournament_id] %}
+        <a href="{{url_for('matches.match_details', match_id=match.match_id)}}">
+          {{ scorecard.scorecard(match, False, True) }}
+        </a>
+        {% endfor %}
+      </td>
     </tr>
     {%endfor%}
   </tbody>
@@ -37,39 +48,21 @@
 <div class="grid-container">
 
   <div id="team-matches-results" class="dashboard-container">
-    <h3>Matches results</h3>
-    <div id="team-matches-results-pie" class="chart">
-      <script>
-        var graphs = {{ visualizations["matches_results"] | safe}};
-        var layout = { autosize: true }
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('team-matches-results-pie', graphs, layout);
-      </script>
-    </div>
+    {{ plot.plot(visualizations["matches_results"], "team-matches-results-pie", "Matches results") }}
   </div>
 
   <div id="all-matches-of-team" class="dashboard-container">
-    <h3>Result of games</h3>
-    The height of the column represents the goals difference of final score.
-    <div id="all-matches-bar" class="chart">
-      <script>
-        var graphs = {{ visualizations["matches_chart"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('all-matches-bar', graphs, {});
-      </script>
+    {{ plot.plot(
+        visualizations["matches_chart"],
+        "all-matches-bar", "Result of games",
+        "The height of the column represents the goals difference of final score") }}
     </div>
-  </div>
 
   <div id="minutes-by-players" class="dashboard-container">
-    <h3>Players with the most minutes played</h3>
-    Top 20 players who spend the largest amount of minutes on the pitch
-    <div id="minutes-by-player-treemap" class="chart">
-      <script>
-        var graphs = {{ visualizations["most_minutes_by_player"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('minutes-by-player-treemap', graphs, {});
-      </script>
-    </div>
+    {{ plot.plot(
+      visualizations["most_minutes_by_player"],
+      "minutes-by-player-treemap", "Players with the most minutes played",
+      "Top 20 players who spend the largest amount of minutes on the pitch") }}
   </div>
 
   {% if data["top_scorers"] %}
@@ -95,27 +88,13 @@
 
   {% if visualizations["goals_by_opponent"] %}
   <div id="goals-by-opponent" class="dashboard-container">
-    <h3>Goals scored againts different teams</h3>
-    <div id="goals-by-opponent-bar" class="chart">
-      <script>
-        var graphs = {{ visualizations["goals_by_opponent"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('goals-by-opponent-bar', graphs, {});
-      </script>
-    </div>
+    {{ plot.plot(visualizations["goals_by_opponent"], "goals-by-opponent-bar", "Goals scored againts different teams") }}
   </div>
   {% endif %}
 
   {% if visualizations["goals_by_tournament"] %}
   <div id="team-goals-by-tournament" class="dashboard-container">
-    <h3>Goals scored by a tournament</h3>
-    <div id="goals-by-tournament-pie" class="chart">
-      <script>
-        var graphs = {{ visualizations["goals_by_tournament"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('goals-by-tournament-pie', graphs, {});
-      </script>
-    </div>
+    {{ plot.plot(visualizations["goals_by_tournament"], "goals-by-tournament-pie", "Goals scored by a tournament") }}
   </div>
   {% endif %}
 
@@ -123,50 +102,23 @@
 
     <div id="biggest-defeat" class="scoreboard-container dashboard-container">
       <h3>Biggest defeat</h3>
-      <div class="scorecard">
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['team'].team_id)}}">{{data["team"].team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['team'].team_id)}}"
-            alt="{{data['team'].team_name}}">
-        </div>
-        <div class="match-result">
-          <span class="date">{{data["biggest_defeat"][0].match_date}}</span>
-          <span class="score">{{data["biggest_defeat"][0].score}}</span>
-        </div>
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['biggest_defeat'][0].opponent_id)}}">{{data["biggest_defeat"][0].opponent_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['biggest_defeat'][0].opponent_id)}}"
-            alt="{{data['biggest_defeat'][0].opponent_name}}">
-        </div>
-      </div>
+      <a href="{{url_for('matches.match_details', match_id=data['biggest_defeat'][0].match_id)}}">
+        {{ scorecard.scorecard(data["biggest_defeat"][0], False) }}
+      </a>
     </div>
 
     {% if data["biggest_win"] %}
     <div id="biggest_win" class="scoreboard-container dashboard-container">
       <h3>Biggest win</h3>
-      <div class="scorecard">
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['team'].team_id)}}">{{data["team"].team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['team'].team_id)}}"
-            alt="{{data['team'].team_name}}">
-        </div>
-        <div class="match-result">
-          <span class="date">{{data["biggest_win"][0].match_date}}</span>
-          <span class="score">{{data["biggest_win"][0].score}}</span>
-        </div>
-        <div class="team">
-          <a
-            href="{{url_for('teams.team_details', team_id=data['biggest_win'][0].opponent_id)}}">{{data["biggest_win"][0].opponent_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['biggest_win'][0].opponent_id)}}"
-            alt="{{data['biggest_win'][0].opponent_name}}">
-        </div>
-      </div>
+      <a href="{{url_for('matches.match_details', match_id=data['biggest_win'][0].match_id)}}">
+        {{ scorecard.scorecard(data["biggest_win"][0], False) }}
+      </a>
+
     </div>
     {% endif %}
 
   </div>
 </div>
+
+<script src="{{ url_for('static', filename='scripts/collapsible_table.js')}}"></script>
 {% endblock content %}

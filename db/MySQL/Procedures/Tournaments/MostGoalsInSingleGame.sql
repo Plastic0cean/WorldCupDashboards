@@ -2,6 +2,7 @@ CREATE PROCEDURE MostGoalsInSingleGame (playerid VARCHAR(10))
 	WITH MatchResults AS (
 	SELECT 
 		m.tournament_id,
+		m.match_id,
 		m.match_date,
 		m.home_team_id,
 		t.team_name AS home_team_name,

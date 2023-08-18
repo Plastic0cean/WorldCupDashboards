@@ -1,5 +1,6 @@
 {% import 'tournaments_dropdown.html' as dropdown %}
 {% import 'scorecard.html' as scorecard %}
+{% import 'plot.html' as plot %}
 {% extends "main.html" %}
 
 {% block head %}
@@ -8,8 +9,7 @@
 {% endblock head %}
 
 {% block content %}
-<h1>FIFA Worldcup statistics</h1>
-
+<h1>Statistics of tournaments</h1>
 
 <div class="button-centered">
   {{ dropdown.tournaments(data["tournament"], data["tournaments_list"]) }}
@@ -19,29 +19,12 @@
 
   <div class="left-col">
     <div id="goals-difference-by-team-container" class="dashboard-container">
-      <h3>Goals difference by a team</h3>
-      <div id="goals-difference-by-team" class="chart">
-        <script>
-          var graphs = {{ visualizations["goals_difference"] | safe}};
-          var layout = { autosize: true }
-          graphs.config = { 'displayModeBar': false, 'responsive': true };
-          Plotly.plot('goals-difference-by-team', graphs, layout);
-        </script>
-      </div>
+      {{ plot.plot(visualizations["goals_difference"], "goals-difference-by-team", "Goals difference by a team") }}
     </div>
 
     <div id="goals-by-minutes-container" class="dashboard-container">
-      <h3>Goals scored by minutes</h3>
-      <div id="goals-by-minutes-hist" class="chart">
-        <script>
-          var graphs = {{ visualizations["goals_by_minutes"] | safe}};
-          var layout = { autosize: true }
-          graphs.config = { 'displayModeBar': false, 'responsive': true };
-          Plotly.plot('goals-by-minutes-hist', graphs, layout);
-        </script>
-      </div>
+      {{ plot.plot(visualizations["goals_by_minutes"], "goals-by-minutes-hist", "Goals scored by minutes") }}
     </div>
-
   </div>
 
 
@@ -49,33 +32,40 @@
 
     <div id="most-goals-in-single-game-container" class="scoreboard-container dashboard-container">
       <h3>Most goals in a single match</h3>
-      {{ scorecard.scorecard(data["most_goals_in_single_game"][0]) }}
+      <a href="{{url_for('matches.match_details', match_id=data['most_goals_in_single_game'][0].match_id)}}">
+        {{ scorecard.scorecard(data["most_goals_in_single_game"][0], False) }}
+      </a>
     </div>
 
     {% if data["most_cards_in_single_game"] %}
     <div class="scoreboard-container dashboard-container">
       <h3> Most cards in a single match</h3>
-      <div class="scorecard">
-        <div class="team">
-          <a href="{{url_for('teams.team_details', team_id=data['most_cards_in_single_game'].home_team_id)}}">{{data["most_cards_in_single_game"].home_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].home_team_id)}}" alt="{{data['most_cards_in_single_game'].home_team_name}}">
-        </div>
-        <div class="match-result">
-          <span class="date">{{data["most_cards_in_single_game"].match_date}}</span>
-          <span class="score">{{data["most_cards_in_single_game"].score}}</span>
-          <div class="cards">
-            <span class="cards">Yellow cards: {{data["most_cards_in_single_game"].yellow_cards}}</span>
-            <span class="cards">Red cards: {{data["most_cards_in_single_game"].red_cards}}</span>
+      <a href="{{url_for('matches.match_details', match_id=data['most_cards_in_single_game'].match_id)}}">
+        <div class="scorecard">
+          <div class="team">
+            {{data["most_cards_in_single_game"].home_team_name}}
+            <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].home_team_id)}}"
+              alt="{{data['most_cards_in_single_game'].home_team_name}}">
           </div>
-        </div>
-        <div class="team">
-          <a href="{{url_for('teams.team_details', team_id=data['most_cards_in_single_game'].away_team_id)}}">{{data["most_cards_in_single_game"].away_team_name}}</a>
-          <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].away_team_id)}}" alt="{{data['most_cards_in_single_game'].away_team_name}}">
-        </div>
-      </div>
+          <div class="match-result">
+            <span class="date">{{data["most_cards_in_single_game"].match_date}}</span>
+            <span class="score">{{data["most_cards_in_single_game"].score}}</span>
+            <div class="cards">
+              <span class="cards">Yellow cards: {{data["most_cards_in_single_game"].yellow_cards}}</span>
+              <span class="cards">Red cards: {{data["most_cards_in_single_game"].red_cards}}</span>
+            </div>
+          </div>
+          <div class="team">
+            {{data["most_cards_in_single_game"].away_team_name}}
+            <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].away_team_id)}}"
+              alt="{{data['most_cards_in_single_game'].away_team_name}}">
+          </div>
+        </div> 
+      </a>
     </div>
     {% endif %}
 
+    {% if data["top_scorers"] %}
     <table class="table-data center">
       <caption>Top scorers</caption>
       <thead>
@@ -96,42 +86,8 @@
         {% endfor %}
       </tbody>
     </table>
+    {% endif %}
 
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function (event) {
-    var dropdown = document.querySelector(".dropdown");
-    var button = dropdown.querySelector(".dropdown-toggle");
-    var menu = dropdown.querySelector(".dropdown-menu");
-
-    function toggleMenu() {
-      if (menu.getAttribute("aria-hidden") === "true") {
-        menu.setAttribute("aria-hidden", "false");
-        button.setAttribute("aria-expanded", "true");
-        menu.style.display = "block";
-      } else {
-        menu.setAttribute("aria-hidden", "true");
-        button.setAttribute("aria-expanded", "false");
-        menu.style.display = "none";
-      }
-    }
-
-    button.addEventListener("click", toggleMenu);
-    dropdown.addEventListener("keydown", function (event) {
-      if (event.code === "Space" || event.code === "Enter") {
-        event.preventDefault();
-        toggleMenu();
-      }
-    });
-    document.addEventListener("click", function (event) {
-      if (!dropdown.contains(event.target)) {
-        menu.setAttribute("aria-hidden", "true");
-        button.setAttribute("aria-expanded", "false");
-        menu.style.display = "none";
-      }
-    });
-  });
-</script>
 {% endblock content %}

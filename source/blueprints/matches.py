@@ -2,6 +2,7 @@ from collections import defaultdict
 from flask import Blueprint, render_template, request
 from repository.matches import match_repository
 from repository.tournaments import tournament_repository
+from repository.squads import squads_repository
 
 
 matches = Blueprint("matches", __name__)
@@ -42,4 +43,8 @@ def matches_list():
 def match_details(match_id: str):
     match = match_repository.get_result(match_id)
     events = match_repository.get_events(match_id)
-    return render_template("match_details.html", events=events,  match=match[0])
+    home_team_squad = squads_repository.get_team_squad_by_match(match_id, True)
+    away_team_squad = squads_repository.get_team_squad_by_match(match_id, False)
+    return render_template(
+        "match_details.html", events=events, match=match[0], 
+        home_team_squad=home_team_squad, away_team_squad=away_team_squad)

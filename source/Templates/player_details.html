@@ -1,4 +1,5 @@
 {% import 'scorecard.html' as scorecard %}
+{% import 'plot.html' as plot %}
 {% extends "main.html" %}
 
 {% block head %}
@@ -24,7 +25,7 @@
   </div>
 </div>
 
-
+{% if data["player"].positions %}
 <div class="pitch-positions">
   <img src="/static/images/pitch.png" alt="player positions">
   {% for position in data["player"].positions %}
@@ -51,7 +52,7 @@
   {% endif %}
   {% endfor %}
 </div>
-
+{% endif %}
 
 {% if data["appearances_summary"] %}
 <table id="player-appearances-summary" class="table-data center">
@@ -76,39 +77,27 @@
     <tr class="hidden">
       <td colspan="5">
         {% for match in data["matches"][row.tournament_id] %}
-        {{ scorecard.scorecard(match) }}
+        <a href="{{url_for('matches.match_details', match_id=match.match_id)}}">
+          {{ scorecard.scorecard(match, False, True) }}
+        </a>
         {% endfor %}
       </td>
     </tr>
-
     {% endfor %}
   </tbody>
 </table>
-{%endif%}
+{% endif %}
 
+{% if visualizations["minutes_played"] %}
 <div id="charts">
   <div id="minutes-played" class="dashboard-container">
-    <h3>Minutes spent on the pitch and bench</h3>
-    <div id="minutes-played-pie" class="plotly-chart">
-      <script>
-        var graphs = {{ visualizations["minutes_played"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('minutes-played-pie', graphs, { displayModeBar: false });
-      </script>
-    </div>
+    {{ plot.plot(visualizations["minutes_played"], "minutes-played-pie", "Time spent on the pitch and bench") }}
   </div>
-
   <div id="starting" class="dashboard-container">
-    <h3>Games in starting 11 and as a substitution</h3>
-    <div id="starter-or-substitute-pie" class="plotly-chart">
-      <script>
-        var graphs = {{ visualizations["starer_or_sub"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('starter-or-substitute-pie', graphs, { displayModeBar: false });
-      </script>
-    </div>
+    {{ plot.plot(visualizations["starer_or_sub"], "starter-or-substitute-pie", "Games in starting 11 and as a substitution") }}
   </div>
 </div>
+{% endif %}
 
 {% if data["awards"] %}
 <table id="awards" class="table-data center">
