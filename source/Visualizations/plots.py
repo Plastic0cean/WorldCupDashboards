@@ -42,16 +42,6 @@ def players_goals_by_team(data: pd.DataFrame) -> go.Figure:
 
 
 @render_figure
-def player_appearances_by_tournament(data: pd.DataFrame) -> go.Figure:
-    if data.empty:
-        return
-    label = {"tournament": "Tournament", "number_of_matches": "Number of matches"}
-    fig = px.bar(data, labels=label, x="tournament", y="number_of_matches", color="stage", title=None)
-    fig.update_yaxes(visible=True, showticklabels=False)
-    return fig
-
-
-@render_figure
 def goals_by_tournament(data) -> go.Figure:
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data["year"], y=data["goals"],
@@ -79,6 +69,7 @@ def starter_or_substitute(data: pd.DataFrame) -> go.Figure:
         data, names="starer_or_sub", values=zero_to_nan(data["number_of_matches"]), 
         hole=0.7, color_discrete_sequence=px.colors.diverging.balance)
     fig.update_traces(textinfo='value')
+    fig.data[0].hovertemplate = "%{value} games as %{label}"
     fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
     return fig
 
@@ -86,11 +77,13 @@ def starter_or_substitute(data: pd.DataFrame) -> go.Figure:
 @render_figure
 def overall_minutes_played(data) -> go.Figure:
     fig = px.pie(
-        labels=["Playing", "Bench"], 
         values=zero_to_nan([data.minutes_played, data.minutes_on_bench]),
         hole=0.7,
         color_discrete_sequence=px.colors.diverging.balance)
-    fig.update_traces(textinfo='value')
+    fig.data[0].labels = ["Playing", "Benched"]
+    fig.data[0].hovertemplate = "<b>%{label}</b>: %{value} minutes overall"
+
+    fig.update_traces(textinfo='value', showlegend=True)    
     fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
     return fig
 
