@@ -1,0 +1,13 @@
+{% macro plot(data, div_id, title, subtitle="") %}
+
+<h3>{{title}}</h3>
+{{subtitle}}
+<div id="{{div_id}}" class="plotly-chart">
+  <script>
+    var graphs = {{ data | safe}};
+    graphs.config = { 'displayModeBar': false, 'responsive': true };
+    Plotly.plot('{{div_id}}', graphs, { displayModeBar: false });
+  </script>
+</div>
+
+{% endmacro %}

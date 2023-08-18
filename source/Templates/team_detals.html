@@ -1,4 +1,5 @@
 {% import 'scorecard.html' as scorecard %}
+{% import 'plot.html' as plot %}
 {% extends "main.html" %}
 
 {% block head %}
@@ -47,39 +48,21 @@
 <div class="grid-container">
 
   <div id="team-matches-results" class="dashboard-container">
-    <h3>Matches results</h3>
-    <div id="team-matches-results-pie" class="chart">
-      <script>
-        var graphs = {{ visualizations["matches_results"] | safe}};
-        var layout = { autosize: true }
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('team-matches-results-pie', graphs, layout);
-      </script>
-    </div>
+    {{ plot.plot(visualizations["matches_results"], "team-matches-results-pie", "Matches results") }}
   </div>
 
   <div id="all-matches-of-team" class="dashboard-container">
-    <h3>Result of games</h3>
-    The height of the column represents the goals difference of final score.
-    <div id="all-matches-bar" class="chart">
-      <script>
-        var graphs = {{ visualizations["matches_chart"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('all-matches-bar', graphs, {});
-      </script>
+    {{ plot.plot(
+        visualizations["matches_chart"],
+        "all-matches-bar", "Result of games",
+        "The height of the column represents the goals difference of final score") }}
     </div>
-  </div>
 
   <div id="minutes-by-players" class="dashboard-container">
-    <h3>Players with the most minutes played</h3>
-    Top 20 players who spend the largest amount of minutes on the pitch
-    <div id="minutes-by-player-treemap" class="chart">
-      <script>
-        var graphs = {{ visualizations["most_minutes_by_player"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('minutes-by-player-treemap', graphs, {});
-      </script>
-    </div>
+    {{ plot.plot(
+      visualizations["most_minutes_by_player"],
+      "minutes-by-player-treemap", "Players with the most minutes played",
+      "Top 20 players who spend the largest amount of minutes on the pitch") }}
   </div>
 
   {% if data["top_scorers"] %}
@@ -105,27 +88,13 @@
 
   {% if visualizations["goals_by_opponent"] %}
   <div id="goals-by-opponent" class="dashboard-container">
-    <h3>Goals scored againts different teams</h3>
-    <div id="goals-by-opponent-bar" class="chart">
-      <script>
-        var graphs = {{ visualizations["goals_by_opponent"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('goals-by-opponent-bar', graphs, {});
-      </script>
-    </div>
+    {{ plot.plot(visualizations["goals_by_opponent"], "goals-by-opponent-bar", "Goals scored againts different teams") }}
   </div>
   {% endif %}
 
   {% if visualizations["goals_by_tournament"] %}
   <div id="team-goals-by-tournament" class="dashboard-container">
-    <h3>Goals scored by a tournament</h3>
-    <div id="goals-by-tournament-pie" class="chart">
-      <script>
-        var graphs = {{ visualizations["goals_by_tournament"] | safe}};
-        graphs.config = { 'displayModeBar': false, 'responsive': true };
-        Plotly.plot('goals-by-tournament-pie', graphs, {});
-      </script>
-    </div>
+    {{ plot.plot(visualizations["goals_by_tournament"], "goals-by-tournament-pie", "Goals scored by a tournament") }}
   </div>
   {% endif %}
 
