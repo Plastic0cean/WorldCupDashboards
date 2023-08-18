@@ -25,6 +25,7 @@
   </div>
 </div>
 
+{% if data["player"].positions %}
 <div class="pitch-positions">
   <img src="/static/images/pitch.png" alt="player positions">
   {% for position in data["player"].positions %}
@@ -51,6 +52,7 @@
   {% endif %}
   {% endfor %}
 </div>
+{% endif %}
 
 {% if data["appearances_summary"] %}
 <table id="player-appearances-summary" class="table-data center">
@@ -84,8 +86,9 @@
     {% endfor %}
   </tbody>
 </table>
-{%endif%}
+{% endif %}
 
+{% if visualizations["minutes_played"] %}
 <div id="charts">
   <div id="minutes-played" class="dashboard-container">
     {{ plot.plot(visualizations["minutes_played"], "minutes-played-pie", "Time spent on the pitch and bench") }}
@@ -94,6 +97,7 @@
     {{ plot.plot(visualizations["starer_or_sub"], "starter-or-substitute-pie", "Games in starting 11 and as a substitution") }}
   </div>
 </div>
+{% endif %}
 
 {% if data["awards"] %}
 <table id="awards" class="table-data center">

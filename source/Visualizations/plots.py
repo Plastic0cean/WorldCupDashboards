@@ -76,6 +76,8 @@ def starter_or_substitute(data: pd.DataFrame) -> go.Figure:
 
 @render_figure
 def overall_minutes_played(data) -> go.Figure:
+    if not data[0]:
+        return
     fig = px.pie(
         values=zero_to_nan([data.minutes_played, data.minutes_on_bench]),
         hole=0.7,
@@ -132,7 +134,7 @@ def all_matches_by_team(data: pd.DataFrame) -> go.Figure:
     loses = data.query("lose == 1")
     fig = go.Figure()
 
-    hovertext = [s + " vs " + opponent for s, opponent in zip(wins.score, wins.opponent_name)]
+    hovertext = ["Final score: " + s + " vs " + opponent for s, opponent in zip(wins.score, wins.opponent_name)]
     fig.add_trace(go.Bar(x=wins.match_id, y=wins.goal_differential,
                     base=0,
                     marker_color="green",
@@ -142,7 +144,7 @@ def all_matches_by_team(data: pd.DataFrame) -> go.Figure:
                     text=[match for match in wins.opponent_name] 
                     ))
 
-    hovertext = [s + " vs " + opponent for s, opponent in zip(loses.score, loses.opponent_name)]
+    hovertext = ["Final score: " + s + " vs " + opponent for s, opponent in zip(loses.score, loses.opponent_name)]
     fig.add_trace(go.Bar(x=loses.match_id, y=loses.goal_differential.apply(abs),
                     base=[int(diff) for diff in loses.goal_differential],
                     marker_color="crimson",
