@@ -64,13 +64,12 @@ a:hover {
 	border-collapse: collapse;
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
+	font-size: 1vmax;
 	padding: var(--table-padding);
-	table-layout: fixed;
 	text-align: center;
 	transition: all 0.3s ease;
 	width: 100%;
 }
-
 
 .table-data tr {
 	height: 50px;
@@ -84,7 +83,7 @@ a:hover {
 
 
 table tbody tr:last-child td{
-    border: none;
+	border: none;
 }
 
 .table-data td, th {
@@ -322,4 +321,12 @@ td .scorecard {
 .active-button {
 	background-color: var(--header-background);
 	color: white;
+}
+
+
+@media only screen and (max-width: 600px) {
+	.table-data {
+		font-size: 1vh;
+	}
+
 }

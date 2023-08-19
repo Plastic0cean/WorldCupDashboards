@@ -62,11 +62,11 @@
 .pitch-positions {
 	position: relative;
 	margin: 0 auto 20px;
-	width: 500px;
+	max-width: 500px;
 }
 
 .pitch-positions img {
-	width: 500px;
+	width: 100%;
 	height: auto;
 }
 
@@ -84,54 +84,55 @@
 	width: 50px;
 }
 
-.forward {
-	left: 400px;
-	top: 140px;
-}
-
 .left-winger {
-	left: 385px;
-	top: 30px;
+	left: 74%;
+	top: 8%;
 }
 
 .right-winger {
-	left: 385px;
-	top: 260px;
-}
-
-.attacking-midfielder {
-	left: 320px;
-	top: 140px;
+	left: 74%;
+	top: 76%;
 }
 
 .center-midfielder {
-	left: 228px;
-	top: 140px;
+	left: 45%;
+	top: 42%;
 }
 
 .defensive-midfielder {
-	left: 170px;
-	top: 140px;
+	left: 30%;
+	top: 42%;
 }
 
-.left-back {
-	left: 85px;
-	top: 30px;
-}
-
-.right-back {
-	left: 85px;
-	top: 260px;
+.forward {
+	left: 79%;
+	top: 42%;
 }
 
 .center-back {
-	left: 85px;
-	top: 140px;
+	left: 15%;
+	top: 42%;
+}
+
+.left-back {
+	left: 15%;
+	top: 8%;
+}
+
+.right-back {
+	left: 15%;
+	top: 76%;
+}
+
+
+.attacking-midfielder {
+	left: 65%;
+	top: 42%;
 }
 
 .goalkeeper {
-	left: 25px;
-	top: 140px;
+	left: 5%;
+	top: 42%;
 }
 
 #charts {
