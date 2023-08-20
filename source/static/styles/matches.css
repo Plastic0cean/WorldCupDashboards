@@ -106,10 +106,10 @@
   font-weight: 300;
 }
 
-/* img {
+.icon {
   width: 20px;
   height: auto;
-} */
+}
 
 .summary .scorecard {
   padding: 20px;
@@ -162,7 +162,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-	.panel, .accordion {
+	.panel, .accordion, .events, .squads-section {
     width: var(--mobile-element-width);
 	}
 

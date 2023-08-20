@@ -27,15 +27,15 @@
       <tr>
         <td {% if event.home_team==1 %} class="left" {% else %} class="right" {% endif %}>
           {% if event.type=="red card" %}
-          <img src="/static/images/icons/red_card.png" alt="Red card">
+          <img class="icon" src="/static/images/icons/red_card.png" alt="Red card">
           {% elif event.type=="yellow card" %}
-          <img src="/static/images/icons/yellow_card.png" alt="Yellow card">
+          <img class="icon" src="/static/images/icons/yellow_card.png" alt="Yellow card">
           {% elif event.type=="sub in" %}
-          <img src="/static/images/icons/sub in.jpg" alt="Substitution">
+          <img class="icon" src="/static/images/icons/sub in.jpg" alt="Substitution">
           {% elif event.type=="sub out" %}
-          <img src="/static/images/icons/sub out.jpg" alt="Substitution">
+          <img class="icon" src="/static/images/icons/sub out.jpg" alt="Substitution">
           {% elif event.type=="goal" %}
-          <img src="/static/images/icons/goal.png" alt="Goal">
+          <img class="icon" src="/static/images/icons/goal.png" alt="Goal">
           {% endif %}
           <a class="name" href="{{url_for('players.player_details', player_id=event.player_id)}}">{{ event.player_name
             }}</a><br>
