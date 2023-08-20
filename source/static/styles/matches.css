@@ -1,5 +1,6 @@
 :root {
   --element-width: 65%;
+  --mobile-element-width: 90%;
 }
 
 .match-date-header {
@@ -105,10 +106,10 @@
   font-weight: 300;
 }
 
-img {
+/* img {
   width: 20px;
   height: auto;
-}
+} */
 
 .summary .scorecard {
   padding: 20px;
@@ -157,5 +158,12 @@ img {
 
 .events {
   transition: 0.5s;
+
+}
+
+@media only screen and (max-width: 600px) {
+	.panel, .accordion {
+    width: var(--mobile-element-width);
+	}
 
 }
