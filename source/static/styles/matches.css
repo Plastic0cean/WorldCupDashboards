@@ -20,21 +20,21 @@
 }
 
 .scoreboard-container {
-  margin: 10px;
   box-shadow: var(--shadow);
+  margin: 10px;
 }
 
 .accordion {
-  cursor: pointer;
   border: none;
+  cursor: pointer;
   outline: none;
   transition: 0.4s;
 }
 
 .accordion,
 .panel {
-  width: var(--element-width);
   margin: auto;
+  width: var(--element-width);
 }
 
 .match-date-header {
@@ -161,9 +161,18 @@
 
 }
 
-@media only screen and (max-width: 600px) {
-	.panel, .accordion, .events, .squads-section {
+@media only screen and (max-width: 800px) {
+	.panel, .accordion, .events, .matches-list-container, .squads-section, .summary .scorecard {
     width: var(--mobile-element-width);
 	}
+
+  .events {
+    padding: 0;
+  }
+
+  .events table {
+    width: 95%;
+  }
+  
 
 }
