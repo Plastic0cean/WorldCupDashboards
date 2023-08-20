@@ -180,7 +180,7 @@ table tbody tr:last-child td{
 	margin-bottom: 20px;
 }
 
-.grid-container {
+.reports-container {
 	width: 90%;
 	display: grid;
 	gap: 20px;
@@ -330,4 +330,8 @@ td .scorecard {
 		font-size: 1vh;
 	}
 
+	.reports-container {
+		display: flex;
+		flex-direction: column;
+	}
 }
