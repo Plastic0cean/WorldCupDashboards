@@ -326,7 +326,7 @@ td .scorecard {
 
 @media only screen and (max-width: 600px) {
 	.table-data {
-		font-size: 4vw;
+		font-size: 3vw;
 	}
 
 	.reports-container {
