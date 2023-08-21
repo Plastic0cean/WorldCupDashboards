@@ -4,6 +4,7 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/player.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/not_found.css') }}">
 {% endblock head %}
 
 {% block content %}
@@ -120,6 +121,11 @@
   </tbody>
 </table>
 {% endif %}
+
+{% if not data["player"].positions and not data["appearances_summary"] and not data["awards"] and not visualizations["minutes_played"] %}
+{% include "no_data.html" %}
+{% endif %}
+
 
 <script src="{{ url_for('static', filename='scripts/collapsible_table.js')}}"></script>
 {% endblock content %}

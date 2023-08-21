@@ -1,3 +1,7 @@
+.not-found {
+    margin-top: 30px;
+}
+
 .not-found p {
     text-align: center;
 }
@@ -11,10 +15,10 @@
 }
 
 .not-found-message {
-
     font-size: larger;
+    margin: 20px;
 }
 
 .not-found {
-    color: gray;
+    color: var(--second-text-color);
 }
