@@ -154,30 +154,6 @@ table tbody tr:last-child td{
 	font-weight: bold;
 }
 
-.dashboard-card {
-	background-color: var(--background-color);
-	border-radius: var(--border-radius);
-	box-shadow: var(--shadow);
-	height: 125px;
-	margin: 5px;
-	overflow: hidden;
-	text-align: center;
-	transition: 0.33s;
-	width: 280px;
-}
-
-.dashboard-card h3 {
-	color: var(--accent-color);
-	margin-top: 20px;
-	font-size: 40px;
-}
-
-.dashboard-card p {
-	color: var(--second-text-color);
-	font-size: 16px;
-	margin-bottom: 20px;
-}
-
 .reports-container {
 	width: 90%;
 	display: grid;
