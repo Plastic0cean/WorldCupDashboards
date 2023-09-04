@@ -117,6 +117,8 @@ def team_goals_by_tournament(data: pd.DataFrame) -> go.Figure:
 
 @render_figure
 def players_with_most_minutes(data: pd.DataFrame) -> go.Figure:
+    if data.empty:
+        return
     fig = px.treemap(
         data, 
         path=["player_name"], 
@@ -189,6 +191,6 @@ def goals_difference_by_team(data: pd.DataFrame) -> go.Figure:
     fig.update_yaxes(visible=True, showticklabels=False)
     fig.update_xaxes(visible=True, showticklabels=False)
     fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
-    hovertemplate = "<b>%{customdata}</b><br>Goals conceded: %{x}<br>Goals scored: %{y}<extra></extra>"
-    fig.update_traces(hovertemplate=hovertemplate, customdata=data["team_name"])
+    hovertemplate = "<b>%{customdata[0]}</b><br>Goals conceded: %{x}<br>Goals scored: %{y}<extra></extra>"
+    fig.update_traces(hovertemplate=hovertemplate, customdata=np.stack((data["team_name"], data["team_name"]), axis=1))
     return fig
