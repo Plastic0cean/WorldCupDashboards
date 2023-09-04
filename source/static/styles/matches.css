@@ -104,6 +104,7 @@
 
 .name {
   font-weight: 300;
+  color: var(--second-text-color);
 }
 
 .icon {

@@ -4,14 +4,14 @@
 	--accent-color: #1e0461;
 	--border-color: rgb(226, 226, 226);
 	--border-radius: 10px;
-	--backgroud-color: #f6f6f9;
-	--button-background-color: white;
+	--body-backgroud-color: #f6f6f9;
+	--background-color: white;
 	--header-background: #1D2125;
 	--hover-bg-color: rgba(192, 190, 190, 0.25);
 	--hover-text-color: rgb(73, 77, 80);
 	--top-margin: 40px;
 	--main-element-width: 80%;
-	--second-text-color: #65676B;
+	--second-text-color: #70757a;
 	--shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 	--table-padding: 1.8rem;
 }
@@ -23,7 +23,7 @@
   }
 
 body {
-	background-color: var(--backgroud-color);
+	background-color: var(--body-backgroud-color);
 	font-family: 'Helvetica', serif;
 }
 
@@ -36,7 +36,7 @@ body {
 	border: none;
 	border-radius: 5px;
 	box-shadow: var(--shadow);
-	color: white;
+	color: var(--background-color);
 	display: inline-block;
 	font-size: 16px;
 	transition: all 0.2s ease-in-out;
@@ -59,7 +59,7 @@ a:hover {
 }
 
 .table-data {
-	background-color: white;
+	background-color: var(--background-color);
 	border: none;
 	border-collapse: collapse;
 	border-radius: var(--border-radius);
@@ -139,13 +139,12 @@ table tbody tr:last-child td{
 }
 
 .user-info h2 {
-	color: #666;
+	color: var(--second-text-color);
 	font-size: 24px;
 	margin-bottom: 10px;
 }
 
 .user-info p {
-	color: #333;
 	font-size: 16px;
 	line-height: 1.5;
 	margin-bottom: 10px;
@@ -156,7 +155,7 @@ table tbody tr:last-child td{
 }
 
 .dashboard-card {
-	background-color: white;
+	background-color: var(--background-color);
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
 	height: 125px;
@@ -174,7 +173,7 @@ table tbody tr:last-child td{
 }
 
 .dashboard-card p {
-	color: #666;
+	color: var(--second-text-color);
 	font-size: 16px;
 	margin-bottom: 20px;
 }
@@ -189,7 +188,7 @@ table tbody tr:last-child td{
 }
 
 .dashboard-container {
-	background-color: white;
+	background-color: var(--background-color);
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
 	padding: 10px;
@@ -214,7 +213,7 @@ table tbody tr:last-child td{
   }
   
   .scorecard {
-	background-color: white;
+	background-color: var(--background-color);
 	border-radius: var(--border-radius);
 	display: flex;
     margin: auto;
@@ -263,7 +262,7 @@ table tbody tr:last-child td{
 
 .date {
     justify-self: center;
-    color: gray;
+    color: var(--second-text-color);
 }
 
 .score {
@@ -277,7 +276,7 @@ table tbody tr:last-child td{
   }
 
 .show-more {
-	color: white;
+	color: var(--background-color);
 	background-color: var(--header-background);
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
@@ -320,7 +319,7 @@ td .scorecard {
 
 .active-button {
 	background-color: var(--header-background);
-	color: white;
+	color: var(--background-color);
 }
 
 

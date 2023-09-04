@@ -6,7 +6,7 @@ nav {
     align-items: center;
     gap: 0px;
     padding: 15px 50px;
-    color: white;
+    color: var(--body-backgroud-color);;
 }
 
 nav ul {
@@ -20,12 +20,12 @@ nav ul {
     font-size: 1.1rem;
     cursor: pointer;
     padding: 10px 15px;
-    color: white;
+    color: var(--body-backgroud-color);;
     text-decoration: none;
 }
 
 #nav-links li a:hover, #logo:hover {
-    color: white;
+    color: var(--body-backgroud-color);;
 }
 
 #nav-links li a:hover {
@@ -49,7 +49,7 @@ nav ul {
 
     .lines {
         display: block;
-        background-color: white;
+        background-color: var(--body-backgroud-color);;
         height: 2px;
         width: 35px;
     }

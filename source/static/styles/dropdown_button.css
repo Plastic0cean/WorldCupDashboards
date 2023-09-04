@@ -2,7 +2,7 @@
   background-color: var(--accent-color);
   border-radius: 10px;
   cursor: pointer;
-  color: white;
+  color: var(--body-backgroud-color);
   font-size: 16px;
   padding: 16px;
   margin: 20px auto;

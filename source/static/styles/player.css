@@ -17,7 +17,7 @@
 .search-icon {
 	width: 40px;
 	height: 30px;
-	background-color: white;
+	background-color: var(--body-backgroud-color);
 	cursor: pointer;
 }
 
@@ -27,11 +27,12 @@
 }
 
 #player-searching-form button {
-	background-color: white;
+	background-color: var(--body-backgroud-color);
 }
 
 .searching-bar {
 	height: 40px;
+	padding: 0 10px;
 	width: 80%;
 }
 
@@ -73,10 +74,10 @@
 
 .marker {
 	background-color: black;
-	border-color: white;
+	border-color: var(--body-backgroud-color);
 	border-radius: 50%;
 	box-shadow: 0 0 0 4px #00000085, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
-	color: white;
+	color: var(--body-backgroud-color);;
 	height: 50px;
 	line-height: 50px;
 	position: absolute;
