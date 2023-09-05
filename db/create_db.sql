@@ -1,21 +1,3 @@
-DROP TABLE award_winners;
-DROP TABLE awards;
-DROP TABLE bookings;
-DROP TABLE goals;
-DROP TABLE group_standings;
-DROP TABLE matches;
-DROP TABLE player_appearances;
-DROP TABLE players;
-DROP TABLE qualified_squads;
-DROP TABLE qualified_teams;
-DROP TABLE squads;
-DROP TABLE substitutions;
-DROP TABLE tasks;
-DROP TABLE team_appearances;
-DROP TABLE teams;
-DROP TABLE tournament_standings;
-DROP TABLE tournaments;
-
 CREATE TABLE award_winners (
 	award_winners_id INT PRIMARY KEY,
 	tournament_id VARCHAR(10),
@@ -24,14 +6,12 @@ CREATE TABLE award_winners (
 	player_id VARCHAR(10)
 );
 
-
 CREATE TABLE awards (
 	award_id VARCHAR(10) PRIMARY KEY,
 	award_name VARCHAR(100),
 	award_description VARCHAR(1000),
 	year_introduced INT
 );
-
 
 CREATE TABLE bookings (
 	booking_id VARCHAR(10) PRIMARY KEY,
@@ -132,9 +112,9 @@ CREATE TABLE qualified_teams(
 CREATE TABLE squads (
 	squad_id INT AUTO_INCREMENT PRIMARY KEY,
 	tournament_id VARCHAR(10),
-	player_id VARCHAR(10)
+	player_id VARCHAR(10),
 	team_id VARCHAR(10),
-	position VARCHAR(100),
+	position VARCHAR(100)
 );
 
 CREATE TABLE substitutions (

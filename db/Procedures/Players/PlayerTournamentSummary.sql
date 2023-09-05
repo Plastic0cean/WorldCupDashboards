@@ -1,4 +1,3 @@
-DELIMITER //
 CREATE PROCEDURE PlayerTournamentSummary (playerid VARCHAR(10))
 	WITH games AS (
 		SELECT 
@@ -40,5 +39,3 @@ CREATE PROCEDURE PlayerTournamentSummary (playerid VARCHAR(10))
 	LEFT JOIN goal g2 ON g1.tournament_id = g2.tournament_id
 	LEFT JOIN cards c ON g1.tournament_id = c.tournament_id
     JOIN tournaments t ON g1.tournament_id = t.tournament_id;
-END //
-DELIMITER ;

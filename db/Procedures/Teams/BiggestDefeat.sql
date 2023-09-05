@@ -6,9 +6,9 @@ CREATE PROCEDURE BiggestDefeat (teamid VARCHAR(10))
 		m.home_team_id, 
 		m.away_team_id,
 		t.team_name AS home_team_name,
-		t2.team_name as away_name, 
+		t2.team_name as away_team_name, 
 		m.match_date, 
-		score(a.goals_for, a.goals_against) as score
+		score(m.home_team_score, m.away_team_score) as score
 	FROM team_appearances a
 	JOIN tournaments tour ON tour.tournament_id = a.tournament_id
 	JOIN matches m ON a.match_id = m.match_id
