@@ -24,10 +24,10 @@
 			<span class="lines"></span>
 		</div>
 		<ul id="nav-links">
-			<li><img class="icon" src="/static/images/icons/team.svg" alt=""><a href="{{ url_for('teams.teams_selection') }}">Teams</a></li>
-			<li><img class="icon" src="/static/images/icons/player.svg" alt=""><a href="{{ url_for('players.players_selection') }}">Players</a></li>
-			<li><img class="icon" src="/static/images/icons/trophy.svg" alt=""><a href="{{ url_for('tournaments.tournament_details') }}">Tournaments</a></li>
-			<li><img class="icon" src="/static/images/icons/stadium.svg" alt=""><a href="{{ url_for('matches.matches_list') }}">Matches</a></li>
+			<li><a href="{{ url_for('teams.teams_selection') }}"><img class="icon" src="/static/images/icons/team.svg" alt="">Teams</a></li>
+			<li><a href="{{ url_for('players.players_selection') }}"><img class="icon" src="/static/images/icons/player.svg" alt="">Players</a></li>
+			<li><a href="{{ url_for('tournaments.tournament_details') }}"><img class="icon" src="/static/images/icons/trophy.svg" alt="">Tournaments</a></li>
+			<li><a href="{{ url_for('matches.matches_list') }}"><img class="icon" src="/static/images/icons/stadium.svg" alt="">Matches</a></li>
 		</ul>
 	</nav>
 	{% block content %}{% endblock %}
