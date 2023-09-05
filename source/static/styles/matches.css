@@ -119,7 +119,6 @@
   margin: 30px auto;
 }
 
-
 .squads-section {
   width: var(--element-width);
   background-color: white;
@@ -139,12 +138,14 @@
 }
 
 .choice-button {
-  background-color: var(--button-background-color);
+  background-color: var(--background-color);
   border: solid;
   border-color: var(--border-color);
   border-radius: var(--border-radius);
   border-width: 1px;
+  min-width: 100px;
   padding: 10px 20px;
+  transition: all 0.3s;
 }
 
 .choice-button {

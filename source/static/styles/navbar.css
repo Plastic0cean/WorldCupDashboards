@@ -1,4 +1,4 @@
-nav {
+.navigation-bar {
     height: 52px;
     background-color: var(--header-background);
     display: flex;
@@ -6,10 +6,10 @@ nav {
     align-items: center;
     gap: 0px;
     padding: 15px 50px;
-    color: var(--body-backgroud-color);;
+    color: var(--body-backgroud-color);
 }
 
-nav ul {
+.navigation-bar ul {
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -20,12 +20,12 @@ nav ul {
     font-size: 1.1rem;
     cursor: pointer;
     padding: 10px 15px;
-    color: var(--body-backgroud-color);;
+    color: var(--body-backgroud-color);
     text-decoration: none;
 }
 
 #nav-links li a:hover, #logo:hover {
-    color: var(--body-backgroud-color);;
+    color: var(--body-backgroud-color);
 }
 
 #nav-links li a:hover {
@@ -34,7 +34,7 @@ nav ul {
 }
 
 .hide {
-    top: 70px;
+    top: 50px;
 }
 
 @media screen and (max-width: 700px) {
@@ -46,10 +46,17 @@ nav ul {
         padding: 14px;
         margin-right: -10px;
     }
-
+    
+    .icon {
+        filter: invert(94%) sepia(99%) saturate(2%) hue-rotate(334deg) brightness(105%) contrast(101%);
+        transform: translateY(10px);
+        height: 38px;
+        width: auto;
+    }
+    
     .lines {
         display: block;
-        background-color: var(--body-backgroud-color);;
+        background-color: var(--body-backgroud-color);
         height: 2px;
         width: 35px;
     }
@@ -59,40 +66,38 @@ nav ul {
         border-radius: 5px;
     }
 
-    nav {
-        position: relative;
+    .navigation-bar {
+        /* position: relative; */
         padding: 15px 20px;
     }
 
     ul {
         width: 100%;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
         position: absolute;
-        top: -300px;
-        right: 0;
-        background-color: #f1c40f;
+        justify-content: space-evenly;
+        /* top: -300px; */
+        /* top: -900px; */
+        left: 0;
+        bottom: 1000px;
+        background-color: var(--header-background);
         padding: 35px 0;
-        border-radius: 0 0 20px 20px;
-        box-shadow: var(--shadow);
     }
-
+    
+    #nav-links {
+        height: 500px;
+    }
+    
     #nav-links li a {
-        color: rgba(12, 11, 11, 0.836);
+        color: white;
     }
-
+    
     #nav-links li {
+        /* margin: 50px; */
         text-align: center;
         width: 90vw;
     }
 
-    #nav-links li a:hover {
-        font-weight: bold;
-        color: #191e24;
-        border: none;
-        letter-spacing: 3px;
-    }
 }
 
 #logo {

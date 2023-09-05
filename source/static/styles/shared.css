@@ -181,6 +181,7 @@ table tbody tr:last-child td{
 	justify-content: center;
     justify-self: center;
 	flex-direction: column;
+	font-size: 0.95em;
   }
   
 .yellow-card,
@@ -298,6 +299,16 @@ td .scorecard {
 	color: var(--background-color);
 }
 
+
+.plot-title {
+	display: block;
+	font-size: 1.17em;
+	margin-block-start: 0.5em;
+	margin-block-end: 0.5em;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+	font-weight: bold;
+}
 
 @media only screen and (max-width: 600px) {
 	.table-data {
