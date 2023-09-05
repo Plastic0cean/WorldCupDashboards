@@ -1,6 +1,6 @@
 # World Cup Dashboards
 
-This is a web application inspired by some fantastic services like [Sofa score](sofascore.com), [Flashscore](flashscore.com). It presents some football statistics about World Cup tournaments between year 1930 and 2022 (on the day of writing these words, this is every tournament that happened).
+This is a web application inspired by some fantastic services like [Sofascore](https://sofascore.com), [Flashscore](https://flashscore.com). It presents some football statistics about World Cup tournaments between year 1930 and 2022 (on the day of writing these words, this is every tournament that happened).
 
 ## Dataset
 The core and most important thing in this project is historical data about football matches and players. The dataset originally comes from another [Github repository](https://github.com/jfjelstul/worldcup). Thanks to Joshua C. Fjelstul who performed the data scrapping and published a dataset under a CC-BY-SA 4.0 license.
