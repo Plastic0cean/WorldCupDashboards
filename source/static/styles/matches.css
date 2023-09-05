@@ -112,6 +112,18 @@
   height: auto;
 }
 
+.sub-out-icon, .sub-in-icon { 
+  width: 25px;
+}
+
+.sub-out-icon { 
+  filter: brightness(0) saturate(100%) invert(33%) sepia(36%) saturate(6196%) hue-rotate(339deg) brightness(64%) contrast(112%);
+}
+
+.sub-in-icon {
+  filter: brightness(0) saturate(100%) invert(29%) sepia(76%) saturate(3415%) hue-rotate(138deg) brightness(93%) contrast(96%);
+}
+
 .summary .scorecard {
   padding: 20px;
   width: var(--element-width);

@@ -38,7 +38,7 @@
   top: 50px;
 }
 
-.icon {
+.nav-icon {
     display: none;
 }
 
@@ -64,7 +64,7 @@
     margin-right: -10px;
   }
 
-  .icon {
+  .nav-icon {
     display: inline-block;
     filter: invert(94%) sepia(99%) saturate(2%) hue-rotate(334deg) brightness(105%) contrast(101%);
     height: 38px;
