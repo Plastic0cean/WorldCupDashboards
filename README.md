@@ -6,7 +6,7 @@ This is a web application inspired by some fantastic services like [Sofascore](h
 The core and most important thing in this project is historical data about football matches and players. The dataset originally comes from another [Github repository](https://github.com/jfjelstul/worldcup). Thanks to Joshua C. Fjelstul who performed the data scrapping and published a dataset under a CC-BY-SA 4.0 license.
 
 ## Tech Stack
-**Database**: MySql 8.0  
+**Database**: MySQL 8.0  
 **Backend**: Python Flask framework (to see all libraries used, please check a *requirements.txt* file)  
 **Frontend**: HTML Jinja Templates, CSS, JS  
 **DevOps**: Docker
