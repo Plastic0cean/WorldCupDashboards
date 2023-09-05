@@ -62,6 +62,7 @@
     cursor: pointer;
     padding: 14px;
     margin-right: -10px;
+    position: relative;
   }
 
   .nav-icon {
@@ -93,6 +94,7 @@
     padding: 35px 0;
     position: absolute;
     width: 100%;
+    z-index: 1;
   }
 
   #nav-links {
