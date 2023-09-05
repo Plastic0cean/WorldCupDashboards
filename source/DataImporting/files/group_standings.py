@@ -1,6 +1,6 @@
 import common
 
-COLUMNS_TO_DELETE = ["team_name", "team_code", "tournament_name", "goal_difference"]
+COLUMNS_TO_DELETE = ["key_id", "team_name", "team_code", "tournament_name", "goal_difference"]
 
 def process():
     standings = common.read_dataset(common.DataSource.GROUP_STANDINGS)
