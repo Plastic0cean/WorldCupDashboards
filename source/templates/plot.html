@@ -1,7 +1,7 @@
 {% macro plot(data, div_id, title, subtitle="") %}
 
-<h3>{{title}}</h3>
-{{subtitle}}
+<span class="plot-title">{{title}}</span>
+<span class="plot-subtitle">{{subtitle}}</span>
 <div id="{{div_id}}" class="plotly-chart">
   <script>
     var graphs = {{ data | safe}};

@@ -45,7 +45,7 @@
   </tbody>
 </table>
 
-<div class="grid-container">
+<div class="reports-container">
 
   <div id="team-matches-results" class="dashboard-container">
     {{ plot.plot(visualizations["matches_results"], "team-matches-results-pie", "Matches results") }}
@@ -58,12 +58,14 @@
         "The height of the column represents the goals difference of final score") }}
     </div>
 
+  {% if visualizations["most_minutes_by_player"] %}
   <div id="minutes-by-players" class="dashboard-container">
     {{ plot.plot(
       visualizations["most_minutes_by_player"],
       "minutes-by-player-treemap", "Players with the most minutes played",
       "Top 20 players who spend the largest amount of minutes on the pitch") }}
   </div>
+  {% endif %}
 
   {% if data["top_scorers"] %}
   <table id="top-scorers" class="table-data">

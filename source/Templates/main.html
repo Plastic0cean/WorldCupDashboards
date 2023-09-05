@@ -10,43 +10,28 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/shared.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/navbar.css') }}">
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-	<!-- <script>
-		let hamburger = document.querySelector('.hamburger');
-		let navLinks = document.getElementById('nav-links');
-		let links = document.querySelectorAll('.links');
-	
-		hamburger.addEventListener('click', () => {
-			navLinks.classList.toggle('hide');
-			hamburger.classList.toggle('lines-rotate');
-		});
-	
-		for (let i = 0; i < links.length; i++) {
-			links[i].addEventListener('click', () => {
-				navLinks.classList.toggle('hide');
-			});
-		}
-	</script> -->
-	{% block head %}{% endblock %}
+	{% block head %}
+	{% endblock %}
 </head>
 
 <body>
 
-	<nav>
+	<nav class="navigation-bar">
 		<a id="logo" href="{{ url_for('home.home_page') }}">MB</a>
-		<div class="hamburger">
+		<div id="hamburger" class="hamburger">
 			<span class="lines"></span>
 			<span class="lines"></span>
 			<span class="lines"></span>
 		</div>
 		<ul id="nav-links">
-			<li><a href="{{ url_for('teams.teams_selection') }}">Teams</a></li>
-			<li><a href="{{ url_for('players.players_selection') }}">Players</a></li>
-			<li><a href="{{ url_for('tournaments.tournament_details') }}">Tournaments</a></li>
-			<li><a href="{{ url_for('matches.matches_list') }}">Matches</a></li>
+			<li><a href="{{ url_for('teams.teams_selection') }}"><img class="nav-icon" src="/static/images/icons/team.svg" alt="">Teams</a></li>
+			<li><a href="{{ url_for('players.players_selection') }}"><img class="nav-icon" src="/static/images/icons/player.svg" alt="">Players</a></li>
+			<li><a href="{{ url_for('tournaments.tournament_details') }}"><img class="nav-icon" src="/static/images/icons/trophy.svg" alt="">Tournaments</a></li>
+			<li><a href="{{ url_for('matches.matches_list') }}"><img class="nav-icon" src="/static/images/icons/stadium.svg" alt="">Matches</a></li>
 		</ul>
 	</nav>
 	{% block content %}{% endblock %}
-
+	<script src="{{ url_for('static', filename='scripts/navigation_bar.js')}}"></script>
 </body>
 
 </html>

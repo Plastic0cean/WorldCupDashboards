@@ -4,26 +4,26 @@
 	--accent-color: #1e0461;
 	--border-color: rgb(226, 226, 226);
 	--border-radius: 10px;
-	--backgroud-color: #f6f6f9;
-	--button-background-color: white;
+	--body-backgroud-color: #f6f6f9;
+	--background-color: white;
 	--header-background: #1D2125;
 	--hover-bg-color: rgba(192, 190, 190, 0.25);
 	--hover-text-color: rgb(73, 77, 80);
 	--top-margin: 40px;
 	--main-element-width: 80%;
-	--second-text-color: rgb(128,128,128);
+	--second-text-color: #70757a;
 	--shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 	--table-padding: 1.8rem;
 }
 
 * {
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
   }
 
 body {
-	background-color: var(--backgroud-color);
+	background-color: var(--body-backgroud-color);
 	font-family: 'Helvetica', serif;
 }
 
@@ -36,7 +36,7 @@ body {
 	border: none;
 	border-radius: 5px;
 	box-shadow: var(--shadow);
-	color: white;
+	color: var(--background-color);
 	display: inline-block;
 	font-size: 16px;
 	transition: all 0.2s ease-in-out;
@@ -59,18 +59,17 @@ a:hover {
 }
 
 .table-data {
-	background-color: white;
+	background-color: var(--background-color);
 	border: none;
 	border-collapse: collapse;
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
+	/* font-size: min(14px, 4vmax); */
 	padding: var(--table-padding);
-	table-layout: fixed;
 	text-align: center;
 	transition: all 0.3s ease;
 	width: 100%;
 }
-
 
 .table-data tr {
 	height: 50px;
@@ -84,7 +83,7 @@ a:hover {
 
 
 table tbody tr:last-child td{
-    border: none;
+	border: none;
 }
 
 .table-data td, th {
@@ -140,13 +139,12 @@ table tbody tr:last-child td{
 }
 
 .user-info h2 {
-	color: #666;
+	color: var(--second-text-color);
 	font-size: 24px;
 	margin-bottom: 10px;
 }
 
 .user-info p {
-	color: #333;
 	font-size: 16px;
 	line-height: 1.5;
 	margin-bottom: 10px;
@@ -156,31 +154,7 @@ table tbody tr:last-child td{
 	font-weight: bold;
 }
 
-.dashboard-card {
-	background-color: white;
-	border-radius: var(--border-radius);
-	box-shadow: var(--shadow);
-	height: 125px;
-	margin: 5px;
-	overflow: hidden;
-	text-align: center;
-	transition: 0.33s;
-	width: 280px;
-}
-
-.dashboard-card h3 {
-	color: var(--accent-color);
-	margin-top: 20px;
-	font-size: 40px;
-}
-
-.dashboard-card p {
-	color: #666;
-	font-size: 16px;
-	margin-bottom: 20px;
-}
-
-.grid-container {
+.reports-container {
 	width: 90%;
 	display: grid;
 	gap: 20px;
@@ -190,7 +164,7 @@ table tbody tr:last-child td{
 }
 
 .dashboard-container {
-	background-color: white;
+	background-color: var(--background-color);
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
 	padding: 10px;
@@ -207,6 +181,7 @@ table tbody tr:last-child td{
 	justify-content: center;
     justify-self: center;
 	flex-direction: column;
+	font-size: 0.95em;
   }
   
 .yellow-card,
@@ -215,20 +190,20 @@ table tbody tr:last-child td{
   }
   
   .scorecard {
-    display: flex;
-    background-color: white;
+	background-color: var(--background-color);
+	border-radius: var(--border-radius);
+	display: flex;
     margin: auto;
-    border-radius: var(--border-radius);
     padding: 20px;
 	white-space: nowrap;
 
 }
 
 .team img {
-    width: 70px;
-    height: 50px;
-    margin: 10px;
+	aspect-ratio: 7/5;
 	box-shadow: var(--shadow);
+    margin: 10px;
+	width: min(70px, 60%);
 }
 
 .team {
@@ -251,7 +226,7 @@ table tbody tr:last-child td{
 } 
 
 .score {
-    font-size: 45px;
+    font-size: 5vh;
     margin: 5px 0px;
 }
 
@@ -264,7 +239,7 @@ table tbody tr:last-child td{
 
 .date {
     justify-self: center;
-    color: gray;
+    color: var(--second-text-color);
 }
 
 .score {
@@ -278,7 +253,7 @@ table tbody tr:last-child td{
   }
 
 .show-more {
-	color: white;
+	color: var(--background-color);
 	background-color: var(--header-background);
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
@@ -301,14 +276,19 @@ td.expand {
     cursor: pointer;
 }
 
+tr {
+	position: relative;
+}
+
 td.expand:before {
-    content: '+';
+    content: url('../images/icons/expand_more.svg');
     display: inline-block;
-    margin-right: 5px;
+	position: absolute;
+	left: 1%;
 }
 
 td.expand.collapsed:before {
-    content: '-';
+    content: url('../images/icons/expand_less.svg');
 }
 
 td .scorecard {
@@ -321,5 +301,27 @@ td .scorecard {
 
 .active-button {
 	background-color: var(--header-background);
-	color: white;
+	color: var(--background-color);
+}
+
+
+.plot-title {
+	display: block;
+	font-size: 1.17em;
+	margin-block-start: 0.5em;
+	margin-block-end: 0.5em;
+	margin-inline-start: 0;
+	margin-inline-end: 0;
+	font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+	.table-data {
+		font-size: 3vw;
+	}
+
+	.reports-container {
+		display: flex;
+		flex-direction: column;
+	}
 }

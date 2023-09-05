@@ -17,7 +17,7 @@
 .search-icon {
 	width: 40px;
 	height: 30px;
-	background-color: white;
+	background-color: var(--body-backgroud-color);
 	cursor: pointer;
 }
 
@@ -27,11 +27,12 @@
 }
 
 #player-searching-form button {
-	background-color: white;
+	background-color: var(--body-backgroud-color);
 }
 
 .searching-bar {
 	height: 40px;
+	padding: 0 10px;
 	width: 80%;
 }
 
@@ -55,28 +56,24 @@
 	justify-content: center;
 }
 
-#player-goals-cards-section .dashboard-card {
-	margin: 20px 40px;
-}
-
 .pitch-positions {
 	position: relative;
 	margin: 0 auto 20px;
-	width: 500px;
+	max-width: 500px;
 }
 
 .pitch-positions img {
-	width: 500px;
+	width: 100%;
 	height: auto;
 }
 
 
 .marker {
 	background-color: black;
-	border-color: white;
+	border-color: var(--body-backgroud-color);
 	border-radius: 50%;
 	box-shadow: 0 0 0 4px #00000085, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05);
-	color: white;
+	color: var(--body-backgroud-color);;
 	height: 50px;
 	line-height: 50px;
 	position: absolute;
@@ -84,54 +81,55 @@
 	width: 50px;
 }
 
-.forward {
-	left: 400px;
-	top: 140px;
-}
-
 .left-winger {
-	left: 385px;
-	top: 30px;
+	left: 74%;
+	top: 8%;
 }
 
 .right-winger {
-	left: 385px;
-	top: 260px;
-}
-
-.attacking-midfielder {
-	left: 320px;
-	top: 140px;
+	left: 74%;
+	top: 76%;
 }
 
 .center-midfielder {
-	left: 228px;
-	top: 140px;
+	left: 45%;
+	top: 42%;
 }
 
 .defensive-midfielder {
-	left: 170px;
-	top: 140px;
+	left: 30%;
+	top: 42%;
 }
 
-.left-back {
-	left: 85px;
-	top: 30px;
-}
-
-.right-back {
-	left: 85px;
-	top: 260px;
+.forward {
+	left: 79%;
+	top: 42%;
 }
 
 .center-back {
-	left: 85px;
-	top: 140px;
+	left: 15%;
+	top: 42%;
+}
+
+.left-back {
+	left: 15%;
+	top: 8%;
+}
+
+.right-back {
+	left: 15%;
+	top: 76%;
+}
+
+
+.attacking-midfielder {
+	left: 65%;
+	top: 42%;
 }
 
 .goalkeeper {
-	left: 25px;
-	top: 140px;
+	left: 5%;
+	top: 42%;
 }
 
 #charts {

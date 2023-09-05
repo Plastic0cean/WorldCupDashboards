@@ -1,5 +1,6 @@
 :root {
   --element-width: 65%;
+  --mobile-element-width: 90%;
 }
 
 .match-date-header {
@@ -19,21 +20,21 @@
 }
 
 .scoreboard-container {
-  margin: 10px;
   box-shadow: var(--shadow);
+  margin: 10px;
 }
 
 .accordion {
-  cursor: pointer;
   border: none;
+  cursor: pointer;
   outline: none;
   transition: 0.4s;
 }
 
 .accordion,
 .panel {
-  width: var(--element-width);
   margin: auto;
+  width: var(--element-width);
 }
 
 .match-date-header {
@@ -103,11 +104,24 @@
 
 .name {
   font-weight: 300;
+  color: var(--second-text-color);
 }
 
-img {
+.icon {
   width: 20px;
   height: auto;
+}
+
+.sub-out-icon, .sub-in-icon { 
+  width: 25px;
+}
+
+.sub-out-icon { 
+  filter: brightness(0) saturate(100%) invert(33%) sepia(36%) saturate(6196%) hue-rotate(339deg) brightness(64%) contrast(112%);
+}
+
+.sub-in-icon {
+  filter: brightness(0) saturate(100%) invert(29%) sepia(76%) saturate(3415%) hue-rotate(138deg) brightness(93%) contrast(96%);
 }
 
 .summary .scorecard {
@@ -116,7 +130,6 @@ img {
   box-shadow: var(--shadow);
   margin: 30px auto;
 }
-
 
 .squads-section {
   width: var(--element-width);
@@ -137,12 +150,14 @@ img {
 }
 
 .choice-button {
-  background-color: var(--button-background-color);
+  background-color: var(--background-color);
   border: solid;
   border-color: var(--border-color);
   border-radius: var(--border-radius);
   border-width: 1px;
+  min-width: 100px;
   padding: 10px 20px;
+  transition: all 0.3s;
 }
 
 .choice-button {
@@ -157,5 +172,21 @@ img {
 
 .events {
   transition: 0.5s;
+
+}
+
+@media only screen and (max-width: 800px) {
+	.panel, .accordion, .events, .matches-list-container, .squads-section, .summary .scorecard {
+    width: var(--mobile-element-width);
+	}
+
+  .events {
+    padding: 0;
+  }
+
+  .events table {
+    width: 95%;
+  }
+  
 
 }

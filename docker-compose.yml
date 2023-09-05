@@ -1,0 +1,14 @@
+version: "3"
+services:
+  db:
+    build: ./db
+    ports:
+      - "32000:3306"
+    image: worldcup_db
+  app:
+    build: ./
+    image: worldcup_app
+    ports: 
+      - "5000:5000"
+    depends_on: 
+      - db

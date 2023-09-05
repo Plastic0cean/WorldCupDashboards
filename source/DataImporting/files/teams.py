@@ -1,6 +1,6 @@
 import common
 
-COLUMNS_TO_DELETE = ["key_id", "federation_wikipedia_link", "confederation_id"]
+COLUMNS_TO_DELETE = ["key_id", "federation_wikipedia_link", "confederation_id", "team_wikipedia_link"]
 
 def process():
     teams = common.read_dataset(common.DataSource.TEAMS)

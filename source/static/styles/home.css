@@ -1,17 +1,29 @@
 body {
 	background-image: url('../images/background.jpg');
 	background-repeat: no-repeat;
-	background-size: cover;
+    background-size: auto;
 }
 
-
 p {
-    display: flex;
     background-color: var(--header-background);
-    color: white;
+    color: var(--body-backgroud-color);
+    display: flex;
     font-size: 1.5rem;
-    width: 70%;
     margin: 10% auto;
+    max-width: 70%;
     text-align: center;
     padding: 0 10px;
+    width: fit-content;
+}
+
+@media only screen and (min-width: 1250px) {
+    body {
+        background-size: cover;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    body {
+        background-position: -387px -250px;
+    }
 }
