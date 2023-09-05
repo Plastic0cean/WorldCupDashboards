@@ -276,14 +276,19 @@ td.expand {
     cursor: pointer;
 }
 
+tr {
+	position: relative;
+}
+
 td.expand:before {
-    content: '+';
+    content: url('../images/icons/expand_more.svg');
     display: inline-block;
-    margin-right: 5px;
+	position: absolute;
+	left: 1%;
 }
 
 td.expand.collapsed:before {
-    content: '-';
+    content: url('../images/icons/expand_less.svg');
 }
 
 td .scorecard {
