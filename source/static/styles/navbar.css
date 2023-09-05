@@ -24,12 +24,11 @@
   text-decoration: none;
 }
 
-#nav-links li a:hover,
-#logo:hover {
+#nav-links li a:hover, #logo:hover {
   color: var(--body-backgroud-color);
 }
 
-#nav-links li a:hover {
+#nav-links li a:hover, #logo:hover {
   background-color: #a6c5e229;
   transition: 0.12s;
 }
@@ -115,4 +114,5 @@
 #logo {
   font-size: 24px;
   text-decoration: none;
+  padding: 10px;
 }
