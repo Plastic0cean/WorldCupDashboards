@@ -17,10 +17,15 @@ The core and most important thing in this project is historical data about footb
 
 ## Screenshots
 ![Matches list](demo/assets/matches_list.png)
+<br>
 ![Match list](demo/assets/match_details.png)
+<br>
 ![Player details](demo/assets/player_details.png)
+<br>
 ![Team details](demo/assets/team_details.png)
+<br>
 ![Team details](demo/assets/team_details(2).png)
+<br>
 
 ## How to run?
 
