@@ -127,7 +127,7 @@
 	top: 42%;
 }
 
-.goalkeeper {
+.goal-keeper {
 	left: 5%;
 	top: 42%;
 }
@@ -166,4 +166,3 @@
 .nationality ~ .nationality::before {
 	content: '/'; 
 }
-  
