@@ -33,7 +33,9 @@ To run the project you should have a [Docker](https://www.docker.com/) already i
 
 First, to build the project, run the following command in a docker console:
 
-``docker compose up --build``
+```console
+docker compose up --build
+```
 
 The docker will use docker-compose.ylm and two dockerfiles stored in this repository. First dockerfile (in the root directory of the project) is used for installing Python and its all required dependencies and finally for running flask server.
 
@@ -41,4 +43,6 @@ The second dockerfile (which is stored in the *./db* directory) is used for crea
 
 After building the project you need to run a data import. The command below performs an easy ETL process - it runs another Python script to transform and import data from csv files into a database. It needs an ID of the container created in the previous step, you can get it by running ``docker ps`` in a console.
 
-``docker exec <container_id> python DataImporting/files/run_data_import.py``
+```console
+docker exec <container_id> python DataImporting/files/run_data_import.py
+```
