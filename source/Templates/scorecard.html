@@ -7,7 +7,7 @@
         {% else %}
         {{data.home_team_name}}
         {% endif %}
-        <img src="{{url_for('teams.display_flag', team_id=data.home_team_id)}}" alt="{{data.home_team_name}}" loading="lazy">
+        <img src="{{url_for('teams.flag', team_id=data.home_team_id)}}" alt="{{data.home_team_name}}" loading="lazy">
     </div>
     <div class="match-result">
         {% if show_date %}
@@ -21,7 +21,7 @@
         {% else %}
         {{data.away_team_name}}
         {% endif %}
-        <img src="{{url_for('teams.display_flag', team_id=data.away_team_id)}}" alt="{{data.away_team_name}}" loading="lazy">
+        <img src="{{url_for('teams.flag', team_id=data.away_team_id)}}" alt="{{data.away_team_name}}" loading="lazy">
     </div>
 </div>
 

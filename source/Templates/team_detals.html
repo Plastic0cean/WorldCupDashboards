@@ -9,7 +9,7 @@
 {% block content %}
 <div class="container">
   <div class="profile-pic">
-    <img class="country-flag" src="{{url_for('.display_flag', team_id=data['team'].team_id)}}" alt="{{data['team'].team_name}} flag">
+    <img class="country-flag" src="{{url_for('.flag', team_id=data['team'].team_id)}}" alt="{{data['team'].team_name}} flag">
   </div>
   <div class="user-info">
     <h1>{{data["team"].team_name}}</h1>

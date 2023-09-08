@@ -30,27 +30,7 @@
 <div class="pitch-positions">
   <img src="/static/images/pitch.png" alt="player positions">
   {% for position in data["player"].positions %}
-  {% if position=='forward' %}
-  <div class="marker forward">FW</div>
-  {% elif position=='left winger'%}
-  <div class="marker left-winger">LW</div>
-  {% elif position=='right winger'%}
-  <div class="marker right-winger">RW</div>
-  {% elif position=='attacking midfielder'%}
-  <div class="marker attacking-midfielder">AMF</div>
-  {% elif position=='center midfielder'%}
-  <div class="marker center-midfielder">CM</div>
-  {% elif position=='defensive midfielder'%}
-  <div class="marker defensive-midfielder">DM</div>
-  {% elif position=='center back'%}
-  <div class="marker center-back">CB</div>
-  {% elif position=='left back'%}
-  <div class="marker left-back">LB</div>
-  {% elif position=='right back'%}
-  <div class="marker right-back">RB</div>
-  {% else %}
-  <div class="marker goalkeeper">GK</div>
-  {% endif %}
+  <div class="marker {{ position.replace(' ', '-') }}"></div>
   {% endfor %}
 </div>
 {% endif %}
@@ -128,4 +108,5 @@
 
 
 <script src="{{ url_for('static', filename='scripts/collapsible_table.js')}}"></script>
+<script src="{{ url_for('static', filename='scripts/pitch_positions.js')}}"></script>
 {% endblock content %}
