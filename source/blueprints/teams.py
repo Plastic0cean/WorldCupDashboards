@@ -40,12 +40,7 @@ def teams_selection():
         return redirect(url_for("teams.team_details", team_id=team_id))
     return render_template("team_selection.html", teams=teams)
 
-@retry_if_fail
-def get_flag_filename(team_id: str):
-    filename = team_repository.get_by_id(team_id).flag_img
-    return filename
 
 @teams.route("/flags/<team_id>")
-def display_flag(team_id: str):
-    filename = get_flag_filename(team_id)
-    return send_from_directory(os.path.join("static", "images", "flags"), filename)
+def flag(team_id: str):
+    return send_from_directory(os.path.join("static", "images", "flags"), team_id + ".jpg")

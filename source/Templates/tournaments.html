@@ -44,7 +44,7 @@
         <div class="scorecard">
           <div class="team">
             {{data["most_cards_in_single_game"].home_team_name}}
-            <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].home_team_id)}}"
+            <img src="{{url_for('teams.flag', team_id=data['most_cards_in_single_game'].home_team_id)}}"
               alt="{{data['most_cards_in_single_game'].home_team_name}}">
           </div>
           <div class="match-result">
@@ -57,7 +57,7 @@
           </div>
           <div class="team">
             {{data["most_cards_in_single_game"].away_team_name}}
-            <img src="{{url_for('teams.display_flag', team_id=data['most_cards_in_single_game'].away_team_id)}}"
+            <img src="{{url_for('teams.flag', team_id=data['most_cards_in_single_game'].away_team_id)}}"
               alt="{{data['most_cards_in_single_game'].away_team_name}}">
           </div>
         </div> 
