@@ -4,7 +4,7 @@ set -e
 echo "Starting database deployment"
 
 echo "Creating tables"
-mysql -u"root" -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE" < ../db_scripts/create_db.sql
+mysql -u"root" -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE" < ../db_scripts/create_tables.sql
 
 echo "Successfully created tables"
 echo "Creating functions"
@@ -46,5 +46,4 @@ for file in *
     mysql -u"root" -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE" < "$file"
 done
 echo "Successfully created procedures"
-
 echo "Successfully finished database deployment"
