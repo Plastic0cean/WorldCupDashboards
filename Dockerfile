@@ -4,6 +4,5 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY db/. db
 COPY source/. source
-# RUN python source/DataImporting/files/run_data_import.py
 WORKDIR "source"
-CMD FLASK_APP=app python -m flask run --host=0.0.0.0
+CMD gunicorn --bind 0.0.0.0:5000 app:app
