@@ -41,7 +41,7 @@ The docker will use docker-compose.ylm and two dockerfiles stored in this reposi
 
 The second dockerfile (which is stored in the *./db* directory) is used for creating and building a database - it pulls MySQL image from a dockerhub, then runs a script to create tables, stored procedures and functions.
 
-After building the project you need to run a data import. The command below performs an easy ETL process - it runs another Python script to transform and import data from csv files into a database. It needs an ID of the container created in the previous step, you can get it by running ``docker ps`` in a console.
+After building the project you need to run a data import. The command below performs an easy ETL process - it runs another Python script to transform and import data from csv files into a database. It needs an ID of the container named *worldcup_app* which was created in the previous step, you can get it by running ``docker ps`` in a console.
 
 ```console
 docker exec <container_id> python DataImporting/files/run_data_import.py
