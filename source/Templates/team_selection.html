@@ -5,16 +5,16 @@
 {% endblock head %}
 
 {% block content %}
-<h1>Select the Team</h1>
+<h1 id="team-selection-header">Select the Team</h1>
 
-  <form method="post">
-  <label for="dropdown-list"></label>
-  <select class="dropdown-list" name="teams-dropdown" id="teams-dropdown">
+<div class="team-selector">
+  <input type="search" autocomplete="off" class="input-text" placeholder="Country name">
+  <ul class="dropdown-content">
     {% for team in teams%}
-      <option value="{{team.team_id}}">{{team.team_name}}</option>
+    <li><a href="{{ url_for('teams.team_details', team_id=team.team_id) }}"><div class="link">{{ team.team_name }}</div></a></li>
     {% endfor %}
-  </select>
+  </ul>
+</div>
 
-  <button type="submit" class="submit-button">Select</button>
-  </form>
+<script src="{{ url_for('static', filename='scripts/countries_selector.js')}}"></script>
 {% endblock content %}
