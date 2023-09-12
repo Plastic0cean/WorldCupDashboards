@@ -48,3 +48,12 @@
   }
 
 document.addEventListener("keyup", renderCountries);
+
+
+// Unfocus input on ESC button
+document.onkeydown = evt => {
+  evt = evt || window.event;
+  if (evt.keyCode == 27) {
+      inputText.blur();
+  }
+};

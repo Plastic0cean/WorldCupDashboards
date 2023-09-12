@@ -84,21 +84,19 @@
     padding: 15px 20px;
   }
 
-  ul {
+  #nav-links {
     background-color: var(--header-background);
     bottom: 1000px;
     flex-direction: column;
+    height: 500px;
     justify-content: space-evenly;
     left: 0;
     padding: 35px 0;
     position: absolute;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
   }
 
-  #nav-links {
-    height: 500px;
-  }
 
   #nav-links li a {
     color: white;

@@ -11,7 +11,7 @@
   <input type="search" autocomplete="off" class="input-text" placeholder="Country name">
   <ul class="dropdown-content">
     {% for team in teams%}
-    <li><a tabindex="0" href="{{ url_for('teams.team_details', team_id=team.team_id) }}"><div class="link">{{ team.team_name }}</div></a></li>
+    <li><a href="{{ url_for('teams.team_details', team_id=team.team_id) }}"><div class="link">{{ team.team_name }}</div></a></li>
     {% endfor %}
   </ul>
 </div>
