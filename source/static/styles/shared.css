@@ -64,7 +64,6 @@ a:hover {
 	border-collapse: collapse;
 	border-radius: var(--border-radius);
 	box-shadow: var(--shadow);
-	/* font-size: min(14px, 4vmax); */
 	padding: var(--table-padding);
 	text-align: center;
 	transition: all 0.3s ease;
