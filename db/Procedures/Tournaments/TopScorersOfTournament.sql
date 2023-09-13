@@ -11,4 +11,5 @@ CREATE PROCEDURE TopScorersOfTournament (tournamentid VARCHAR(10), how_many INT)
     JOIN matches m ON g.match_id = m.match_id
 	WHERE tournament_id = COALESCE(tournamentid, tournament_id)
 	GROUP BY g.player_id, p.given_name, p.family_name, g.player_team_id, t.team_name
-    ORDER BY goals DESC;
+    ORDER BY goals DESC
+    LIMIT how_many;
