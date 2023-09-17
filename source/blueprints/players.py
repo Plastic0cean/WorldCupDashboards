@@ -18,10 +18,11 @@ def generate_data(player_id):
         "positions": player_repository.get_positions(player_id)
     }
 
+
 def generate_visualizations(player_id):
     return {
         "minutes_played": plt.overall_minutes_played(player_stats_repository.get_minutes_played(player_id)),
-        "starer_or_sub": plt.starter_or_substitute(player_stats_repository.get_number_of_games_as_starter(player_id))
+        "starter_or_sub": plt.starter_or_substitute(player_stats_repository.get_number_of_games_as_starter(player_id))
     }
 
 

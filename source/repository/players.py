@@ -44,9 +44,12 @@ class PlayerStatisticsRepository(EntityRepository):
         return StoredProcedure("MinutesPlayedAndBenched", playerid=player_id).call(self.conn)[0]
         
     @to_dataframe
-    def get_number_of_games_as_starter(self, player_id) -> dict:
+    def get_number_of_games_as_starter(self, player_id) -> dict[str, list[str | int]]:
         data = StoredProcedure("GamesAsStarterOrSubstitute", playerid=player_id).call(self.conn)[0]
-        return data._asdict()
+        return {
+            "starter_or_sub": ["starter", "substitute"],
+            "number_of_matches": [data.starter, data.substitute]
+        }
 
 
 player_repository = PlayerRepository(conn)
