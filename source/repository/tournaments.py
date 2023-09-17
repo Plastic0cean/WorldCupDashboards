@@ -1,5 +1,6 @@
-from Db.DbConnection import conn, DBConnection, StoredProcedure
+from Db.DbConnection import conn, StoredProcedure
 from .utils import to_dataframe
+from entities.tournament import TournamentSummary
 from .entity import EntityRepository
 
 
@@ -17,7 +18,8 @@ class TournamentRepository(EntityRepository):
 class TournamentSummaryRepository(EntityRepository):
 
     def get_by_player(self, player_id: str):
-        return StoredProcedure("PlayerTournamentSummary", playerid=player_id).call(self.conn)
+        records = StoredProcedure("PlayerTournamentSummary", playerid=player_id).call(self.conn)
+        return [TournamentSummary(*record) for record in records]
 
 
 class TournamentStatisticsRepository(EntityRepository):
@@ -33,4 +35,4 @@ class TournamentStatisticsRepository(EntityRepository):
 
 tournament_repository = TournamentRepository(conn)
 tournament_stats_repository = TournamentStatisticsRepository(conn)
-tournnamet_summary_repository = TournamentSummaryRepository(conn)
+tournament_summary_repository = TournamentSummaryRepository(conn)

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request
 from entities.match import MatchesSummaryCollection
 from repository.players import player_repository, player_stats_repository
 from repository.awards import awards_repository
-from repository.tournaments import tournnamet_summary_repository
+from repository.tournaments import tournament_summary_repository
 from repository.match_summary import match_summary_repository
 from SearchingEngine.Searching import players_searching
 import visualizations.plots as plt
@@ -11,7 +11,7 @@ players = Blueprint("players", __name__)
 
 def generate_data(player_id):
     return {
-        "appearances_summary": tournnamet_summary_repository.get_by_player(player_id),
+        "appearances_summary": tournament_summary_repository.get_by_player(player_id),
         "matches": MatchesSummaryCollection(match_summary_repository.get_by_player(player_id)).to_dict("tournament_id"),
         "awards": awards_repository.get_player_awards(player_id),
         "player": player_repository.get_by_id(player_id),
