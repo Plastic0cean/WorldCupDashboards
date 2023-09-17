@@ -1,6 +1,7 @@
 from Db.DbConnection import conn, DBConnection, StoredProcedure
 from .utils import to_dataframe
 
+
 class TeamRepository:
 
     def __init__(self, conn: DBConnection) -> None:
@@ -20,15 +21,6 @@ class TeamStatisticsRepository:
 
     def __init__(self, conn: DBConnection) -> None:
         self.conn = conn
-
-    def get_biggest_win(self, team_id: str):
-        return StoredProcedure("BiggestWin", teamid=team_id).call(conn)
-
-    def get_biggest_defeat(self, team_id: str):
-        return StoredProcedure("BiggestDefeat", teamid=team_id).call(conn)
-
-    def get_top_scorers(self, team_id: str, how_many: int=None):
-        return StoredProcedure("TopScorers", teamid=team_id, how_many=how_many).call(conn)
 
     def get_position_by_tournaments(self, team_id: str):
         return StoredProcedure("PositionsOnTournaments", teamid=team_id).call(conn)
@@ -57,9 +49,6 @@ class TeamStatisticsRepository:
             "number": [data.wins, data.loses, data.draws]
             }
         
-    # def get_goals_and_matches_summary(self, team_id: str):
-    #     return StoredProcedure("GoalsAndMatchesSummary", teamid=team_id).call(self.conn)[0]
-    
     
 team_repository = TeamRepository(conn)
 team_stats_repository = TeamStatisticsRepository(conn)

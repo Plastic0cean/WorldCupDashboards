@@ -32,8 +32,8 @@
 
     <div id="most-goals-in-single-game-container" class="scoreboard-container dashboard-container">
       <h3>Most goals in a single match</h3>
-      <a href="{{url_for('matches.match_details', match_id=data['most_goals_in_single_game'][0].match_id)}}">
-        {{ scorecard.scorecard(data["most_goals_in_single_game"][0], False) }}
+      <a href="{{url_for('matches.match_details', match_id=data['most_goals_in_single_game'].match_id)}}">
+        {{ scorecard.scorecard(data["most_goals_in_single_game"], False) }}
       </a>
     </div>
 
@@ -60,7 +60,7 @@
             <img src="{{url_for('teams.flag', team_id=data['most_cards_in_single_game'].away_team_id)}}"
               alt="{{data['most_cards_in_single_game'].away_team_name}}">
           </div>
-        </div> 
+        </div>
       </a>
     </div>
     {% endif %}
@@ -80,7 +80,7 @@
         <tr class="row-on-hover-grey">
           <td><a href="{{url_for('players.player_details', player_id=scorer.player_id)}}">{{scorer.player_name}}</a>
           </td>
-          <td><a href="{{url_for('teams.team_details', team_id=scorer.team_id)}}">{{scorer.team}}</a></td>
+          <td><a href="{{url_for('teams.team_details', team_id=scorer.team_id)}}">{{scorer.team_name}}</a></td>
           <td>{{scorer.goals}}</td>
         </tr>
         {% endfor %}

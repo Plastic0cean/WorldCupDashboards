@@ -1,11 +1,9 @@
 from Db.DbConnection import conn, DBConnection, StoredProcedure
 from .utils import to_dataframe
+from .entity import EntityRepository
 
 
-class TournamentRepository:
-
-    def __init__(self, conn: DBConnection) -> None:
-        self.conn = conn
+class TournamentRepository(EntityRepository):
 
     def get_all(self):
         with self.conn:
@@ -16,22 +14,13 @@ class TournamentRepository:
             return self.conn.execute(f"SELECT * FROM tournaments WHERE tournament_id = '{tournament_id}'")
 
 
-class TournamentStatisticsRepository:
+class TournamentSummaryRepository(EntityRepository):
 
-    def __init__(self, conn: DBConnection) -> None:
-        self.conn = conn
+    def get_by_player(self, player_id: str):
+        return StoredProcedure("PlayerTournamentSummary", playerid=player_id).call(self.conn)
 
-    def get_top_scorers(self, tournament_id: str=None, how_many: int=None):
-        return StoredProcedure("TopScorersOfTournament", tournamentid=tournament_id, how_many=how_many).call(self.conn)
 
-    def get_most_goals_in_single_game(self, tournament_id: str=None):
-        return StoredProcedure("MostGoalsInSingleGame", tournamentid=tournament_id).call(self.conn)
-
-    def get_most_cards_in_single_game(self, tournament_id: str=None, how_many: int=1):
-        try:
-            return StoredProcedure("MostBookingsByGames", tournamentid=tournament_id, how_many=how_many).call(self.conn)[0]
-        except IndexError:
-            return
+class TournamentStatisticsRepository(EntityRepository):
 
     @to_dataframe
     def get_goals_by_minutes(self, tournament_id: str=None):
@@ -44,3 +33,4 @@ class TournamentStatisticsRepository:
 
 tournament_repository = TournamentRepository(conn)
 tournament_stats_repository = TournamentStatisticsRepository(conn)
+tournnamet_summary_repository = TournamentSummaryRepository(conn)

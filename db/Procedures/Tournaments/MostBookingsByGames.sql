@@ -3,6 +3,7 @@ CREATE PROCEDURE MostBookingsByGames (tournamentid VARCHAR(10), how_many INT)
 	WITH BookingsByGame AS (
 	SELECT 
 		m.tournament_id,
+        m.match_date,
 		b.match_id,
 		m.home_team_id,
 		t.team_name AS home_team_name,
@@ -19,11 +20,23 @@ CREATE PROCEDURE MostBookingsByGames (tournamentid VARCHAR(10), how_many INT)
 	WHERE m.tournament_id = COALESCE(tournamentid, m.tournament_id)
 	GROUP BY 
 		m.tournament_id,
+        m.match_date,
 		b.match_id,
 		m.home_team_id,
 		t.team_name,
 		m.away_team_id,
 		t2.team_name)
 		
-	SELECT * FROM BookingsByGame 
+	SELECT 
+		tournament_id,
+		match_id,
+		home_team_id,
+		home_team_name,
+		away_team_id,
+		away_team_name,
+		score,
+		match_date,
+        yellow_cards,
+        red_cards
+	FROM BookingsByGame
 	WHERE yellow_cards + red_cards = (SELECT MAX(yellow_cards + red_cards) FROM BookingsByGame) LIMIT how_many;

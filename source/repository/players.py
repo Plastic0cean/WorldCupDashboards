@@ -1,34 +1,11 @@
-from Db.DbConnection import conn, DBConnection, StoredProcedure
+from entities.player import Player
+from Db.DbConnection import conn, StoredProcedure
 from .utils import to_dataframe
-from dataclasses import dataclass
-
-@dataclass
-class Player:
-
-    id: str
-    given_name: str
-    family_name: str
-    birth_date: str
-    team_ids: list[str]
-    nationalities: list[str]
-    positions: list[str]
-
-    @property
-    def name(self) -> str:
-        return f"{self.given_name} {self.family_name}" if self.given_name else self.family_name
-    
-    @property
-    def positions_str(self, sep: str="/") -> str:
-        return sep.join(self.positions)
-    
-    def get_teams(self):
-        return [(team_id, nationality) for team_id, nationality in zip(self.team_ids, self.nationalities)]
+from .entity import EntityRepository
 
 
-class PlayerRepository:
 
-    def __init__(self, conn: DBConnection) -> None:
-        self.conn = conn
+class PlayerRepository(EntityRepository):
 
     def get_all(self):
         return StoredProcedure("PlayersList").call(self.conn)
@@ -61,36 +38,15 @@ class PlayerRepository:
         return nationalities
 
 
-class PlayerStatisticsRepository:
-
-    def __init__(self, conn: DBConnection) -> None:
-        self.conn = conn
-    
-    def get_awards(self, player_id: str):
-        return StoredProcedure("PlayerAwards", playerid=player_id).call(self.conn)
-    
-    def get_apperances_summary(self, player_id: str):
-        return StoredProcedure("PlayerTournamentSummary", playerid=player_id).call(self.conn)
+class PlayerStatisticsRepository(EntityRepository):
 
     def get_minutes_played(self, player_id: str):
         return StoredProcedure("MinutesPlayedAndBenched", playerid=player_id).call(self.conn)[0]
         
     @to_dataframe
-    def get_number_of_games_as_starter(self, player_id):
-        with self.conn:
-            query = f"""
-                SELECT 
-                    SUM(starter) AS starter,
-                    SUM(substitute) AS substitute
-                FROM player_appearances 
-            WHERE player_id = '{player_id}'
-            """
-            result = self.conn.execute(query)
-        
-        return {
-            "starer_or_sub": ["starter", "substitute"],
-            "number_of_matches": [result[0].starter, result[0].substitute]
-        }
+    def get_number_of_games_as_starter(self, player_id) -> dict:
+        data = StoredProcedure("GamesAsStarterOrSubstitute", playerid=player_id).call(self.conn)[0]
+        return data._asdict()
 
 
 player_repository = PlayerRepository(conn)
