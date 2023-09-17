@@ -1,5 +1,5 @@
 import pytest
-from SearchingEngine.FuzzyStringsMatcher import FuzzyStringsMatcher
+from searching.FuzzyStringsMatcher import FuzzyStringsMatcher
 
 @pytest.fixture
 def not_ignore_cases_matcher():

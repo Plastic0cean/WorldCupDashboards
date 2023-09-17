@@ -1,4 +1,4 @@
-from Db.DbConnection import DBConnection
+from db.DbConnection import DBConnection
 
 class EntityRepository:
     """

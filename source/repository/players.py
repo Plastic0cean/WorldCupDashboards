@@ -1,5 +1,5 @@
 from entities.player import Player
-from Db.DbConnection import conn, StoredProcedure
+from db.DbConnection import conn, StoredProcedure
 from .utils import to_dataframe
 from .entity import EntityRepository
 

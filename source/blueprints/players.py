@@ -4,7 +4,7 @@ from repository.players import player_repository, player_stats_repository
 from repository.awards import awards_repository
 from repository.tournaments import tournament_summary_repository
 from repository.match_summary import match_summary_repository
-from SearchingEngine.Searching import players_searching
+from searching.Searching import players_searching
 import visualizations.plots as plt
 
 players = Blueprint("players", __name__)

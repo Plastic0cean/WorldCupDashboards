@@ -1,4 +1,4 @@
-from Db.DbConnection import conn, DBConnection, StoredProcedure
+from db.DbConnection import conn, DBConnection, StoredProcedure
 
 
 class SquadsRepository:

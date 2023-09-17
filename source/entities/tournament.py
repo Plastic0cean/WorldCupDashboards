@@ -1,4 +1,17 @@
 from dataclasses import dataclass
+from datetime import datetime
+
+
+@dataclass 
+class Tournament:
+
+    tournament_id: str
+    tournament_name: str
+    year: str
+    start_date: datetime
+    end_date: datetime
+    host_country: str
+
 
 @dataclass
 class TournamentSummary:

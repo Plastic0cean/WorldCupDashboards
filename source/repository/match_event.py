@@ -1,6 +1,6 @@
 from entities.match_event import MatchEvent 
 from .entity import EntityRepository
-from Db.DbConnection import conn, StoredProcedure
+from db.DbConnection import conn, StoredProcedure
 
 
 class MatchEventRepository(EntityRepository):
