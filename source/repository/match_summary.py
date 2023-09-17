@@ -1,6 +1,6 @@
 from entities.match import MatchSummary
 from .entity import EntityRepository
-from Db.DbConnection import conn, StoredProcedure
+from db.DbConnection import conn, StoredProcedure
 
 
 class MatchSummaryRepository(EntityRepository):

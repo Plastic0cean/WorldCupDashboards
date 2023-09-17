@@ -1,6 +1,6 @@
 from entities.award import IndividualAward
 from .entity import EntityRepository
-from Db.DbConnection import conn, StoredProcedure
+from db.DbConnection import conn, StoredProcedure
 
 
 class AwardsRepository(EntityRepository):

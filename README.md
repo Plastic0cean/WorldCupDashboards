@@ -44,5 +44,5 @@ The second dockerfile (which is stored in the *./db* directory) is used for crea
 After building the project you need to run a data import. The command below performs an easy ETL process - it runs another Python script to transform and import data from csv files into a database. It needs an ID of the container named *worldcup_app* which was created in the previous step, you can get it by running ``docker ps`` in a console.
 
 ```console
-docker exec <container_id> python DataImporting/files/run_data_import.py
+docker exec <container_id> python data_importing/files/run_data_import.py
 ```
