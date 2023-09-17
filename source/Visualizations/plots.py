@@ -66,7 +66,7 @@ def starter_or_substitute(data: pd.DataFrame) -> go.Figure:
     if data.empty:
         return
     fig = px.pie(
-        data, names="starer_or_sub", values=zero_to_nan(data["number_of_matches"]), 
+        data, names="starter_or_sub", values=zero_to_nan(data["number_of_matches"]), 
         hole=0.7, color_discrete_sequence=px.colors.diverging.balance)
     fig.update_traces(textinfo='value')
     fig.data[0].hovertemplate = "%{value} games as %{label}"

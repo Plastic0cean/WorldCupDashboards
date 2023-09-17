@@ -75,7 +75,7 @@
     {{ plot.plot(visualizations["minutes_played"], "minutes-played-pie", "Time spent on the pitch and bench") }}
   </div>
   <div id="starting" class="dashboard-container">
-    {{ plot.plot(visualizations["starer_or_sub"], "starter-or-substitute-pie", "Games in starting 11 and as a substitution") }}
+    {{ plot.plot(visualizations["starter_or_sub"], "starter-or-substitute-pie", "Games in starting 11 and as a substitution") }}
   </div>
 </div>
 {% endif %}
@@ -95,7 +95,7 @@
     <tr class="row-on-hover-grey">
       <td>{{award.name}}</td>
       <td>{{award.description}}</td>
-      <td>{{award.tournament_name}}</td>
+      <td>{{award.tournament}}</td>
     </tr>
     {% endfor %}
   </tbody>

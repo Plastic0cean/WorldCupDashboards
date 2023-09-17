@@ -9,11 +9,11 @@
 {% block content %}
 <div class="container">
   <div class="profile-pic">
-    <img class="country-flag" src="{{url_for('.flag', team_id=data['team'].team_id)}}" alt="{{data['team'].team_name}} flag">
+    <img class="country-flag" src="{{ url_for('.flag', team_id=data['team'].team_id) }}" alt="{{ data['team'].team_name }} flag">
   </div>
   <div class="user-info">
-    <h1>{{data["team"].team_name}}</h1>
-    <h2>{{data["team"].region_name}}</h2>
+    <h1>{{ data["team"].team_name }}</h1>
+    <h2>{{ data["team"].region_name }}</h2>
   </div>
 </div>
 
@@ -26,11 +26,11 @@
     </tr>
   </thead>
   <tbody>
-    {%for row in data["position_by_tournament"]%}
+    {% for row in data["position_by_tournament"] %}
     <tr class="row-on-hover-grey">
-      <td class="expand">{{row.tournament_name}}</td>
-      <td>{{row.count_matches}}</td>
-      <td>{{row.performance}} {% if "group" in row.performace %} ({{row.group_position}} position) {% endif %}</td>
+      <td class="expand">{{ row.tournament_name }}</td>
+      <td>{{ row.count_matches }}</td>
+      <td>{{ row.performance }} {% if "group" in row.performace %} ({{row.group_position}} position) {% endif %}</td>
     </tr>
     <tr class="hidden">
       <td colspan="3">
@@ -41,7 +41,7 @@
         {% endfor %}
       </td>
     </tr>
-    {%endfor%}
+    {% endfor %}
   </tbody>
 </table>
 
@@ -77,13 +77,13 @@
       </tr>
     </thead>
     <tbody>
-      {%for scorer in data["top_scorers"]%}
+      {% for scorer in data["top_scorers"] %}
       <tr class="row-on-hover-grey">
         <td><a href="{{url_for('players.player_details', player_id=scorer.player_id)}}">
-            {{scorer.player_name}}</a></td>
-        <td>{{scorer.goals_number}}</td>
+            {{ scorer.player_name }}</a></td>
+        <td>{{ scorer.goals }}</td>
       </tr>
-      {%endfor%}
+      {% endfor %}
     </tbody>
   </table>
   {% endif %}
@@ -104,16 +104,16 @@
 
     <div id="biggest-defeat" class="scoreboard-container dashboard-container">
       <h3>Biggest defeat</h3>
-      <a href="{{url_for('matches.match_details', match_id=data['biggest_defeat'][0].match_id)}}">
-        {{ scorecard.scorecard(data["biggest_defeat"][0], False) }}
+      <a href="{{url_for('matches.match_details', match_id=data['biggest_defeat'].match_id)}}">
+        {{ scorecard.scorecard(data["biggest_defeat"], False) }}
       </a>
     </div>
 
     {% if data["biggest_win"] %}
     <div id="biggest_win" class="scoreboard-container dashboard-container">
       <h3>Biggest win</h3>
-      <a href="{{url_for('matches.match_details', match_id=data['biggest_win'][0].match_id)}}">
-        {{ scorecard.scorecard(data["biggest_win"][0], False) }}
+      <a href="{{url_for('matches.match_details', match_id=data['biggest_win'].match_id)}}">
+        {{ scorecard.scorecard(data["biggest_win"], False) }}
       </a>
 
     </div>
