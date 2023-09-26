@@ -1,4 +1,4 @@
-import common
+from .common import read_dataset, DataSource, delete_columns, import_to_db, rename_columns
 
 COLUMNS_TO_DELETE = [
     "key_id", "away_team", "family_name", "given_name", "shirt_number",
@@ -11,10 +11,10 @@ COLUMNS_MAPPING = {"team_id": "opponent_id"}
 
 
 def process():
-    goals = common.read_dataset(common.DataSource.GOALS)
-    goals = common.rename_columns(goals, COLUMNS_MAPPING)
-    goals = common.delete_columns(goals, COLUMNS_TO_DELETE)
-    common.import_to_db(goals, "goals")
+    goals = read_dataset(DataSource.GOALS)
+    goals = rename_columns(goals, COLUMNS_MAPPING)
+    goals = delete_columns(goals, COLUMNS_TO_DELETE)
+    import_to_db(goals, "goals")
 
 
 if __name__ == "__main__":

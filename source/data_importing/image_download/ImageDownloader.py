@@ -2,6 +2,7 @@ import os
 import shutil
 from bing_image_downloader import downloader
 
+
 class ImageWebDownloader:
 
     def __init__(self, searched: str, output_directory: str) -> None:
