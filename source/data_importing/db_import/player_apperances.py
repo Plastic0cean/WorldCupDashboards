@@ -1,4 +1,4 @@
-import common
+from .common import DataSource, delete_columns, import_to_db, read_dataset, rename_columns
 import numpy as np
 import pandas as pd
 
@@ -83,15 +83,15 @@ def format_positions(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def process():
-    player_apperances = common.read_dataset(common.DataSource.PLAYER_APPEARANCES)
-    substitutions = common.read_dataset(common.DataSource.SUBSTITUTIONS)
-    matches = common.read_dataset(common.DataSource.MATCHES)
+    player_apperances = read_dataset(DataSource.PLAYER_APPEARANCES)
+    substitutions = read_dataset(DataSource.SUBSTITUTIONS)
+    matches = read_dataset(DataSource.MATCHES)
 
     player_apperances = add_minutes_played(player_apperances, substitutions, matches)
-    player_apperances = common.delete_columns(player_apperances, COLUMNS_TO_DELETE)
-    player_apperances = common.rename_columns(player_apperances, COLUMNS_MAPPING)
+    player_apperances = delete_columns(player_apperances, COLUMNS_TO_DELETE)
+    player_apperances = rename_columns(player_apperances, COLUMNS_MAPPING)
     player_apperances = format_positions(player_apperances)
-    common.import_to_db(player_apperances, "player_appearances")
+    import_to_db(player_apperances, "player_appearances")
 
 
 if __name__ == "__main__":

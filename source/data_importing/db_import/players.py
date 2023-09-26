@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import common
+from .common import DataSource, delete_columns, import_to_db, read_dataset
 
 COLUMNS_TO_DELETE = [
     "key_id", "goal_keeper", "defender", 
@@ -26,15 +26,15 @@ def clean_birth_date(date: str) -> str:
 
 def transform(df: pd.DataFrame) -> pd.DataFrame:
     df = add_position(df)
-    df = common.delete_columns(df, COLUMNS_TO_DELETE)
+    df = delete_columns(df, COLUMNS_TO_DELETE)
     df["given_name"] = df["given_name"].apply(clean_player_name)
     df["birth_date"] = df["birth_date"].apply(clean_birth_date)
     return df
 
 def process():
-    players = common.read_dataset(common.DataSource.PLAYERS)
+    players = read_dataset(DataSource.PLAYERS)
     players = transform(players)
-    common.import_to_db(players, "players")
+    import_to_db(players, "players")
 
 if __name__=="__main__":
     process()

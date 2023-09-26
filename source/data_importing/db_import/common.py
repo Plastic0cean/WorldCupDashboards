@@ -1,6 +1,8 @@
-import pandas as pd
 from enum import Enum
+import pandas as pd
 import sqlalchemy
+from Config import Config, config
+
 
 class DataSource(Enum):
 
@@ -21,28 +23,26 @@ class DataSource(Enum):
     TOURNAMENTS = r"../dataset/tournaments.csv"
 
 
-def create_connection():
-    # TODO: Move variables to config
-    user = "root"
-    password = "668604112Xd"
-    host = "db"
-    port = 3306
-    database = "worldcupstatistics"
+def create_connection(config: Config):
     return sqlalchemy.create_engine(
         url="mysql+pymysql://{0}:{1}@{2}:{3}/{4}".format(
-            user, password, host, port, database))
+            config.db.user, config.db.password, config.db.host, config.db.port, config.db.database))
+
 
 def read_dataset(source: DataSource, *kwargs) -> pd.DataFrame:
     return pd.read_csv(source.value, *kwargs)
 
+
 def delete_columns(df: pd.DataFrame, to_delete: list[str]) -> pd.DataFrame:
     return df.drop(columns=to_delete)
+
 
 def rename_columns(df: pd.DataFrame, columns_mapping: dict[str, str]) -> pd.DataFrame:
     return df.rename(columns=columns_mapping)
 
+
 def import_to_db(data: pd.DataFrame, table: str) -> None:
-    engine = create_connection()
+    engine = create_connection(config)
     with engine.connect() as conn:
-        data.to_sql(table, conn, if_exists="append", index=False, chunksize=1)
+        data.to_sql(table, conn, if_exists="append", index=False, chunksize=1000)
         conn.commit()

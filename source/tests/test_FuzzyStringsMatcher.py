@@ -47,14 +47,14 @@ def test_contains_word_not_ignore_cases(not_ignore_cases_matcher):
 
 def test_contains_substring_not_ignore_cases(not_ignore_cases_matcher):
     assert not_ignore_cases_matcher.contains_substring("Robert Lewandowski", "ewandowsky")
-    assert ignore_cases_matcher.contains_substring("Robert Lewandowski", "EWANDOwskY") is False
+    assert not_ignore_cases_matcher.contains_substring("Robert Lewandowski", "EWANDOwskY") is False
     assert not_ignore_cases_matcher.contains_substring("Robert Lewandowski", "OBERT") is False
     assert not_ignore_cases_matcher.contains_substring("Robert Lewandowski", "obert")
     assert not_ignore_cases_matcher.contains_substring("Robert Lewandowski", "XXXXXX") is False
 
 def test_contains_substring_ignore_cases(ignore_cases_matcher):
     assert ignore_cases_matcher.contains_substring("Robert Lewandowski", "ewAnDOwskY")
-    assert ignore_cases_matcher.contains_substring("Robert Lewandowski", "OBERT") is False
+    assert ignore_cases_matcher.contains_substring("Robert Lewandowski", "OBERT") 
     assert ignore_cases_matcher.contains_substring("Robert Lewandowski", "ewandowsky")
     assert ignore_cases_matcher.contains_substring("Robert Lewandowski", "obert") 
     assert ignore_cases_matcher.contains_substring("Robert Lewandowski", "XXXXXX") is False

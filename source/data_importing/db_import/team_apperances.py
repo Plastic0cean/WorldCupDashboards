@@ -1,4 +1,4 @@
-import common
+from .common import DataSource, delete_columns, import_to_db, read_dataset
 
 COLUMNS_TO_DELETE = [
     'key_id', 'tournament_name', 'match_name', 'stage_name', 
@@ -10,9 +10,9 @@ COLUMNS_TO_DELETE = [
     ]
 
 def process():
-    matches = common.read_dataset(common.DataSource.TEAM_APPEARANCES)
-    matches = common.delete_columns(matches, COLUMNS_TO_DELETE)
-    common.import_to_db(matches, "team_appearances")
+    matches = read_dataset(DataSource.TEAM_APPEARANCES)
+    matches = delete_columns(matches, COLUMNS_TO_DELETE)
+    import_to_db(matches, "team_appearances")
 
 
 if __name__ == "__main__":

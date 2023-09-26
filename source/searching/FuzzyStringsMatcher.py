@@ -1,4 +1,3 @@
-#TODO: Reduce coupling by injecting SequenceMatcher into FuzzyStringMatcher
 from difflib import SequenceMatcher 
 
 def tokenize_text(text: str) -> list[str]:
