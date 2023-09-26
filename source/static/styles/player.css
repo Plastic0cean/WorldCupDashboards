@@ -28,7 +28,11 @@
 
 #player-searching-form button {
 	background-color: var(--body-backgroud-color);
-	border-radius: 0 10px 10px 0;
+}
+
+#player-searching-form button, .search-icon
+{
+border-radius: 0 10px 10px 0;
 }
 
 .searching-bar {
