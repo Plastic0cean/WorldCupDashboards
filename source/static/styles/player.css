@@ -28,9 +28,11 @@
 
 #player-searching-form button {
 	background-color: var(--body-backgroud-color);
+	border-radius: 0 10px 10px 0;
 }
 
 .searching-bar {
+	border-radius: 10px 0 0 10px;
 	height: 40px;
 	padding: 0 10px;
 	width: 80%;
